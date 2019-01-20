@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="750.0" styleClass="mainFxmlClass" stylesheets="@../../style/loginv.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema.controlador.LoginVController">
+   <children>
+      <Pane prefHeight="500.0" prefWidth="750.0" styleClass="container" stylesheets="@../../style/loginv.css">
+         <children>
+            <Pane layoutX="414.0" prefHeight="500.0" prefWidth="336.0" styleClass="loginCont" stylesheets="@../../style/loginv.css">
+               <children>
+                  <Pane layoutX="48.0" layoutY="153.0" prefHeight="165.0" prefWidth="240.0" stylesheets="@../../style/loginv.css">
+                     <children>
+                        <JFXTextField fx:id="txtUser" focusColor="WHITE" labelFloat="true" layoutX="2.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="240.0" promptText="Usuario" styleClass="txtInput" stylesheets="@../../style/loginv.css" unFocusColor="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXPasswordField fx:id="txtPassword" focusColor="WHITE" labelFloat="true" layoutX="2.0" layoutY="96.0" prefHeight="40.0" prefWidth="240.0" promptText="Contraseña" styleClass="txtInput" stylesheets="@../../style/loginv.css" unFocusColor="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXPasswordField>
+                     </children>
+                  </Pane>
+                  <JFXButton fx:id="btnLogin" layoutX="48.0" layoutY="347.0" onAction="#EntrarLogin" prefHeight="40.0" prefWidth="240.0" ripplerFill="WHITE" styleClass="btnLogin" stylesheets="@../../style/loginv.css" text="Iniciar sesión" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <Label layoutX="297.0" layoutY="5.0" onMouseClicked="#CerrarLogin" prefHeight="33.0" prefWidth="33.0" styleClass="btnCerrar">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label layoutX="48.0" layoutY="75.0" prefHeight="69.0" prefWidth="216.0" stylesheets="@../../style/loginv.css" text="Iniciar sesión" textFill="WHITE">
+                     <font>
+                        <Font size="34.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblInvalid" layoutY="422.0" prefHeight="27.0" prefWidth="336.0" styleClass="Invalid" stylesheets="@../../style/loginv.css" text="Usuario o contraseña invalido" textAlignment="CENTER" textFill="#ff3535">
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="50.0" layoutY="141.0" prefHeight="200.0" prefWidth="294.0" stylesheets="@../../style/loginv.css">
+               <children>
+                  <Label layoutX="14.0" layoutY="47.0" text="Bienvenido" textFill="WHITE">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="20.0" layoutY="122.0" text="inicia secion para continuar" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

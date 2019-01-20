@@ -1,5 +1,5 @@
 
-package modelo;
+package sistema.modelo;
 
 public class LoginM {
     
@@ -7,6 +7,21 @@ public class LoginM {
     private String user;
     private String password;
 
+    private static LoginM User;
+    
+    private LoginM(){
+
+    }
+    
+    public static LoginM getInstance(){
+        
+        if(User == null){
+            User = new LoginM();
+        }
+        
+        return User;
+    }
+    
     public int getId() {
         return id;
     }

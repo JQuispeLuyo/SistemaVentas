@@ -1,9 +1,8 @@
 
-package controlador;
+package sistema.controlador;
 
-import view.LoginVController;
-import dao.LoginD;
-import modelo.LoginM;
+import sistema.dao.LoginD;
+import sistema.modelo.LoginM;
 
 public class LoginC {
     
@@ -14,7 +13,7 @@ public class LoginC {
     
     public LoginC(){
         loginD = new LoginD();
-        loginM = new LoginM();
+        loginM = LoginM.getInstance();
     }
     
     public void cargarVariables(String user, String password){ 
@@ -26,14 +25,15 @@ public class LoginC {
         }    
     }
     
-    public void Verificar(){
+    public boolean Verificar(){
         try {
-            loginD.validar(loginM); 
+            if(loginD.validar(loginM)){
+                return true;
+            }    
         } catch (Exception e) {
-            System.out.println("En en controlador verificar: "+ e.getMessage());
-          
-        }
- 
+            System.out.println("En en controlador verificar: "+ e.getMessage());   
+        }      
+        return false;
     }
     
 }

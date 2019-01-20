@@ -1,7 +1,39 @@
-/*
- * Empty Stylesheet file.
- */
-
+/*Fondo*/
 .mainFxmlClass {
-    
+    -fx-background-image: url("../img/fondo.jpg");
 }
+
+.container{
+    -fx-background-color: rgba(0, 0, 0, .7);
+}
+
+.loginCont{
+    -fx-background-color: rgba(32, 72, 209, .3);
+}
+
+/*Botones*/
+.btnCerrar{
+    -fx-background-image: url("../img/Cerrar.png");
+    -fx-background-repeat: no-repeat;
+}
+.btnLogin{
+    -fx-background-color: linear-gradient(to right, #c4c405, #799f0c);
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+}
+
+/*Usuario invalido*/
+
+.Invalid{
+    -fx-background-color: rgba(0, 0, 0, .7);
+    -fx-alignment: center ;
+    -fx-padding: 10 ;
+}
+
+/*Intrada de datos*/
+.txtInput{
+    -fx-prompt-text-fill: #ffffff;
+    -fx-text-fill: #ffffff;
+}
+
+
