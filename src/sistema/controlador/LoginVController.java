@@ -64,7 +64,7 @@ public class LoginVController implements Initializable {
        
             new PanelControl().setVisible(true);
             
-   
+
         }else{
              System.out.println("Usuario incorrecto");
              txtUser.setText("");

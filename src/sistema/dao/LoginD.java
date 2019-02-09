@@ -11,9 +11,9 @@ import sistema.modelo.LoginM;
 public class LoginD extends Conexion {
 
     public boolean validar(LoginM loginM) throws Exception {
-         
+        
 //        String sql = "SELECT * FROM user WHERE username=? and password=?";
-        String sql = "SELECT * FROM user WHERE username=? and password=sha1(md5(?))";
+        String sql = "SELECT CODPER, USEPER, CONPER FROM PERSONA WHERE USEPER=? and CONPER=sha1(md5(?))";
         
         PreparedStatement ps = this.conectar().prepareStatement(sql);
         ps.setString(1, loginM.getUser());

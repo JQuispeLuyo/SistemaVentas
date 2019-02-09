@@ -9,7 +9,7 @@ public class LoginM {
 
     private static LoginM User;
     
-    private LoginM(){
+    public LoginM(){
 
     }
     

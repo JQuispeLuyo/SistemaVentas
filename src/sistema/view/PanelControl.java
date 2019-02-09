@@ -1,39 +1,42 @@
 package sistema.view;
 
-import static com.sun.deploy.trace.TraceLevel.UI;
-import java.awt.Color;
-import java.util.Arrays;
-import javax.swing.JButton;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import sistema.modelo.LoginM;
 
 public class PanelControl extends javax.swing.JFrame {
 
     LoginM loginM;
-    int posx,posy;
-    int nPnl,pnlActualClick;
-    
+    int posx, posy;
+    int nPnl, pnlActualClick;
+    Object pnls;
+    PnlInicioContainer pnlInicioContainer = new PnlInicioContainer();
+    PnlEntradaContainer pnlEntradaContainer = new PnlEntradaContainer();
+    PnlUsuariosContainer pnlUsuariosContainer = new PnlUsuariosContainer();
+    PnlEmpresaContainer pnlEmpresaContainer = new PnlEmpresaContainer();
+    PnlProductosContainer pnlProductosContainer = new PnlProductosContainer();
+
     @SuppressWarnings("empty-statement")
     public PanelControl() {
-        
+
         loginM = LoginM.getInstance();
         try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()){
-                if("Windows".equals(info.getName())){
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
-            }   
-        } catch (Exception e) {    
+            }
+        } catch (Exception e) {
         }
+
         initComponents();
+
+        //logica de menu
         pnlActualClick = 0;
-        
+
         nPnl = pnlMenuOptions.getComponentCount();
         pnlInicio.setOpaque(true);
         for (int i = 0; i < nPnl; i++) {
@@ -41,10 +44,17 @@ public class PanelControl extends javax.swing.JFrame {
         }
         this.setLocationRelativeTo(null);
         lblUsername.setText(loginM.getUser());
-        hoverMenu(0);
+//        hoverMenu(0);
+
+        //logica de paneles contenedores
+        pnlPrincipal.add(pnlInicioContainer);
+        pnlPrincipal.add(pnlEntradaContainer);
+        pnlPrincipal.add(pnlUsuariosContainer);
+        pnlPrincipal.add(pnlEmpresaContainer);
+        pnlPrincipal.add(pnlProductosContainer);
+        pnlPrincipal.add(pnlPrincipal.getComponent(0), 0);
+        pnlPrincipal.validate();
     }
-    
-   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -54,6 +64,8 @@ public class PanelControl extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pnlMenu = new javax.swing.JPanel();
         pnlInfoUser = new javax.swing.JPanel();
         imgUser = new javax.swing.JLabel();
@@ -86,8 +98,6 @@ public class PanelControl extends javax.swing.JFrame {
         btnMinimizar = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         pnlPrincipal = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,9 +114,10 @@ public class PanelControl extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(jEditorPane1);
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(800, 650));
-        setMinimumSize(new java.awt.Dimension(800, 650));
+        setMinimumSize(new java.awt.Dimension(1000, 650));
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -135,11 +146,37 @@ public class PanelControl extends javax.swing.JFrame {
         lblUsername.setToolTipText("");
         lblUsername.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        javax.swing.GroupLayout pnlInfoUserLayout = new javax.swing.GroupLayout(pnlInfoUser);
+        pnlInfoUser.setLayout(pnlInfoUserLayout);
+        pnlInfoUserLayout.setHorizontalGroup(
+            pnlInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfoUserLayout.createSequentialGroup()
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addComponent(imgUser)
+                .addGap(67, 67, 67))
+            .addGroup(pnlInfoUserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlInfoUserLayout.setVerticalGroup(
+            pnlInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInfoUserLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblUsername)
+                .addGap(484, 484, 484))
+        );
+
         pnlMenuOptions.setOpaque(false);
 
         pnlInicio.setBackground(new java.awt.Color(153, 153, 153));
         pnlInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlInicio.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlInicioMouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 pnlInicioMouseMoved(evt);
             }
@@ -154,7 +191,7 @@ public class PanelControl extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Inicio");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlInicioLayout = new javax.swing.GroupLayout(pnlInicio);
         pnlInicio.setLayout(pnlInicioLayout);
@@ -176,6 +213,9 @@ public class PanelControl extends javax.swing.JFrame {
         pnlItem2.setBackground(new java.awt.Color(153, 153, 153));
         pnlItem2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlItem2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlItem2MouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 pnlItem2MouseMoved(evt);
             }
@@ -190,7 +230,7 @@ public class PanelControl extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Entrada");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cashbox.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlItem2Layout = new javax.swing.GroupLayout(pnlItem2);
         pnlItem2.setLayout(pnlItem2Layout);
@@ -212,6 +252,9 @@ public class PanelControl extends javax.swing.JFrame {
         pnlItem3.setBackground(new java.awt.Color(153, 153, 153));
         pnlItem3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlItem3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlItem3MouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 pnlItem3MouseMoved(evt);
             }
@@ -226,7 +269,7 @@ public class PanelControl extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Usuarios");
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/team.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlItem3Layout = new javax.swing.GroupLayout(pnlItem3);
         pnlItem3.setLayout(pnlItem3Layout);
@@ -248,6 +291,9 @@ public class PanelControl extends javax.swing.JFrame {
         pnlItem4.setBackground(new java.awt.Color(153, 153, 153));
         pnlItem4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlItem4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlItem4MouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 pnlItem4MouseMoved(evt);
             }
@@ -260,9 +306,9 @@ public class PanelControl extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Empresa");
+        jLabel7.setText("Empresas");
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/skyscrapper.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlItem4Layout = new javax.swing.GroupLayout(pnlItem4);
         pnlItem4.setLayout(pnlItem4Layout);
@@ -284,6 +330,9 @@ public class PanelControl extends javax.swing.JFrame {
         pnlItem5.setBackground(new java.awt.Color(153, 153, 153));
         pnlItem5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlItem5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlItem5MouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 pnlItem5MouseMoved(evt);
             }
@@ -296,9 +345,9 @@ public class PanelControl extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Provedores");
+        jLabel6.setText("Productos");
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlItem5Layout = new javax.swing.GroupLayout(pnlItem5);
         pnlItem5.setLayout(pnlItem5Layout);
@@ -320,6 +369,9 @@ public class PanelControl extends javax.swing.JFrame {
         pnlItem6.setBackground(new java.awt.Color(153, 153, 153));
         pnlItem6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlItem6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlItem6MouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 pnlItem6MouseMoved(evt);
             }
@@ -334,7 +386,7 @@ public class PanelControl extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Configuracion");
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/setting.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlItem6Layout = new javax.swing.GroupLayout(pnlItem6);
         pnlItem6.setLayout(pnlItem6Layout);
@@ -356,6 +408,9 @@ public class PanelControl extends javax.swing.JFrame {
         pnlItem7.setBackground(new java.awt.Color(153, 153, 153));
         pnlItem7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlItem7.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlItem7MouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 pnlItem7MouseMoved(evt);
             }
@@ -370,7 +425,7 @@ public class PanelControl extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Cerrar sesión");
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/exit.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlItem7Layout = new javax.swing.GroupLayout(pnlItem7);
         pnlItem7.setLayout(pnlItem7Layout);
@@ -421,44 +476,23 @@ public class PanelControl extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout pnlInfoUserLayout = new javax.swing.GroupLayout(pnlInfoUser);
-        pnlInfoUser.setLayout(pnlInfoUserLayout);
-        pnlInfoUserLayout.setHorizontalGroup(
-            pnlInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfoUserLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(imgUser)
-                .addGap(67, 67, 67))
-            .addGroup(pnlInfoUserLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlMenuOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        pnlInfoUserLayout.setVerticalGroup(
-            pnlInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlInfoUserLayout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblUsername)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlMenuOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
         pnlMenu.setLayout(pnlMenuLayout);
         pnlMenuLayout.setHorizontalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlInfoUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlMenuOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlMenuLayout.setVerticalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMenuLayout.createSequentialGroup()
-                .addComponent(pnlInfoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(pnlInfoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlMenuOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 55, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 650));
@@ -529,7 +563,7 @@ public class PanelControl extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabezeraLayout.createSequentialGroup()
                 .addGap(237, 237, 237)
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 494, Short.MAX_VALUE)
                 .addComponent(pnlAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -541,44 +575,13 @@ public class PanelControl extends javax.swing.JFrame {
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(pnlCabezera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 50));
+        getContentPane().add(pnlCabezera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 50));
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
-        pnlPrincipal.setMaximumSize(new java.awt.Dimension(600, 600));
-        pnlPrincipal.setMinimumSize(new java.awt.Dimension(600, 600));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable2.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable2.setRequestFocusEnabled(false);
-        jTable2.setSelectionBackground(new java.awt.Color(41, 124, 214));
-        jScrollPane2.setViewportView(jTable2);
-
-        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
-        pnlPrincipal.setLayout(pnlPrincipalLayout);
-        pnlPrincipalLayout.setHorizontalGroup(
-            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
-        pnlPrincipalLayout.setVerticalGroup(
-            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(459, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        getContentPane().add(pnlPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 600, 600));
+        pnlPrincipal.setMaximumSize(new java.awt.Dimension(800, 600));
+        pnlPrincipal.setMinimumSize(new java.awt.Dimension(800, 600));
+        pnlPrincipal.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(pnlPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 800, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -590,15 +593,15 @@ public class PanelControl extends javax.swing.JFrame {
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
-                            
+
     private void pnlCabezeraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCabezeraMousePressed
-       posx=evt.getX(); //Capturar la posicion del mouse en X
-        posy=evt.getY(); //Capturar la posicion del mouse en Y
+        posx = evt.getX(); //Capturar la posicion del mouse en X
+        posy = evt.getY(); //Capturar la posicion del mouse en Y
     }//GEN-LAST:event_pnlCabezeraMousePressed
 
     private void pnlCabezeraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCabezeraMouseDragged
-        int xp = evt.getXOnScreen()-posx;
-        int yp = evt.getYOnScreen()-posy;
+        int xp = evt.getXOnScreen() - posx;
+        int yp = evt.getYOnScreen() - posy;
         this.setLocation(xp, yp);   //Cambiar la posicion del frame (ventana)
     }//GEN-LAST:event_pnlCabezeraMouseDragged
 
@@ -661,21 +664,63 @@ public class PanelControl extends javax.swing.JFrame {
     private void pnlItem7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlItem7MouseClicked
         hoverMenuClick(6);
     }//GEN-LAST:event_pnlItem7MouseClicked
-    
-    private void hoverMenuClick(int Actual){
+
+    private void pnlItem2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlItem2MouseDragged
+        hoverMenuClick(1);
+    }//GEN-LAST:event_pnlItem2MouseDragged
+
+    private void pnlInicioMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlInicioMouseDragged
+        hoverMenuClick(0);
+    }//GEN-LAST:event_pnlInicioMouseDragged
+
+    private void pnlItem3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlItem3MouseDragged
+        hoverMenuClick(2);
+    }//GEN-LAST:event_pnlItem3MouseDragged
+
+    private void pnlItem4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlItem4MouseDragged
+        hoverMenuClick(3);
+    }//GEN-LAST:event_pnlItem4MouseDragged
+
+    private void pnlItem5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlItem5MouseDragged
+        hoverMenuClick(4);
+    }//GEN-LAST:event_pnlItem5MouseDragged
+
+    private void pnlItem6MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlItem6MouseDragged
+        hoverMenuClick(5);
+    }//GEN-LAST:event_pnlItem6MouseDragged
+
+    private void pnlItem7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlItem7MouseDragged
+        hoverMenuClick(6);
+    }//GEN-LAST:event_pnlItem7MouseDragged
+
+    private void hoverMenuClick(int Actual) {
         pnlActualClick = Actual;
+        CambiarContenedor(pnlActualClick);
         hoverMenu(Actual);
     }
-    private void hoverMenu (int pnlActual){
+
+    private void hoverMenu(int pnlActual) {
         for (int i = 0; i < nPnl; i++) {
-            if(i == pnlActual || i == pnlActualClick){
+            if (i == pnlActual || i == pnlActualClick) {
                 pnlMenuOptions.getComponent(i).setBackground(new java.awt.Color(20, 110, 214));
-            }else{
+            } else {
                 pnlMenuOptions.getComponent(i).setBackground(new java.awt.Color(41, 124, 214));
-            }  
+            }
         }
     }
-    
+
+    private void CambiarContenedor(int pnlActual) {
+        for (int i = 0; i < pnlPrincipal.getComponentCount(); i++) {
+            if (i == pnlActual) {
+                pnlPrincipal.getComponent(i).setVisible(true);
+                pnlPrincipal.add(pnlPrincipal.getComponent(i), i);
+                pnlPrincipal.validate();
+            } else {
+                pnlPrincipal.getComponent(i).setVisible(false);
+            }
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -685,7 +730,7 @@ public class PanelControl extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -703,18 +748,33 @@ public class PanelControl extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PanelControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new PanelControl().setVisible(true);
+                try {
+                    new PanelControl().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(PanelControl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnMinimizar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel imgUser;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
@@ -731,11 +791,10 @@ public class PanelControl extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPanel pnlAcceso;

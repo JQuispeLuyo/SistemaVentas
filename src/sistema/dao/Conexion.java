@@ -6,10 +6,11 @@ import java.sql.DriverManager;
 
 public class Conexion {
     protected static Connection cn = null;
-
+    
     public static Connection conectar() throws Exception {
+        
         String driver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/usuario";
+        String url = "jdbc:mysql://localhost:3306/sistema_venta";
         String user = "root";
         String pwd = "root";
         try {
