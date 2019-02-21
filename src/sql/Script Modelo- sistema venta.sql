@@ -4,61 +4,41 @@ USE sistema_venta;
 
 CREATE TABLE CATEGORIA (
     CODCAT char(4) NOT NULL COMMENT 'Contiene el identificador de las categorias de los productos',
-    NOMCAT varchar(30) NOT NULL COMMENT 'Contiene el nombre de la categoria',
+    DESCAT varchar(30) NOT NULL COMMENT 'Contiene el nombre de la categoria',
     CONSTRAINT CATEGORIA_pk PRIMARY KEY (CODCAT)
 ) COMMENT 'Contiene la categoria de los productos';
-
--- Table: EMPRESA
-CREATE TABLE EMPRESA (
-    CODEMP int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el codigo de la empresa',
-    NOMEMP varchar(100) NOT NULL COMMENT 'Contiene el nombre de la empresa',
-    RUCEMP char(11) NOT NULL COMMENT 'Contiene el ruc de la empresa',
-    RAZSOCEMP varchar(150) NOT NULL COMMENT 'Contiene la razon social de la empresa',
-    TELF1EMP char(9) NOT NULL COMMENT 'Contiene el telefono 1 de la empresa',
-    TELF2EMP char(9) NULL COMMENT 'Contiene el telefono 2 de la empresa',
-    CORREMP varchar(50) NULL COMMENT 'Contiene el correo de la empresa',
-    WEBEMP varchar(100) NULL COMMENT 'Contiene la direcion web de la empresa',
-    TIPEMP char(1) NOT NULL COMMENT 'Contiene el tipo de empresa
-A = Empresa propia
-B = Otras empresas
-',
-    ESTEMP char(1) NOT NULL COMMENT 'Contiene el estado de la empresa
-A = Activo
-B = Inactivo',
-    UBIGEO_CODUBI char(6) NOT NULL,
-    CONSTRAINT EMPRESA_pk PRIMARY KEY (CODEMP)
-);
 
 -- Table: PERSONA
 CREATE TABLE PERSONA (
     CODPER int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador de las personas',
     NOMPER varchar(80) NOT NULL COMMENT 'Contiene el nombre de la persona',
-    APEPER varchar(80) NOT NULL COMMENT 'Contiene el apellido de la persona',
-    RUCPER char(11) NULL COMMENT 'Contiene el RUC de la persona',
-    DNIPER char(8) NULL COMMENT 'Contiene el DNI de la persona',
-    FECNAC date NOT NULL COMMENT 'Contiene la fechad e nacimiento de la persona',
-    UBIPER char(6) NOT NULL COMMENT 'Contiene la direcion de las personas',
-    DIRPER varchar(30) NOT NULL COMMENT 'Contiene las calles donde vive la persona',
-    TELPER char(9) NULL COMMENT 'Contiene el primer telefono de las personas',
+    APEPER varchar(80) NULL COMMENT 'Contiene el apellido de la persona',
+    RUCDNIPER varchar(11) NULL COMMENT 'Contiene el DNI o RUC  (Persona o Empresa)',
+    RAZSOCPER varchar(150) NULL COMMENT 'Contiene la razon social',
+    FECNAC date NULL COMMENT 'Contiene la fecha de nacimiento de la persona',
+    UBIPER char(6) NOT NULL COMMENT 'Contiene el ubigeo (Persona, Empresa)',
+    DIRPER varchar(30) NULL COMMENT 'Contiene las calles donde vive la persona',
+    WEBPER varchar(100) NULL COMMENT 'Contiene la pagina web del proveedor (empresa)',
+    TEL1PER char(9) NULL COMMENT 'Contiene el numero de teléfono de empleados y proveedores',
+    TEL2PER char(9) NULL COMMENT 'Contiene el numero de teléfono de empleados y proveedores',
     CORPER varchar(120) NULL COMMENT 'Contiene el correo del proveedor',
-    GENPER char(1) NOT NULL,
-    USEPER varchar(30) NULL COMMENT 'Contiene el usuario de la persona',
-    CONPER varchar(100) NULL COMMENT 'Contiene la contraseña de la persona',
-    TIPPER char(1) NULL COMMENT 'Contiene el tipo de persona (Cliente, proveedor)',
+    GENPER char(1) NULL COMMENT 'Contiene el genero cliente y empleado',
+    USEPER varchar(30) NULL COMMENT 'Contiene el usuario de persona',
+    CONPER varchar(100) NULL COMMENT 'Contiene la contraseña de persona',
+    TIPPER char(1) NOT NULL COMMENT 'Contiene el tipo de persona (cliente, empleado y proveedor)',
     ESTAPER char(1) NOT NULL COMMENT 'Contiene el estado de la persona
 A = Activo
 B = Inactivo',
-    EMPRESA_CODEMP int NULL,
     CONSTRAINT PERSONA_pk PRIMARY KEY (CODPER)
-) COMMENT 'Contiene los datos de los clientes y proveedores';
+) COMMENT 'Contiene los datos de los Clientes, Trabajadores y Empresas';
 
 -- Table: PRODUCTO
 CREATE TABLE PRODUCTO (
     CODPRO char(4) NOT NULL COMMENT 'Contiene el identificador de los productos ',
-    DESPRO varchar(100) NULL COMMENT 'Contiene la descripción del producto',
-    CODUNI int NOT NULL COMMENT 'Contiene el codigo de la unidades',
-    PREPRO decimal(10,2) NOT NULL COMMENT 'Contiene el precio de los productos',
     CODCAT char(4) NOT NULL COMMENT 'Contiene el codigo de categoria',
+    DESPRO varchar(100) NULL COMMENT 'Contiene la descripción del producto',
+    PREPRO decimal(10,2) NOT NULL COMMENT 'Contiene el precio de los productos',
+    CODUNI int NOT NULL COMMENT 'Contiene el codigo de la unidades',
     CONSTRAINT PRODUCTO_pk PRIMARY KEY (CODPRO)
 ) COMMENT 'Contienes los productos a vender';
 
@@ -73,7 +53,7 @@ CREATE TABLE UBIGEO (
 
 -- Table: UNIDAD
 CREATE TABLE UNIDAD (
-    CODUNI int NOT NULL AUTO_INCREMENT,
+    CODUNI int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador del tipo de unidad de los productos',
     DESUNI varchar(40) NOT NULL COMMENT 'Contiene la descripción de la unidad',
     CONSTRAINT UNIDAD_pk PRIMARY KEY (CODUNI)
 ) COMMENT 'Contiene las unidades de medida de los productos ';
@@ -84,10 +64,8 @@ CREATE TABLE VENTAS (
     TIPVENT char(1) NOT NULL COMMENT 'B = BOLETA
 F = FACTURA',
     FECVENT date NOT NULL COMMENT 'Contiene la fecha de la venta',
-    EMPLEADO_CODPER int NOT NULL,
-    PERSONA_CODPER int NOT NULL COMMENT 'Contiene el codigo de la persona',
-    CAJAVENT varchar(2) NOT NULL COMMENT 'Contiene el numero de caja',
-    EMPRESA_CODEMP int NOT NULL COMMENT 'Contiene el codigo de la empresa',
+    EMPLEADO_CODPER int NOT NULL COMMENT 'Contiene el código de empleado',
+    PERSONA_CODPER int NOT NULL COMMENT 'Contiene el código de cliente',
     CONSTRAINT VENTAS_pk PRIMARY KEY (CODVENT)
 );
 
@@ -109,14 +87,6 @@ ALTER TABLE PRODUCTO ADD CONSTRAINT CATEGORIA_PRODUCTO_CODCAT FOREIGN KEY CATEGO
 ALTER TABLE VENTAS ADD CONSTRAINT EMPLEADO_VENTAS_CODPER FOREIGN KEY EMPLEADO_VENTAS_CODPER (EMPLEADO_CODPER)
     REFERENCES PERSONA (CODPER);
 
--- Reference: EMPRESA_UBIGEO (table: EMPRESA)
-ALTER TABLE EMPRESA ADD CONSTRAINT EMPRESA_UBIGEO FOREIGN KEY EMPRESA_UBIGEO (UBIGEO_CODUBI)
-    REFERENCES UBIGEO (CODUBI);
-
--- Reference: PERSONA_EMPRESA (table: PERSONA)
-ALTER TABLE PERSONA ADD CONSTRAINT PERSONA_EMPRESA FOREIGN KEY PERSONA_EMPRESA (EMPRESA_CODEMP)
-    REFERENCES EMPRESA (CODEMP);
-
 -- Reference: PERSONA_VENTAS_CODPER (table: VENTAS)
 ALTER TABLE VENTAS ADD CONSTRAINT PERSONA_VENTAS_CODPER FOREIGN KEY PERSONA_VENTAS_CODPER (PERSONA_CODPER)
     REFERENCES PERSONA (CODPER);
@@ -132,10 +102,6 @@ ALTER TABLE PERSONA ADD CONSTRAINT UBIGEO_PERSONA_CODUBI FOREIGN KEY UBIGEO_PERS
 -- Reference: UNIDADES_PRODUCTO_CODUNI (table: PRODUCTO)
 ALTER TABLE PRODUCTO ADD CONSTRAINT UNIDADES_PRODUCTO_CODUNI FOREIGN KEY UNIDADES_PRODUCTO_CODUNI (CODUNI)
     REFERENCES UNIDAD (CODUNI);
-
--- Reference: VENTAS_EMPRESA (table: VENTAS)
-ALTER TABLE VENTAS ADD CONSTRAINT VENTAS_EMPRESA FOREIGN KEY VENTAS_EMPRESA (EMPRESA_CODEMP)
-    REFERENCES EMPRESA (CODEMP);
 
 -- Reference: VENTAS_VENTAS_DETALLE_CODVENT (table: VENTAS_DETALLE)
 ALTER TABLE VENTAS_DETALLE ADD CONSTRAINT VENTAS_VENTAS_DETALLE_CODVENT FOREIGN KEY VENTAS_VENTAS_DETALLE_CODVENT (CODVENT)
