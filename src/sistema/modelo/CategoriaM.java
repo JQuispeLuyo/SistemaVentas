@@ -4,7 +4,6 @@ package sistema.modelo;
 public class CategoriaM {
     
     String CODCAT;
-    String NOMCAT;
     String DESCAT;
 
     public CategoriaM() {
@@ -12,7 +11,7 @@ public class CategoriaM {
 
     public CategoriaM(String CODCAT, String NOMCAT) {
         this.CODCAT = CODCAT;
-        this.NOMCAT = NOMCAT;
+        this.DESCAT = NOMCAT;
     }
 
     public String getCODCAT() {
@@ -23,17 +22,17 @@ public class CategoriaM {
         this.CODCAT = CODCAT;
     }
 
-    public String getNOMCAT() {
-        return NOMCAT;
+    public String getDESCAT() {
+        return DESCAT;
     }
 
-    public void setNOMCAT(String NOMCAT) {
-        this.NOMCAT = NOMCAT;
+    public void setDESCAT(String NOMCAT) {
+        this.DESCAT = NOMCAT;
     }
 
     @Override
     public String toString() {
-        return NOMCAT;
+        return DESCAT;
     }
     
 }

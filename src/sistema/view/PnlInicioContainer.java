@@ -6,6 +6,7 @@
 package sistema.view;
 
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import sistema.modelo.LoginM;
 
 /**
@@ -15,6 +16,7 @@ import sistema.modelo.LoginM;
 public class PnlInicioContainer extends javax.swing.JPanel {
     
     public PnlInicioContainer() {
+        
         
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()){
@@ -26,6 +28,7 @@ public class PnlInicioContainer extends javax.swing.JPanel {
         } catch (Exception e) {    
         }
         initComponents();
+        
     }
 
     /**

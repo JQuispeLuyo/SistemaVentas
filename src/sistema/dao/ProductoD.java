@@ -19,7 +19,7 @@ import sistema.modelo.UnidadM;
 
 public class ProductoD extends Conexion {
 
-    public void guardarProducto(ProductoM prodcutoM) throws Exception {
+    public void guardarProducto(ProductoM productoM) throws Exception {
 
         try {
 //            String sql = "Insert Into PRODUCTO "
@@ -32,11 +32,11 @@ public class ProductoD extends Conexion {
 
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
-            ps.setString(1, prodcutoM.getCODPRO());
-            ps.setString(2, prodcutoM.getDESPRO());
-            ps.setInt(3, prodcutoM.getCODUNI());
-            ps.setDouble(4, prodcutoM.getPREPRO());
-            ps.setString(5, prodcutoM.getCODCAT());
+            ps.setString(1, productoM.getCODPRO());
+            ps.setString(2, productoM.getCODCAT());
+            ps.setString(3, productoM.getDESPRO());
+            ps.setDouble(4, productoM.getPREPRO());
+            ps.setInt(5, productoM.getCODUNI());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -57,10 +57,10 @@ public class ProductoD extends Conexion {
             PreparedStatement ps = this.conectar().prepareStatement(sql);
             
             ps.setString(1, productoM.getCODPRO());
-            ps.setString(2, productoM.getDESPRO());
-            ps.setInt(3, productoM.getCODUNI());
+            ps.setString(2, productoM.getCODCAT());
+            ps.setString(3, productoM.getDESPRO());
             ps.setDouble(4, productoM.getPREPRO());
-            ps.setString(5, productoM.getCODCAT());
+            ps.setInt(5, productoM.getCODUNI());
             ps.executeUpdate();
             ps.close();
             System.out.println(productoM.getCODPRO());
@@ -111,13 +111,13 @@ public class ProductoD extends Conexion {
                 jcCategoria.addItem(
                         new CategoriaM(
                                 rs.getString("CODCAT"),
-                                rs.getString("NOMCAT")
+                                rs.getString("DESCAT")
                         )
                 );
                 jcCategoriaFiltro.addItem(
                         new CategoriaM(
                                 rs.getString("CODCAT"),
-                                rs.getString("NOMCAT")
+                                rs.getString("DESCAT")
                         )
                 );
             }

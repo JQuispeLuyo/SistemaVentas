@@ -33,16 +33,14 @@ public class PanelControl extends javax.swing.JFrame {
         }
 
         initComponents();
-
+        this.setExtendedState(MAXIMIZED_BOTH);
         //logica de menu
         pnlActualClick = 0;
-
         nPnl = pnlMenuOptions.getComponentCount();
         pnlInicio.setOpaque(true);
         for (int i = 0; i < nPnl; i++) {
             pnlMenuOptions.getComponent(i).setBackground(pnlMenu.getBackground());
         }
-        this.setLocationRelativeTo(null);
         lblUsername.setText(loginM.getUser());
 //        hoverMenu(0);
 
@@ -66,6 +64,14 @@ public class PanelControl extends javax.swing.JFrame {
         jEditorPane1 = new javax.swing.JEditorPane();
         jMenuItem1 = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        pnlContainerControl = new javax.swing.JPanel();
+        pnlVista = new javax.swing.JPanel();
+        pnlCabezera = new javax.swing.JPanel();
+        pnlAcceso = new javax.swing.JPanel();
+        btnCerrar = new javax.swing.JButton();
+        btnMinimizar = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
+        pnlPrincipal = new javax.swing.JPanel();
         pnlMenu = new javax.swing.JPanel();
         pnlInfoUser = new javax.swing.JPanel();
         imgUser = new javax.swing.JLabel();
@@ -92,12 +98,6 @@ public class PanelControl extends javax.swing.JFrame {
         pnlItem7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        pnlCabezera = new javax.swing.JPanel();
-        pnlAcceso = new javax.swing.JPanel();
-        btnCerrar = new javax.swing.JButton();
-        btnMinimizar = new javax.swing.JButton();
-        lblTitle = new javax.swing.JLabel();
-        pnlPrincipal = new javax.swing.JPanel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,10 +117,107 @@ public class PanelControl extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1000, 650));
         setMinimumSize(new java.awt.Dimension(1000, 650));
         setUndecorated(true);
-        setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
+
+        pnlContainerControl.setLayout(new java.awt.BorderLayout());
+
+        pnlVista.setLayout(new java.awt.BorderLayout());
+
+        pnlCabezera.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCabezera.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(41, 124, 214)));
+        pnlCabezera.setMaximumSize(new java.awt.Dimension(800, 50));
+        pnlCabezera.setMinimumSize(new java.awt.Dimension(800, 50));
+        pnlCabezera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlCabezeraMouseDragged(evt);
+            }
+        });
+        pnlCabezera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlCabezeraMousePressed(evt);
+            }
+        });
+
+        pnlAcceso.setBackground(new java.awt.Color(255, 255, 255));
+        pnlAcceso.setMaximumSize(new java.awt.Dimension(100, 45));
+        pnlAcceso.setMinimumSize(new java.awt.Dimension(100, 45));
+        pnlAcceso.setPreferredSize(new java.awt.Dimension(100, 45));
+        pnlAcceso.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Cerrar.png"))); // NOI18N
+        btnCerrar.setBorder(null);
+        btnCerrar.setBorderPainted(false);
+        btnCerrar.setContentAreaFilled(false);
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setFocusPainted(false);
+        btnCerrar.setMargin(null);
+        btnCerrar.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnCerrar.setMinimumSize(new java.awt.Dimension(35, 35));
+        btnCerrar.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+        pnlAcceso.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 40, 50));
+
+        btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Minimize.png"))); // NOI18N
+        btnMinimizar.setBorder(null);
+        btnMinimizar.setBorderPainted(false);
+        btnMinimizar.setContentAreaFilled(false);
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinimizar.setFocusPainted(false);
+        btnMinimizar.setMargin(null);
+        btnMinimizar.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnMinimizar.setMinimumSize(new java.awt.Dimension(35, 35));
+        btnMinimizar.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnMinimizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinimizarActionPerformed(evt);
+            }
+        });
+        pnlAcceso.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 50));
+
+        lblTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(41, 124, 214));
+        lblTitle.setText("Administrador");
+
+        javax.swing.GroupLayout pnlCabezeraLayout = new javax.swing.GroupLayout(pnlCabezera);
+        pnlCabezera.setLayout(pnlCabezeraLayout);
+        pnlCabezeraLayout.setHorizontalGroup(
+            pnlCabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabezeraLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 521, Short.MAX_VALUE)
+                .addComponent(pnlAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlCabezeraLayout.setVerticalGroup(
+            pnlCabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlAcceso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabezeraLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTitle)
+                .addContainerGap())
+        );
+
+        pnlVista.add(pnlCabezera, java.awt.BorderLayout.PAGE_START);
+
+        pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPrincipal.setMaximumSize(new java.awt.Dimension(800, 600));
+        pnlPrincipal.setMinimumSize(new java.awt.Dimension(800, 600));
+        pnlPrincipal.setLayout(new java.awt.BorderLayout());
+        pnlVista.add(pnlPrincipal, java.awt.BorderLayout.CENTER);
+
+        pnlContainerControl.add(pnlVista, java.awt.BorderLayout.CENTER);
 
         pnlMenu.setBackground(new java.awt.Color(41, 124, 214));
         pnlMenu.setAlignmentX(0.0F);
@@ -492,102 +589,19 @@ public class PanelControl extends javax.swing.JFrame {
                 .addComponent(pnlInfoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlMenuOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 55, Short.MAX_VALUE))
+                .addGap(0, 71, Short.MAX_VALUE))
         );
 
-        getContentPane().add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 650));
+        pnlContainerControl.add(pnlMenu, java.awt.BorderLayout.LINE_START);
 
-        pnlCabezera.setBackground(new java.awt.Color(255, 255, 255));
-        pnlCabezera.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(41, 124, 214)));
-        pnlCabezera.setMaximumSize(new java.awt.Dimension(800, 50));
-        pnlCabezera.setMinimumSize(new java.awt.Dimension(800, 50));
-        pnlCabezera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                pnlCabezeraMouseDragged(evt);
-            }
-        });
-        pnlCabezera.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnlCabezeraMousePressed(evt);
-            }
-        });
-
-        pnlAcceso.setBackground(new java.awt.Color(255, 255, 255));
-        pnlAcceso.setMaximumSize(new java.awt.Dimension(100, 45));
-        pnlAcceso.setMinimumSize(new java.awt.Dimension(100, 45));
-        pnlAcceso.setPreferredSize(new java.awt.Dimension(100, 45));
-        pnlAcceso.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Cerrar.png"))); // NOI18N
-        btnCerrar.setBorder(null);
-        btnCerrar.setBorderPainted(false);
-        btnCerrar.setContentAreaFilled(false);
-        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCerrar.setFocusPainted(false);
-        btnCerrar.setMargin(null);
-        btnCerrar.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnCerrar.setMinimumSize(new java.awt.Dimension(35, 35));
-        btnCerrar.setPreferredSize(new java.awt.Dimension(35, 35));
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
-        pnlAcceso.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 40, 50));
-
-        btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Minimize.png"))); // NOI18N
-        btnMinimizar.setBorder(null);
-        btnMinimizar.setBorderPainted(false);
-        btnMinimizar.setContentAreaFilled(false);
-        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMinimizar.setFocusPainted(false);
-        btnMinimizar.setMargin(null);
-        btnMinimizar.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnMinimizar.setMinimumSize(new java.awt.Dimension(35, 35));
-        btnMinimizar.setPreferredSize(new java.awt.Dimension(35, 35));
-        btnMinimizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMinimizarActionPerformed(evt);
-            }
-        });
-        pnlAcceso.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 50));
-
-        lblTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(41, 124, 214));
-        lblTitle.setText("Administrador");
-
-        javax.swing.GroupLayout pnlCabezeraLayout = new javax.swing.GroupLayout(pnlCabezera);
-        pnlCabezera.setLayout(pnlCabezeraLayout);
-        pnlCabezeraLayout.setHorizontalGroup(
-            pnlCabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabezeraLayout.createSequentialGroup()
-                .addGap(237, 237, 237)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 494, Short.MAX_VALUE)
-                .addComponent(pnlAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        pnlCabezeraLayout.setVerticalGroup(
-            pnlCabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlAcceso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnlCabezeraLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        getContentPane().add(pnlCabezera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 50));
-
-        pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
-        pnlPrincipal.setMaximumSize(new java.awt.Dimension(800, 600));
-        pnlPrincipal.setMinimumSize(new java.awt.Dimension(800, 600));
-        pnlPrincipal.setLayout(new java.awt.BorderLayout());
-        getContentPane().add(pnlPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 800, 600));
+        getContentPane().add(pnlContainerControl, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
-        setExtendedState(JFrame.CROSSHAIR_CURSOR);
+        this.setExtendedState(JFrame.CROSSHAIR_CURSOR);
+        
     }//GEN-LAST:event_btnMinimizarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -595,14 +609,14 @@ public class PanelControl extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void pnlCabezeraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCabezeraMousePressed
-        posx = evt.getX(); //Capturar la posicion del mouse en X
-        posy = evt.getY(); //Capturar la posicion del mouse en Y
+//        posx = evt.getX(); //Capturar la posicion del mouse en X
+//        posy = evt.getY(); //Capturar la posicion del mouse en Y
     }//GEN-LAST:event_pnlCabezeraMousePressed
 
     private void pnlCabezeraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCabezeraMouseDragged
-        int xp = evt.getXOnScreen() - posx;
-        int yp = evt.getYOnScreen() - posy;
-        this.setLocation(xp, yp);   //Cambiar la posicion del frame (ventana)
+//        int xp = evt.getXOnScreen() - posx;
+//        int yp = evt.getYOnScreen() - posy;
+//        this.setLocation(xp, yp);   //Cambiar la posicion del frame (ventana)
     }//GEN-LAST:event_pnlCabezeraMouseDragged
 
     private void pnlInicioMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlInicioMouseMoved
@@ -692,6 +706,10 @@ public class PanelControl extends javax.swing.JFrame {
     private void pnlItem7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlItem7MouseDragged
         hoverMenuClick(6);
     }//GEN-LAST:event_pnlItem7MouseDragged
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        this.setExtendedState(MAXIMIZED_BOTH);
+    }//GEN-LAST:event_formWindowActivated
 
     private void hoverMenuClick(int Actual) {
         pnlActualClick = Actual;
@@ -799,6 +817,7 @@ public class PanelControl extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPanel pnlAcceso;
     private javax.swing.JPanel pnlCabezera;
+    private javax.swing.JPanel pnlContainerControl;
     private javax.swing.JPanel pnlInfoUser;
     private javax.swing.JPanel pnlInicio;
     private javax.swing.JPanel pnlItem2;
@@ -810,5 +829,6 @@ public class PanelControl extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlMenuOptions;
     private javax.swing.JPanel pnlPrincipal;
+    private javax.swing.JPanel pnlVista;
     // End of variables declaration//GEN-END:variables
 }

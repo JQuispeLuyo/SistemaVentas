@@ -8,6 +8,7 @@ package sistema.view;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import sistema.controlador.ProductoC;
 import sistema.dao.ProductoD;
@@ -34,7 +35,9 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     DefaultTableModel modeloTablaProducto;
 
     public PnlProductosContainer(){
-        //Apariencia Componentes
+        
+    
+    //Apariencia Componentes    
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -46,7 +49,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         }
 
         initComponents();
-
+        this.setBorder(new EmptyBorder(20, 40, 40, 40));
         //Añanidor hover al menu
         nPnl = pnlOptionProductos.getComponentCount();
         hover = new Hover(nPnl, pnlOptionProductos);
@@ -90,30 +93,15 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PnlProductosForm = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        txtCodigoProducto = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        txtProducto = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jcUnidadMedida = new javax.swing.JComboBox<>();
-        jPanel5 = new javax.swing.JPanel();
-        lblPrecio = new javax.swing.JLabel();
-        txtPrecioProducto = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jcCategoria = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtProducto = new javax.swing.JTable();
+        pnlContainerFiltro = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
         PnlFiltro = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         txtCodigoProducto1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
         jcCategoriaFiltro = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtProducto = new javax.swing.JTable();
         pnlOptionProductos = new javax.swing.JPanel();
         item0 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -130,112 +118,44 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         item4 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        PnlProductosForm = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        txtCodigoProducto = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        txtProducto = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jcUnidadMedida = new javax.swing.JComboBox<>();
+        jPanel5 = new javax.swing.JPanel();
+        lblPrecio = new javax.swing.JLabel();
+        txtPrecioProducto = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jcCategoria = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(new java.awt.BorderLayout());
 
-        PnlProductosForm.setBackground(new java.awt.Color(255, 255, 255));
-        PnlProductosForm.setOpaque(false);
-        PnlProductosForm.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlContainerFiltro.setMaximumSize(new java.awt.Dimension(570, 300));
+        pnlContainerFiltro.setMinimumSize(new java.awt.Dimension(570, 300));
+        pnlContainerFiltro.setOpaque(false);
+        pnlContainerFiltro.setPreferredSize(new java.awt.Dimension(570, 300));
+        pnlContainerFiltro.setLayout(new java.awt.BorderLayout());
 
-        jPanel3.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel3.setOpaque(false);
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel8.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel8.setOpaque(false);
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlContainerFiltro.add(jPanel8, java.awt.BorderLayout.LINE_END);
 
-        txtCodigoProducto.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtCodigoProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtCodigoProducto.setOpaque(false);
-        jPanel3.add(txtCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 80, 30));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel2.setText("CODIGO");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 30));
-
-        PnlProductosForm.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 240, -1));
-
-        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel2.setOpaque(false);
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtProducto.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtProducto.setOpaque(false);
-        jPanel2.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 240, 30));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel1.setText("PRODUCTO");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
-
-        PnlProductosForm.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 240, -1));
-
-        jPanel4.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel4.setOpaque(false);
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel3.setText("UNIDAD DE MEDIDA");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
-
-        jcUnidadMedida.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jPanel4.add(jcUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 230, 30));
-
-        PnlProductosForm.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 230, 60));
-
-        jPanel5.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel5.setOpaque(false);
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblPrecio.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        lblPrecio.setText("PRECIO");
-        jPanel5.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 30));
-
-        txtPrecioProducto.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtPrecioProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtPrecioProducto.setOpaque(false);
-        jPanel5.add(txtPrecioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 120, 30));
-
-        PnlProductosForm.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 240, 60));
-
-        jPanel6.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel6.setOpaque(false);
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel5.setText("CATEGORIA");
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
-
-        jcCategoria.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jPanel6.add(jcCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 230, 30));
-
-        PnlProductosForm.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 230, 60));
-
-        add(PnlProductosForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 580, 250));
-
-        jtProducto.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
-        jtProducto.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jtProducto.setGridColor(new java.awt.Color(255, 255, 255));
-        jtProducto.setRowHeight(25);
-        jtProducto.setSelectionBackground(new java.awt.Color(20, 110, 214));
-        jtProducto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtProductoMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jtProducto);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 730, 220));
-
+        PnlFiltro.setMaximumSize(new java.awt.Dimension(570, 80));
+        PnlFiltro.setMinimumSize(new java.awt.Dimension(570, 80));
         PnlFiltro.setOpaque(false);
+        PnlFiltro.setPreferredSize(new java.awt.Dimension(570, 80));
         PnlFiltro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel7.setBackground(new java.awt.Color(102, 153, 255));
@@ -251,11 +171,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jLabel4.setText("BUSCAR");
         jPanel7.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 60, 20));
 
-        PnlFiltro.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 180, 60));
-
-        jPanel8.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel8.setOpaque(false);
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PnlFiltro.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 180, 60));
 
         jcCategoriaFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jcCategoriaFiltro.addItemListener(new java.awt.event.ItemListener() {
@@ -278,13 +194,37 @@ public class PnlProductosContainer extends javax.swing.JPanel {
                 jcCategoriaFiltroVetoableChange(evt);
             }
         });
-        jPanel8.add(jcCategoriaFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 190, 30));
+        PnlFiltro.add(jcCategoriaFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 190, 30));
 
-        PnlFiltro.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 60));
+        pnlContainerFiltro.add(PnlFiltro, java.awt.BorderLayout.PAGE_START);
 
-        add(PnlFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 570, 70));
+        jtProducto.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jtProducto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
+            },
+            new String [] {
+
+            }
+        ));
+        jtProducto.setGridColor(new java.awt.Color(255, 255, 255));
+        jtProducto.setRowHeight(25);
+        jtProducto.setSelectionBackground(new java.awt.Color(20, 110, 214));
+        jtProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtProductoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtProducto);
+
+        pnlContainerFiltro.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        add(pnlContainerFiltro, java.awt.BorderLayout.PAGE_END);
+
+        pnlOptionProductos.setMaximumSize(new java.awt.Dimension(150, 300));
+        pnlOptionProductos.setMinimumSize(new java.awt.Dimension(150, 300));
         pnlOptionProductos.setOpaque(false);
+        pnlOptionProductos.setPreferredSize(new java.awt.Dimension(150, 300));
         pnlOptionProductos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 pnlOptionProductosMouseMoved(evt);
@@ -315,7 +255,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (2).png"))); // NOI18N
         item0.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionProductos.add(item0, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 50));
+        pnlOptionProductos.add(item0, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 120, 50));
 
         item1.setBackground(new java.awt.Color(204, 204, 204));
         item1.setEnabled(false);
@@ -338,7 +278,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag7.png"))); // NOI18N
         item1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionProductos.add(item1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 120, 50));
+        pnlOptionProductos.add(item1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 120, 50));
 
         item2.setBackground(new java.awt.Color(204, 204, 204));
         item2.setEnabled(false);
@@ -361,7 +301,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (4).png"))); // NOI18N
         item2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 50));
 
-        pnlOptionProductos.add(item2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 120, 50));
+        pnlOptionProductos.add(item2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, 50));
 
         item3.setBackground(new java.awt.Color(204, 204, 204));
         item3.setEnabled(false);
@@ -384,7 +324,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (1).png"))); // NOI18N
         item3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 0, 30, 50));
 
-        pnlOptionProductos.add(item3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 120, 50));
+        pnlOptionProductos.add(item3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 120, 50));
 
         item4.setBackground(new java.awt.Color(204, 204, 204));
         item4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -406,9 +346,96 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (6).png"))); // NOI18N
         item4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionProductos.add(item4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 120, 50));
+        pnlOptionProductos.add(item4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 120, 50));
 
-        add(pnlOptionProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 140, 320));
+        add(pnlOptionProductos, java.awt.BorderLayout.LINE_END);
+
+        PnlProductosForm.setBackground(new java.awt.Color(255, 255, 255));
+        PnlProductosForm.setMaximumSize(new java.awt.Dimension(570, 400));
+        PnlProductosForm.setMinimumSize(new java.awt.Dimension(570, 400));
+        PnlProductosForm.setPreferredSize(new java.awt.Dimension(570, 400));
+        PnlProductosForm.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel3.setOpaque(false);
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtCodigoProducto.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        txtCodigoProducto.setForeground(new java.awt.Color(102, 102, 102));
+        txtCodigoProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtCodigoProducto.setOpaque(false);
+        jPanel3.add(txtCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 80, 30));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel2.setText("CODIGO");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 30));
+
+        PnlProductosForm.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 240, -1));
+
+        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel2.setOpaque(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtProducto.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        txtProducto.setForeground(new java.awt.Color(102, 102, 102));
+        txtProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtProducto.setOpaque(false);
+        txtProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProductoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 240, 30));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel1.setText("PRODUCTO");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
+
+        PnlProductosForm.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 240, -1));
+
+        jPanel4.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel4.setOpaque(false);
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel3.setText("UNIDAD DE MEDIDA");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
+
+        jcUnidadMedida.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jPanel4.add(jcUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 230, 30));
+
+        PnlProductosForm.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 230, 60));
+
+        jPanel5.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel5.setOpaque(false);
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblPrecio.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        lblPrecio.setText("PRECIO");
+        jPanel5.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 30));
+
+        txtPrecioProducto.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        txtPrecioProducto.setForeground(new java.awt.Color(102, 102, 102));
+        txtPrecioProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtPrecioProducto.setOpaque(false);
+        jPanel5.add(txtPrecioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 120, 30));
+
+        PnlProductosForm.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 240, 60));
+
+        jPanel6.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel6.setOpaque(false);
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel5.setText("CATEGORIA");
+        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
+
+        jcCategoria.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jPanel6.add(jcCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 230, 30));
+
+        PnlProductosForm.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 230, 60));
+
+        add(PnlProductosForm, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtProductoMouseClicked
@@ -436,7 +463,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
 
             String categoria = jtProducto.getValueAt(fila, 4).toString();
             for (int index = 0; index < jcCategoria.getItemCount(); index++) {
-                if (jcCategoria.getItemAt(index).getNOMCAT().equals(categoria)) {
+                if (jcCategoria.getItemAt(index).getDESCAT().equals(categoria)) {
                     jcCategoria.setSelectedIndex(index);
                     break;
                 };
@@ -466,7 +493,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item0MouseClicked
 
     private void item2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_item2MouseClicked
 
     //Boton Actualizar
@@ -478,9 +505,9 @@ public class PnlProductosContainer extends javax.swing.JPanel {
                     productoC.editarProducto();
                     cargarTabla();
                     productoC.limpiarVariables();
-                    desactivarBotones(1);
-                    hover.menu(-1);
+                    desactivarBotones(1);                
                 }
+                hover.menu(-1);
             } catch (Exception ex) {
                 Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -552,7 +579,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
                 datoFiltro = "";
             }else{
                 tipoFiltro = 1;
-                datoFiltro = PnlProductosContainer.jcCategoriaFiltro.getItemAt(jcCategoriaFiltro.getSelectedIndex()).getNOMCAT();
+                datoFiltro = PnlProductosContainer.jcCategoriaFiltro.getItemAt(jcCategoriaFiltro.getSelectedIndex()).getDESCAT();
             }
             cargarTabla();
             
@@ -560,6 +587,10 @@ public class PnlProductosContainer extends javax.swing.JPanel {
             Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jcCategoriaFiltroActionPerformed
+
+    private void txtProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProductoActionPerformed
 
     private void desactivarBotones(int tipo) {
 
@@ -633,6 +664,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     public static javax.swing.JComboBox<UnidadM> jcUnidadMedida;
     private javax.swing.JTable jtProducto;
     private javax.swing.JLabel lblPrecio;
+    private javax.swing.JPanel pnlContainerFiltro;
     private javax.swing.JPanel pnlOptionProductos;
     public static javax.swing.JTextField txtCodigoProducto;
     public static javax.swing.JTextField txtCodigoProducto1;

@@ -5,17 +5,19 @@
  */
 package sistema.view;
 
+import javax.swing.border.EmptyBorder;
+import sistema.controlador.UsuarioC;
 /**
  *
  * @author Jose Luis
  */
 public class PnlUsuariosContainer extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PnlUsuariosContainer
-     */
+    UsuarioC usuarioC = new UsuarioC();
+    
     public PnlUsuariosContainer() {
         initComponents();
+        this.setBorder(new EmptyBorder(20, 40, 40, 40));
     }
 
     /**
@@ -27,22 +29,18 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        pnlNombre = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        pnlUsuariosForm = new javax.swing.JPanel();
         pnlApePaterno = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtApellidoPat = new javax.swing.JTextField();
-        pnlApeMaterno = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        txtApellidoMat = new javax.swing.JTextField();
-        pnlRuc = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        txtApellidoMat1 = new javax.swing.JTextField();
+        txtApellidoPersona = new javax.swing.JTextField();
+        pnlNombre = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtNombrePersona = new javax.swing.JTextField();
         pnlDni = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        txtApellidoMat2 = new javax.swing.JTextField();
+        txtDniPersona = new javax.swing.JTextField();
+        btnBuscarPersona = new javax.swing.JButton();
         pnlUbicacion = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -51,12 +49,6 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         pnlDni1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         txtApellidoMat3 = new javax.swing.JTextField();
-        pnlDni2 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        txtApellidoMat4 = new javax.swing.JTextField();
-        pnlDni3 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        txtApellidoMat5 = new javax.swing.JTextField();
         pnlLogin = new javax.swing.JPanel();
         pnlRuc1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -64,112 +56,120 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         pnlRuc2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        pnlRuc3 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
         pnlDni4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
-        pnlDni5 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
         pnlDni6 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jPanel1 = new javax.swing.JPanel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        espe = new javax.swing.JLabel();
+        pnlOptionProductos = new javax.swing.JPanel();
+        item0 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        item1 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        item2 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        item3 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        item4 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        pnlContainerFiltro = new javax.swing.JPanel();
+        PnlFiltro = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        txtCodigoProducto1 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jcCategoriaFiltro = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtProducto = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("Usuarios");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 11, -1, -1));
-
-        pnlNombre.setOpaque(false);
-        pnlNombre.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel2.setText("Nombre");
-        pnlNombre.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
-
-        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
-        pnlNombre.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 250, 30));
-
-        add(pnlNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 77, -1, -1));
+        pnlUsuariosForm.setMinimumSize(new java.awt.Dimension(860, 500));
+        pnlUsuariosForm.setOpaque(false);
+        pnlUsuariosForm.setPreferredSize(new java.awt.Dimension(550, 300));
+        pnlUsuariosForm.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlApePaterno.setOpaque(false);
         pnlApePaterno.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel3.setText("Apellido Paterno");
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel3.setText("Apellido");
         pnlApePaterno.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
 
-        txtApellidoPat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtApellidoPat.addActionListener(new java.awt.event.ActionListener() {
+        txtApellidoPersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtApellidoPersona.setForeground(new java.awt.Color(102, 102, 102));
+        txtApellidoPersona.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtApellidoPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoPatActionPerformed(evt);
+                txtApellidoPersonaActionPerformed(evt);
             }
         });
-        pnlApePaterno.add(txtApellidoPat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 220, 30));
+        pnlApePaterno.add(txtApellidoPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
 
-        add(pnlApePaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 77, -1, -1));
+        pnlUsuariosForm.add(pnlApePaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 180, -1));
 
-        pnlApeMaterno.setOpaque(false);
-        pnlApeMaterno.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlNombre.setOpaque(false);
+        pnlNombre.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel4.setText("Apellido Materno");
-        pnlApeMaterno.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel2.setText("Nombre");
+        pnlNombre.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
 
-        txtApellidoMat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtApellidoMat.addActionListener(new java.awt.event.ActionListener() {
+        txtNombrePersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNombrePersona.setForeground(new java.awt.Color(102, 102, 102));
+        txtNombrePersona.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtNombrePersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoMatActionPerformed(evt);
+                txtNombrePersonaActionPerformed(evt);
             }
         });
-        pnlApeMaterno.add(txtApellidoMat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 220, 30));
+        pnlNombre.add(txtNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
 
-        add(pnlApeMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(538, 77, -1, -1));
-
-        pnlRuc.setOpaque(false);
-        pnlRuc.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel5.setText("RUC");
-        pnlRuc.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
-
-        txtApellidoMat1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtApellidoMat1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoMat1ActionPerformed(evt);
-            }
-        });
-        pnlRuc.add(txtApellidoMat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 160, 30));
-
-        add(pnlRuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 163, -1, -1));
+        pnlUsuariosForm.add(pnlNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 180, -1));
 
         pnlDni.setOpaque(false);
         pnlDni.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel6.setText("DNI");
         pnlDni.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
 
-        txtApellidoMat2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtApellidoMat2.addActionListener(new java.awt.event.ActionListener() {
+        txtDniPersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtDniPersona.setForeground(new java.awt.Color(102, 102, 102));
+        txtDniPersona.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtDniPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoMat2ActionPerformed(evt);
+                txtDniPersonaActionPerformed(evt);
             }
         });
-        pnlDni.add(txtApellidoMat2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 130, 30));
+        pnlDni.add(txtDniPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 90, 30));
 
-        add(pnlDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 163, -1, -1));
+        btnBuscarPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
+        btnBuscarPersona.setBorder(null);
+        btnBuscarPersona.setBorderPainted(false);
+        btnBuscarPersona.setContentAreaFilled(false);
+        btnBuscarPersona.setFocusPainted(false);
+        btnBuscarPersona.setOpaque(false);
+        btnBuscarPersona.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarPersonaMouseClicked(evt);
+            }
+        });
+        pnlDni.add(btnBuscarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 40, 40));
+
+        pnlUsuariosForm.add(pnlDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 140, -1));
 
         pnlUbicacion.setOpaque(false);
         pnlUbicacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -181,30 +181,37 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        pnlUbicacion.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 136, 30));
+        pnlUbicacion.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 136, 30));
 
         jComboBox2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pnlUbicacion.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 133, 30));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        pnlUbicacion.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 133, 30));
 
         jComboBox3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pnlUbicacion.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 133, 30));
+        pnlUbicacion.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 133, 30));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel7.setText("Ubicación");
         pnlUbicacion.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
 
-        add(pnlUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 163, 415, -1));
+        pnlUsuariosForm.add(pnlUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 530, 70));
 
         pnlDni1.setOpaque(false);
         pnlDni1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel8.setText("Telefono 1");
         pnlDni1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
 
         txtApellidoMat3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtApellidoMat3.setForeground(new java.awt.Color(102, 102, 102));
+        txtApellidoMat3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
         txtApellidoMat3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoMat3ActionPerformed(evt);
@@ -212,41 +219,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         });
         pnlDni1.add(txtApellidoMat3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 130, 30));
 
-        add(pnlDni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, 60));
-
-        pnlDni2.setOpaque(false);
-        pnlDni2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel9.setText("Telefono 2");
-        pnlDni2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
-
-        txtApellidoMat4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtApellidoMat4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoMat4ActionPerformed(evt);
-            }
-        });
-        pnlDni2.add(txtApellidoMat4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 130, 30));
-
-        add(pnlDni2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
-
-        pnlDni3.setOpaque(false);
-        pnlDni3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel10.setText("Correo");
-        pnlDni3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
-
-        txtApellidoMat5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtApellidoMat5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoMat5ActionPerformed(evt);
-            }
-        });
-        pnlDni3.add(txtApellidoMat5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 270, 30));
-
-        add(pnlDni3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 270, -1));
+        pnlUsuariosForm.add(pnlDni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, -1, -1));
 
         pnlLogin.setOpaque(false);
         pnlLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -254,11 +227,13 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         pnlRuc1.setOpaque(false);
         pnlRuc1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel11.setText("Usuario");
         pnlRuc1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
 
         txtApellidoMat6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtApellidoMat6.setForeground(new java.awt.Color(102, 102, 102));
+        txtApellidoMat6.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
         txtApellidoMat6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoMat6ActionPerformed(evt);
@@ -271,60 +246,36 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         pnlRuc2.setOpaque(false);
         pnlRuc2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel12.setText("Contraseña");
         pnlRuc2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setForeground(new java.awt.Color(102, 102, 102));
+        jPasswordField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
         pnlRuc2.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
 
-        pnlLogin.add(pnlRuc2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, -1, -1));
+        pnlLogin.add(pnlRuc2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, -1, -1));
 
-        pnlRuc3.setOpaque(false);
-        pnlRuc3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel13.setText("Validar Contraseña");
-        pnlRuc3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
-
-        jPasswordField2.setText("jPasswordField1");
-        pnlRuc3.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
-
-        pnlLogin.add(pnlRuc3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, -1));
+        pnlUsuariosForm.add(pnlLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 390, 60));
 
         pnlDni4.setOpaque(false);
         pnlDni4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel14.setText("Tipo");
         pnlDni4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 30));
 
         jComboBox4.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pnlDni4.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 120, 30));
+        pnlDni4.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 130, 30));
 
-        pnlLogin.add(pnlDni4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 120, 60));
-
-        add(pnlLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 740, 60));
-
-        pnlDni5.setOpaque(false);
-        pnlDni5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel15.setText("Empresa");
-        pnlDni5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 30));
-
-        jComboBox5.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9 ", "Item 10", "Item 11", "Item 12" }));
-        pnlDni5.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 240, 30));
-
-        add(pnlDni5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 240, 60));
+        pnlUsuariosForm.add(pnlDni4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, -1));
 
         pnlDni6.setOpaque(false);
         pnlDni6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jCheckBox1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("Activo");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -334,28 +285,248 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         });
         pnlDni6.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 100, 30));
 
-        add(pnlDni6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, 110, 50));
+        pnlUsuariosForm.add(pnlDni6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 110, -1));
+
+        jPanel1.setOpaque(false);
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jRadioButton1.setText("Masculino");
+        jRadioButton1.setOpaque(false);
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jRadioButton1);
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jRadioButton2.setText("Femenino");
+        jRadioButton2.setOpaque(false);
+        jPanel1.add(jRadioButton2);
+
+        pnlUsuariosForm.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 80, 70));
+
+        espe.setText(":D");
+        pnlUsuariosForm.add(espe, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, -1, -1));
+
+        add(pnlUsuariosForm, java.awt.BorderLayout.CENTER);
+
+        pnlOptionProductos.setMaximumSize(new java.awt.Dimension(150, 300));
+        pnlOptionProductos.setOpaque(false);
+        pnlOptionProductos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                pnlOptionProductosMouseMoved(evt);
+            }
+        });
+        pnlOptionProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        item0.setBackground(new java.awt.Color(204, 204, 204));
+        item0.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                item0MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                item0MouseMoved(evt);
+            }
+        });
+        item0.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                item0MouseClicked(evt);
+            }
+        });
+        item0.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel17.setText("Guardar");
+        item0.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 50, 50));
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (2).png"))); // NOI18N
+        item0.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
+
+        pnlOptionProductos.add(item0, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 120, 50));
+
+        item1.setBackground(new java.awt.Color(204, 204, 204));
+        item1.setEnabled(false);
+        item1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                item1MouseMoved(evt);
+            }
+        });
+        item1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                item1MouseClicked(evt);
+            }
+        });
+        item1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel19.setText("Editar");
+        item1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 50, 50));
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag7.png"))); // NOI18N
+        item1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
+
+        pnlOptionProductos.add(item1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 120, 50));
+
+        item2.setBackground(new java.awt.Color(204, 204, 204));
+        item2.setEnabled(false);
+        item2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                item2MouseMoved(evt);
+            }
+        });
+        item2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                item2MouseClicked(evt);
+            }
+        });
+        item2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel21.setText("Eliminar");
+        item2.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 50, 50));
+
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (4).png"))); // NOI18N
+        item2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 50));
+
+        pnlOptionProductos.add(item2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, 50));
+
+        item3.setBackground(new java.awt.Color(204, 204, 204));
+        item3.setEnabled(false);
+        item3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                item3MouseMoved(evt);
+            }
+        });
+        item3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                item3MouseClicked(evt);
+            }
+        });
+        item3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel23.setText("Nuevo");
+        item3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 50, 50));
+
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (1).png"))); // NOI18N
+        item3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 0, 30, 50));
+
+        pnlOptionProductos.add(item3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 120, 50));
+
+        item4.setBackground(new java.awt.Color(204, 204, 204));
+        item4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                item4MouseMoved(evt);
+            }
+        });
+        item4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                item4MouseClicked(evt);
+            }
+        });
+        item4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel25.setText("Imprimir");
+        item4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, -1, 50));
+
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (6).png"))); // NOI18N
+        item4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
+
+        pnlOptionProductos.add(item4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 120, 50));
+
+        add(pnlOptionProductos, java.awt.BorderLayout.LINE_END);
+
+        pnlContainerFiltro.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        pnlContainerFiltro.setMinimumSize(new java.awt.Dimension(800, 250));
+        pnlContainerFiltro.setOpaque(false);
+        pnlContainerFiltro.setPreferredSize(new java.awt.Dimension(800, 250));
+        pnlContainerFiltro.setLayout(new java.awt.BorderLayout());
+
+        PnlFiltro.setMaximumSize(new java.awt.Dimension(570, 80));
+        PnlFiltro.setMinimumSize(new java.awt.Dimension(570, 80));
+        PnlFiltro.setOpaque(false);
+        PnlFiltro.setPreferredSize(new java.awt.Dimension(570, 80));
+        PnlFiltro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel7.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel7.setOpaque(false);
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtCodigoProducto1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        txtCodigoProducto1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 102, 204)));
+        txtCodigoProducto1.setOpaque(false);
+        jPanel7.add(txtCodigoProducto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel16.setText("BUSCAR");
+        jPanel7.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 60, 20));
+
+        PnlFiltro.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 180, 60));
+
+        jcCategoriaFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jcCategoriaFiltro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcCategoriaFiltroItemStateChanged(evt);
+            }
+        });
+        jcCategoriaFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcCategoriaFiltroActionPerformed(evt);
+            }
+        });
+        jcCategoriaFiltro.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jcCategoriaFiltroPropertyChange(evt);
+            }
+        });
+        jcCategoriaFiltro.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                jcCategoriaFiltroVetoableChange(evt);
+            }
+        });
+        PnlFiltro.add(jcCategoriaFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 190, 30));
+
+        pnlContainerFiltro.add(PnlFiltro, java.awt.BorderLayout.PAGE_START);
+
+        jtProducto.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jtProducto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jtProducto.setGridColor(new java.awt.Color(255, 255, 255));
+        jtProducto.setRowHeight(25);
+        jtProducto.setSelectionBackground(new java.awt.Color(20, 110, 214));
+        jtProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtProductoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtProducto);
+
+        pnlContainerFiltro.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        add(pnlContainerFiltro, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+    private void txtNombrePersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombrePersonaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
+    }//GEN-LAST:event_txtNombrePersonaActionPerformed
 
-    private void txtApellidoPatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoPatActionPerformed
+    private void txtApellidoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoPersonaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoPatActionPerformed
+    }//GEN-LAST:event_txtApellidoPersonaActionPerformed
 
-    private void txtApellidoMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMatActionPerformed
+    private void txtDniPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniPersonaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoMatActionPerformed
-
-    private void txtApellidoMat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMat1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoMat1ActionPerformed
-
-    private void txtApellidoMat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMat2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoMat2ActionPerformed
+    }//GEN-LAST:event_txtDniPersonaActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
@@ -365,14 +536,6 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoMat3ActionPerformed
 
-    private void txtApellidoMat4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMat4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoMat4ActionPerformed
-
-    private void txtApellidoMat5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMat5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoMat5ActionPerformed
-
     private void txtApellidoMat6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMat6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoMat6ActionPerformed
@@ -381,55 +544,149 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    private void jcCategoriaFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroItemStateChanged
+
+    }//GEN-LAST:event_jcCategoriaFiltroItemStateChanged
+
+    private void jcCategoriaFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroActionPerformed
+
+    }//GEN-LAST:event_jcCategoriaFiltroActionPerformed
+
+    private void jcCategoriaFiltroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroPropertyChange
+
+    }//GEN-LAST:event_jcCategoriaFiltroPropertyChange
+
+    private void jcCategoriaFiltroVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jcCategoriaFiltroVetoableChange
+
+    }//GEN-LAST:event_jcCategoriaFiltroVetoableChange
+
+    private void jtProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtProductoMouseClicked
+
+    }//GEN-LAST:event_jtProductoMouseClicked
+
+    private void item0MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseDragged
+
+    }//GEN-LAST:event_item0MouseDragged
+
+    private void item0MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseMoved
+
+    }//GEN-LAST:event_item0MouseMoved
+
+    private void item0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseClicked
+
+    }//GEN-LAST:event_item0MouseClicked
+
+    private void item1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item1MouseMoved
+
+    }//GEN-LAST:event_item1MouseMoved
+
+    private void item1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item1MouseClicked
+
+    }//GEN-LAST:event_item1MouseClicked
+
+    private void item2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseMoved
+
+    }//GEN-LAST:event_item2MouseMoved
+
+    private void item2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_item2MouseClicked
+
+    private void item3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item3MouseMoved
+
+    }//GEN-LAST:event_item3MouseMoved
+
+    private void item3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item3MouseClicked
+
+    }//GEN-LAST:event_item3MouseClicked
+
+    private void item4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item4MouseMoved
+
+    }//GEN-LAST:event_item4MouseMoved
+
+    private void item4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_item4MouseClicked
+
+    private void pnlOptionProductosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOptionProductosMouseMoved
+
+    }//GEN-LAST:event_pnlOptionProductosMouseMoved
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void btnBuscarPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPersonaMouseClicked
+        usuarioC.resPersona(txtDniPersona.getText());
+    }//GEN-LAST:event_btnBuscarPersonaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PnlFiltro;
+    private javax.swing.JButton btnBuscarPersona;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel espe;
+    private javax.swing.JPanel item0;
+    private javax.swing.JPanel item1;
+    private javax.swing.JPanel item2;
+    private javax.swing.JPanel item3;
+    private javax.swing.JPanel item4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPanel pnlApeMaterno;
+    public static javax.swing.JRadioButton jRadioButton1;
+    public static javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JComboBox jcCategoriaFiltro;
+    private javax.swing.JTable jtProducto;
     private javax.swing.JPanel pnlApePaterno;
+    private javax.swing.JPanel pnlContainerFiltro;
     private javax.swing.JPanel pnlDni;
     private javax.swing.JPanel pnlDni1;
-    private javax.swing.JPanel pnlDni2;
-    private javax.swing.JPanel pnlDni3;
     private javax.swing.JPanel pnlDni4;
-    private javax.swing.JPanel pnlDni5;
     private javax.swing.JPanel pnlDni6;
     private javax.swing.JPanel pnlLogin;
     private javax.swing.JPanel pnlNombre;
-    private javax.swing.JPanel pnlRuc;
+    private javax.swing.JPanel pnlOptionProductos;
     private javax.swing.JPanel pnlRuc1;
     private javax.swing.JPanel pnlRuc2;
-    private javax.swing.JPanel pnlRuc3;
     private javax.swing.JPanel pnlUbicacion;
-    private javax.swing.JTextField txtApellidoMat;
-    private javax.swing.JTextField txtApellidoMat1;
-    private javax.swing.JTextField txtApellidoMat2;
-    private javax.swing.JTextField txtApellidoMat3;
-    private javax.swing.JTextField txtApellidoMat4;
-    private javax.swing.JTextField txtApellidoMat5;
+    private javax.swing.JPanel pnlUsuariosForm;
+    public static javax.swing.JTextField txtApellidoMat3;
     private javax.swing.JTextField txtApellidoMat6;
-    private javax.swing.JTextField txtApellidoPat;
-    private javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtApellidoPersona;
+    public static javax.swing.JTextField txtCodigoProducto1;
+    public static javax.swing.JTextField txtDniPersona;
+    public static javax.swing.JTextField txtNombrePersona;
     // End of variables declaration//GEN-END:variables
 }
