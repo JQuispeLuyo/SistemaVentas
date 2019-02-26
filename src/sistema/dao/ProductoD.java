@@ -63,8 +63,27 @@ public class ProductoD extends Conexion {
             ps.setInt(5, productoM.getCODUNI());
             ps.executeUpdate();
             ps.close();
-            System.out.println(productoM.getCODPRO());
             JOptionPane.showMessageDialog(null, "Actualización correcta");
+        } catch (Exception e) {
+
+            System.out.println("Error al actualizar producto en el Dao");
+
+        }
+
+    }
+    
+    public void eliminarProducto(ProductoM productoM) throws Exception {
+
+        try {
+            String sql = "CALL ELIMINAR_PRODUCTO(?)";
+            
+            PreparedStatement ps = this.conectar().prepareStatement(sql);
+            
+            ps.setString(1, productoM.getCODPRO());
+            ps.execute();
+            ps.close();
+            
+            JOptionPane.showMessageDialog(null, "Eliminado");
         } catch (Exception e) {
 
             System.out.println("Error al actualizar producto en el Dao");
@@ -130,7 +149,7 @@ public class ProductoD extends Conexion {
     
     public void listarProductoTabla(DefaultTableModel modeloTabla, Integer tipo, String dato) throws SQLException, Exception {
         try {
-            System.out.println(tipo);
+            
             String sql = "";
             
             switch (tipo) {
@@ -141,13 +160,7 @@ public class ProductoD extends Conexion {
                     sql = "CALL FILTRAR_PRODUCTO('1', '%"+dato+"%')"; // todos , activado el chkTodos
                     break;
                 case 2:
-                    sql = "CALL FILTRAR_PRODUCTO('1', '%"+dato+"%')"; // DNI
-                    break;
-                case 3:
-                    sql = "CALL FILTRAR_PRODUCTO('1', '%"+dato+"%')"; // Nombre
-                    break;
-                case 4:
-                    sql = "CALL FILTRAR_PRODUCTO('1', '%"+dato+"%')"; // DNI
+                    sql = "CALL FILTRAR_PRODUCTO('2', '%"+dato+"%')"; // DNI
                     break;
             }
             PreparedStatement preparedstatement = this.conectar().prepareStatement(sql);
@@ -163,7 +176,7 @@ public class ProductoD extends Conexion {
             }
             rs.close();
         } catch (Exception e) {
-            System.out.println("Error en Dao CLiente Listar");
+            System.out.println("Error en Dao producto Listar");
         }
 
     }

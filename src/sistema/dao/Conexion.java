@@ -16,9 +16,6 @@ public class Conexion {
         try {
             Class.forName(driver);
             cn = DriverManager.getConnection(url, user, pwd);
-//            if (cn != null) {
-//                System.out.println("Si hay conexion");
-//            }
         } catch (Exception e) {
             System.out.println("Error en la conexion " + e.getMessage());
         }

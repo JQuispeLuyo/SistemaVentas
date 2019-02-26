@@ -5,53 +5,33 @@
  */
 package sistema.view;
 
-import java.awt.event.KeyEvent;
-import java.sql.Date;
-import java.util.Enumeration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import sistema.controlador.UsuarioC;
-import static sistema.view.PnlProductosContainer.txtPrecioProducto;
 import utilidad.Hover;
-
 /**
  *
  * @author Jose Luis
  */
-public class PnlUsuariosContainer extends javax.swing.JPanel {
-
+public class PnlClienteContainer extends javax.swing.JPanel {
+    
     private int tipoFiltro = 0;
     private String datoFiltro = "";
-
+    
     int nPnl, pnlActualClick;
-
+    
     UsuarioC usuarioC = new UsuarioC();
     Hover hover;
-
-    DefaultTableModel modeloTablaUsuario;
-
-    public PnlUsuariosContainer() {
+    
+    public PnlClienteContainer() {
+        
         initComponents();
-        desactivarBotones(1);
-        txtCodigoUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtCodigoCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         //Añanidor hover al menu
         nPnl = pnlOptionPersona.getComponentCount();
         hover = new Hover(nPnl, pnlOptionPersona);
         hover.menu(-1);
-
+        
         this.setBorder(new EmptyBorder(20, 40, 40, 40));
-
-        try {
-            tipoFiltro = 0;
-            datoFiltro = "";
-            this.cargarTabla();
-        } catch (Exception ex) {
-            Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
     /**
@@ -64,19 +44,20 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     private void initComponents() {
 
         rdGrupoGenero = new javax.swing.ButtonGroup();
+        rdGRupoTipo = new javax.swing.ButtonGroup();
         pnlUsuariosForm = new javax.swing.JPanel();
         pnlCodigo = new javax.swing.JPanel();
-        txtCodigoUsuario = new javax.swing.JTextField();
+        txtCodigoCliente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         pnlNombre = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtNombreUsuario = new javax.swing.JTextField();
+        txtNombreCliente = new javax.swing.JTextField();
         pnlApellido = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtApellidoUsuario = new javax.swing.JTextField();
+        txtApellidoCliente = new javax.swing.JTextField();
         pnlDni = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        txtDniUsuario = new javax.swing.JTextField();
+        txtDniCliente = new javax.swing.JTextField();
         btnBuscarPersona = new javax.swing.JButton();
         pnlUbicacion = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -84,26 +65,12 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         pnlGenero = new javax.swing.JPanel();
-        rdMasculinoUsuario = new javax.swing.JRadioButton();
-        rdFemeninoUsuario = new javax.swing.JRadioButton();
+        rdGeneroMasculino = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
-        pnlTelefono = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        txtTelefonoUsuario = new javax.swing.JTextField();
-        pnlLogin = new javax.swing.JPanel();
-        pnlRuc1 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        txtUsuarioUsuario = new javax.swing.JTextField();
-        pnlRuc2 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        txtContraseñaUsuario = new javax.swing.JPasswordField();
         pnlApellido1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txtDireccionUsuario = new javax.swing.JTextField();
-        pnlFechaNacimiento = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jcaNacimientoUsuario = new com.toedter.calendar.JDateChooser();
-        btnCredencialLogin = new javax.swing.JButton();
+        txtDirecionCliente = new javax.swing.JTextField();
         pnlOptionPersona = new javax.swing.JPanel();
         item0 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -128,7 +95,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jcCategoriaFiltro = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtUsuario = new javax.swing.JTable();
+        jtPersona = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -146,12 +113,12 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         pnlCodigo.setOpaque(false);
         pnlCodigo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtCodigoUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtCodigoUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        txtCodigoUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtCodigoUsuario.setEnabled(false);
-        txtCodigoUsuario.setOpaque(false);
-        pnlCodigo.add(txtCodigoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 80, 30));
+        txtCodigoCliente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        txtCodigoCliente.setForeground(new java.awt.Color(102, 102, 102));
+        txtCodigoCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtCodigoCliente.setEnabled(false);
+        txtCodigoCliente.setOpaque(false);
+        pnlCodigo.add(txtCodigoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 80, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel4.setText("Codigo");
@@ -166,17 +133,17 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         jLabel2.setText("Nombre");
         pnlNombre.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
 
-        txtNombreUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtNombreUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        txtNombreUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtNombreUsuario.addActionListener(new java.awt.event.ActionListener() {
+        txtNombreCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNombreCliente.setForeground(new java.awt.Color(102, 102, 102));
+        txtNombreCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtNombreCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreUsuarioActionPerformed(evt);
+                txtNombreClienteActionPerformed(evt);
             }
         });
-        pnlNombre.add(txtNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
+        pnlNombre.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
 
-        pnlUsuariosForm.add(pnlNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 180, -1));
+        pnlUsuariosForm.add(pnlNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 180, -1));
 
         pnlApellido.setOpaque(false);
         pnlApellido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -185,17 +152,17 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         jLabel3.setText("Apellido");
         pnlApellido.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
 
-        txtApellidoUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtApellidoUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        txtApellidoUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtApellidoUsuario.addActionListener(new java.awt.event.ActionListener() {
+        txtApellidoCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtApellidoCliente.setForeground(new java.awt.Color(102, 102, 102));
+        txtApellidoCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtApellidoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoUsuarioActionPerformed(evt);
+                txtApellidoClienteActionPerformed(evt);
             }
         });
-        pnlApellido.add(txtApellidoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
+        pnlApellido.add(txtApellidoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
 
-        pnlUsuariosForm.add(pnlApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 180, -1));
+        pnlUsuariosForm.add(pnlApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 180, -1));
 
         pnlDni.setOpaque(false);
         pnlDni.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -204,21 +171,16 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         jLabel6.setText("DNI");
         pnlDni.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
 
-        txtDniUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDniUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        txtDniUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDniUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtDniUsuario.addActionListener(new java.awt.event.ActionListener() {
+        txtDniCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtDniCliente.setForeground(new java.awt.Color(102, 102, 102));
+        txtDniCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDniCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtDniCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDniUsuarioActionPerformed(evt);
+                txtDniClienteActionPerformed(evt);
             }
         });
-        txtDniUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDniUsuarioKeyTyped(evt);
-            }
-        });
-        pnlDni.add(txtDniUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 30));
+        pnlDni.add(txtDniCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 30));
 
         btnBuscarPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
         btnBuscarPersona.setBorder(null);
@@ -230,14 +192,9 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                 btnBuscarPersonaMouseClicked(evt);
             }
         });
-        btnBuscarPersona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarPersonaActionPerformed(evt);
-            }
-        });
         pnlDni.add(btnBuscarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 40, 40));
 
-        pnlUsuariosForm.add(pnlDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 140, -1));
+        pnlUsuariosForm.add(pnlDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 140, -1));
 
         pnlUbicacion.setOpaque(false);
         pnlUbicacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -258,102 +215,46 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        pnlUbicacion.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 140, 30));
+        pnlUbicacion.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 150, 30));
 
         jComboBox3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pnlUbicacion.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 140, 30));
+        pnlUbicacion.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 130, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel7.setText("Ubicación");
         pnlUbicacion.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
 
-        pnlUsuariosForm.add(pnlUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 150, 160));
+        pnlUsuariosForm.add(pnlUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 490, 70));
 
         pnlGenero.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
         pnlGenero.setOpaque(false);
         pnlGenero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        rdGrupoGenero.add(rdMasculinoUsuario);
-        rdMasculinoUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        rdMasculinoUsuario.setText("Masculino");
-        rdMasculinoUsuario.setActionCommand("M");
-        rdMasculinoUsuario.setOpaque(false);
-        rdMasculinoUsuario.addActionListener(new java.awt.event.ActionListener() {
+        rdGrupoGenero.add(rdGeneroMasculino);
+        rdGeneroMasculino.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        rdGeneroMasculino.setText("Masculino");
+        rdGeneroMasculino.setActionCommand("M");
+        rdGeneroMasculino.setOpaque(false);
+        rdGeneroMasculino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdMasculinoUsuarioActionPerformed(evt);
+                rdGeneroMasculinoActionPerformed(evt);
             }
         });
-        pnlGenero.add(rdMasculinoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+        pnlGenero.add(rdGeneroMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
-        rdGrupoGenero.add(rdFemeninoUsuario);
-        rdFemeninoUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        rdFemeninoUsuario.setText("Femenino");
-        rdFemeninoUsuario.setActionCommand("F");
-        rdFemeninoUsuario.setOpaque(false);
-        pnlGenero.add(rdFemeninoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+        rdGrupoGenero.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jRadioButton2.setText("Femenino");
+        jRadioButton2.setActionCommand("F");
+        jRadioButton2.setOpaque(false);
+        pnlGenero.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel10.setText("Genero");
         pnlGenero.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 70));
 
-        pnlUsuariosForm.add(pnlGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 180, 70));
-
-        pnlTelefono.setOpaque(false);
-        pnlTelefono.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel8.setText("Telefono");
-        pnlTelefono.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
-
-        txtTelefonoUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTelefonoUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        txtTelefonoUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtTelefonoUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoUsuarioActionPerformed(evt);
-            }
-        });
-        pnlTelefono.add(txtTelefonoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 30));
-
-        pnlUsuariosForm.add(pnlTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 100, -1));
-
-        pnlLogin.setOpaque(false);
-        pnlLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pnlRuc1.setOpaque(false);
-        pnlRuc1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel11.setText("Usuario");
-        pnlRuc1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
-
-        txtUsuarioUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtUsuarioUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        txtUsuarioUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtUsuarioUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioUsuarioActionPerformed(evt);
-            }
-        });
-        pnlRuc1.add(txtUsuarioUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
-
-        pnlLogin.add(pnlRuc1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        pnlRuc2.setOpaque(false);
-        pnlRuc2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel12.setText("Contraseña");
-        pnlRuc2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
-
-        txtContraseñaUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        txtContraseñaUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        pnlRuc2.add(txtContraseñaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
-
-        pnlLogin.add(pnlRuc2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, -1, -1));
-
-        pnlUsuariosForm.add(pnlLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 390, 60));
+        pnlUsuariosForm.add(pnlGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 180, 70));
 
         pnlApellido1.setOpaque(false);
         pnlApellido1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -362,36 +263,17 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         jLabel5.setText("Dirección");
         pnlApellido1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
 
-        txtDireccionUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDireccionUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        txtDireccionUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtDireccionUsuario.addActionListener(new java.awt.event.ActionListener() {
+        txtDirecionCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtDirecionCliente.setForeground(new java.awt.Color(102, 102, 102));
+        txtDirecionCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtDirecionCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDireccionUsuarioActionPerformed(evt);
+                txtDirecionClienteActionPerformed(evt);
             }
         });
-        pnlApellido1.add(txtDireccionUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
+        pnlApellido1.add(txtDirecionCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 300, 30));
 
-        pnlUsuariosForm.add(pnlApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 180, 60));
-
-        pnlFechaNacimiento.setBackground(new java.awt.Color(102, 153, 255));
-        pnlFechaNacimiento.setOpaque(false);
-        pnlFechaNacimiento.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel9.setText("Fecha nacimento");
-        pnlFechaNacimiento.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
-        pnlFechaNacimiento.add(jcaNacimientoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 170, 30));
-
-        pnlUsuariosForm.add(pnlFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, -1, 60));
-
-        btnCredencialLogin.setText("Editar credenciales");
-        btnCredencialLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCredencialLoginMouseClicked(evt);
-            }
-        });
-        pnlUsuariosForm.add(btnCredencialLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 343, -1, 50));
+        pnlUsuariosForm.add(pnlApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 300, 60));
 
         add(pnlUsuariosForm, java.awt.BorderLayout.CENTER);
 
@@ -578,8 +460,8 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
 
         pnlContainerFiltro.add(PnlFiltro, java.awt.BorderLayout.PAGE_START);
 
-        jtUsuario.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
-        jtUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        jtPersona.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jtPersona.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -587,44 +469,36 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
 
             }
         ));
-        jtUsuario.setGridColor(new java.awt.Color(255, 255, 255));
-        jtUsuario.setRowHeight(25);
-        jtUsuario.setSelectionBackground(new java.awt.Color(20, 110, 214));
-        jtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtPersona.setGridColor(new java.awt.Color(255, 255, 255));
+        jtPersona.setRowHeight(25);
+        jtPersona.setSelectionBackground(new java.awt.Color(20, 110, 214));
+        jtPersona.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtUsuarioMouseClicked(evt);
+                jtPersonaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtUsuario);
+        jScrollPane1.setViewportView(jtPersona);
 
         pnlContainerFiltro.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         add(pnlContainerFiltro, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreUsuarioActionPerformed
+    private void txtNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreUsuarioActionPerformed
+    }//GEN-LAST:event_txtNombreClienteActionPerformed
 
-    private void txtApellidoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoUsuarioActionPerformed
+    private void txtApellidoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoUsuarioActionPerformed
+    }//GEN-LAST:event_txtApellidoClienteActionPerformed
 
-    private void txtDniUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniUsuarioActionPerformed
+    private void txtDniClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDniUsuarioActionPerformed
+    }//GEN-LAST:event_txtDniClienteActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void txtTelefonoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoUsuarioActionPerformed
-
-    private void txtUsuarioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioUsuarioActionPerformed
 
     private void jcCategoriaFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroItemStateChanged
 
@@ -642,25 +516,9 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jcCategoriaFiltroVetoableChange
 
-    private void cargarTabla() throws Exception {
-        String columna[] = new String[]{"Código", "Nombre", "Apellido", "DNI", "Nacimiento", "Ubigeo", "Dirección", "Telefono", "Genero", "Usuario"};
-
-        modeloTablaUsuario = new DefaultTableModel(null, columna) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-
-        };
-//        productoD.listarProductoTabla(modeloTablaProducto, tipoFiltro, datoFiltro);
-        usuarioC.listarUsuarioTabla(modeloTablaUsuario, tipoFiltro, datoFiltro);
-        jtUsuario.setModel(modeloTablaUsuario);
-    }
-
-
-    private void jtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtUsuarioMouseClicked
-
-        int fila = jtUsuario.getSelectedRow(); // el nro de fila seleccionada
+    private void jtPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonaMouseClicked
+        
+        int fila = jtPersona.getSelectedRow(); // el nro de fila seleccionada
 
         if (fila >= 0) {
 
@@ -669,31 +527,10 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
             hover.menu(-1);
 
             //Campos de formularios
-            txtCodigoUsuario.setText(jtUsuario.getValueAt(fila, 0).toString());
-            txtNombreUsuario.setText(jtUsuario.getValueAt(fila, 1).toString());
-            txtApellidoUsuario.setText(jtUsuario.getValueAt(fila, 2).toString());
-            txtDniUsuario.setText(jtUsuario.getValueAt(fila, 3).toString());
+            txtCodigoCliente.setText(jtPersona.getValueAt(fila, 0).toString());
+            txtNombreCliente.setText(jtPersona.getValueAt(fila, 1).toString());
+            txtApellidoCliente.setText(jtPersona.getValueAt(fila, 1).toString());
             
-            try {
-                jcaNacimientoUsuario.setDate(Date.valueOf(jtUsuario.getValueAt(fila, 4).toString()));
-            } catch (Exception e) {
-                jcaNacimientoUsuario.setDate(null);
-            }
-            
-//            txtTelefonoUsuario.setText(jtUsuario.getValueAt(fila, 5).toString());
-            txtDireccionUsuario.setText(jtUsuario.getValueAt(fila, 6).toString());
-            txtTelefonoUsuario.setText(jtUsuario.getValueAt(fila, 7).toString());
-
-            for (Enumeration e = rdGrupoGenero.getElements(); e.hasMoreElements();) {
-                JRadioButton b = (JRadioButton) e.nextElement();
-                if (b.getActionCommand().equals(jtUsuario.getValueAt(fila, 8).toString())) {
-                    b.setSelected(true);
-                }
-
-            }
-
-            txtUsuarioUsuario.setText(jtUsuario.getValueAt(fila, 9).toString());
-
 //            String unidad = jtPersona.getValueAt(fila, 2).toString();
 //            for (int index = 0; index < jcUnidadMedida.getItemCount(); index++) {
 //                if (jcUnidadMedida.getItemAt(index).getDESUNI().equals(unidad)) {
@@ -711,33 +548,22 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
 //                    break;
 //                };
 //            }
+
         }
-
-
-    }//GEN-LAST:event_jtUsuarioMouseClicked
+        
+        
+    }//GEN-LAST:event_jtPersonaMouseClicked
 
     private void item0MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseDragged
 
     }//GEN-LAST:event_item0MouseDragged
 
     private void item0MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseMoved
-        hover.menu(0);
+         hover.menu(0);
     }//GEN-LAST:event_item0MouseMoved
 
     private void item0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseClicked
-        if (item0.isEnabled()) {
-            try {
-                if (!usuarioC.validarExistenciaUsuario(txtDniUsuario.getText()) && usuarioC.validar()) {
-                    usuarioC.cargarVariables();
-                    usuarioC.guardarUsuario();
-                    cargarTabla();
-                    usuarioC.limpiarVariables();
-                    hover.menu(-1);
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+       
     }//GEN-LAST:event_item0MouseClicked
 
     private void item1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item1MouseMoved
@@ -745,20 +571,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item1MouseMoved
 
     private void item1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item1MouseClicked
-        if (item1.isEnabled()) {
-            try {
-                if (usuarioC.validarEditarUsuario()) {
-                    usuarioC.cargarVariables();
-                    usuarioC.editarUsuario();
-                    cargarTabla();
-                    usuarioC.limpiarVariables();
-                    desactivarBotones(1);
-                }
-                hover.menu(-1);
-            } catch (Exception ex) {
-                Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        
     }//GEN-LAST:event_item1MouseClicked
 
     private void item2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseMoved
@@ -766,20 +579,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item2MouseMoved
 
     private void item2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseClicked
-       if (item2.isEnabled()) {
-            try {
-                if (usuarioC.validarEditarUsuario()) {
-                    usuarioC.cargarVariables();
-                    usuarioC.eliminarUsuario();
-                    cargarTabla();
-                    usuarioC.limpiarVariables();
-                    desactivarBotones(1);
-                }
-                hover.menu(-1);
-            } catch (Exception ex) {
-                Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_item2MouseClicked
 
     private void item3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item3MouseMoved
@@ -787,11 +587,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item3MouseMoved
 
     private void item3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item3MouseClicked
-        if (item3.isEnabled()) {
-            usuarioC.limpiarVariables();
-            desactivarBotones(1);
-            hover.menu(-1);
-        }
+
     }//GEN-LAST:event_item3MouseClicked
 
     private void item4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item4MouseMoved
@@ -810,54 +606,23 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    
 
-    private void rdMasculinoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdMasculinoUsuarioActionPerformed
+    private void rdGeneroMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdGeneroMasculinoActionPerformed
 
-    }//GEN-LAST:event_rdMasculinoUsuarioActionPerformed
+    }//GEN-LAST:event_rdGeneroMasculinoActionPerformed
 
     private void btnBuscarPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPersonaMouseClicked
-        usuarioC.resPersona(txtDniUsuario.getText());
-        txtUsuarioUsuario.setText(txtDniUsuario.getText());
-        txtContraseñaUsuario.setText(txtDniUsuario.getText());
+        usuarioC.resPersona(txtDniCliente.getText());
     }//GEN-LAST:event_btnBuscarPersonaMouseClicked
 
-    private void txtDireccionUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionUsuarioActionPerformed
+    private void txtDirecionClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirecionClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDireccionUsuarioActionPerformed
+    }//GEN-LAST:event_txtDirecionClienteActionPerformed
 
-    private void btnBuscarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPersonaActionPerformed
-
-    }//GEN-LAST:event_btnBuscarPersonaActionPerformed
-
-    private void btnCredencialLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCredencialLoginMouseClicked
-        try {
-
-            if (usuarioC.validarCredencialLogin()) {
-                usuarioC.cargarVariablesLogin();
-                usuarioC.editarUsuarioLogin();
-                cargarTabla();
-                usuarioC.limpiarVariables();
-                desactivarBotones(1);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnCredencialLoginMouseClicked
-
-    private void txtDniUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniUsuarioKeyTyped
-        char caracter = evt.getKeyChar();
-        if (txtDniUsuario.getText().length() >= 8) {
-            evt.consume();
-        }
-        
-        if (((caracter < '0') || (caracter > '9'))
-                && (caracter != KeyEvent.VK_BACK_SPACE)
-                && (caracter != '.' || txtPrecioProducto.getText().contains("."))) {
-            evt.consume();
-        }
-        
-    }//GEN-LAST:event_txtDniUsuarioKeyTyped
-
+    
+    
+    
     private void desactivarBotones(int tipo) {
 
         switch (tipo) {
@@ -867,8 +632,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                 item2.setEnabled(false);
                 item3.setEnabled(false);
                 item4.setEnabled(true);
-                btnCredencialLogin.setEnabled(false);
-                txtCodigoUsuario.setEnabled(true);
+                txtCodigoCliente.setEnabled(true);
 
                 break;
 
@@ -878,8 +642,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                 item2.setEnabled(true);
                 item3.setEnabled(true);
                 item4.setEnabled(false);
-                btnCredencialLogin.setEnabled(true);
-                txtCodigoUsuario.setEnabled(false);
+                txtCodigoCliente.setEnabled(false);
 
                 break;
 
@@ -889,8 +652,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                 item2.setEnabled(false);
                 item3.setEnabled(false);
                 item4.setEnabled(false);
-                btnCredencialLogin.setEnabled(false);
-                txtCodigoUsuario.setEnabled(false);
+                txtCodigoCliente.setEnabled(false);
                 break;
         }
 
@@ -899,7 +661,6 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PnlFiltro;
     private javax.swing.JButton btnBuscarPersona;
-    private javax.swing.JButton btnCredencialLogin;
     private javax.swing.JPanel item0;
     private javax.swing.JPanel item1;
     private javax.swing.JPanel item2;
@@ -909,8 +670,6 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -928,40 +687,30 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
+    public static javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JComboBox jcCategoriaFiltro;
-    public static com.toedter.calendar.JDateChooser jcaNacimientoUsuario;
-    private javax.swing.JTable jtUsuario;
+    private javax.swing.JTable jtPersona;
     private javax.swing.JPanel pnlApellido;
     private javax.swing.JPanel pnlApellido1;
     private javax.swing.JPanel pnlCodigo;
     private javax.swing.JPanel pnlContainerFiltro;
     private javax.swing.JPanel pnlDni;
-    private javax.swing.JPanel pnlFechaNacimiento;
     private javax.swing.JPanel pnlGenero;
-    private javax.swing.JPanel pnlLogin;
     private javax.swing.JPanel pnlNombre;
     private javax.swing.JPanel pnlOptionPersona;
-    private javax.swing.JPanel pnlRuc1;
-    private javax.swing.JPanel pnlRuc2;
-    private javax.swing.JPanel pnlTelefono;
     private javax.swing.JPanel pnlUbicacion;
     private javax.swing.JPanel pnlUsuariosForm;
-    public static javax.swing.JRadioButton rdFemeninoUsuario;
-    public static javax.swing.ButtonGroup rdGrupoGenero;
-    public static javax.swing.JRadioButton rdMasculinoUsuario;
-    public static javax.swing.JTextField txtApellidoUsuario;
+    private javax.swing.ButtonGroup rdGRupoTipo;
+    public static javax.swing.JRadioButton rdGeneroMasculino;
+    private javax.swing.ButtonGroup rdGrupoGenero;
+    public static javax.swing.JTextField txtApellidoCliente;
+    public static javax.swing.JTextField txtCodigoCliente;
     public static javax.swing.JTextField txtCodigoProducto1;
-    public static javax.swing.JTextField txtCodigoUsuario;
-    public static javax.swing.JPasswordField txtContraseñaUsuario;
-    public static javax.swing.JTextField txtDireccionUsuario;
-    public static javax.swing.JTextField txtDniUsuario;
-    public static javax.swing.JTextField txtNombreUsuario;
-    public static javax.swing.JTextField txtTelefonoUsuario;
-    public static javax.swing.JTextField txtUsuarioUsuario;
+    public static javax.swing.JTextField txtDirecionCliente;
+    public static javax.swing.JTextField txtDniCliente;
+    public static javax.swing.JTextField txtNombreCliente;
     // End of variables declaration//GEN-END:variables
 }

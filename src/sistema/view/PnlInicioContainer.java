@@ -17,7 +17,6 @@ public class PnlInicioContainer extends javax.swing.JPanel {
     
     public PnlInicioContainer() {
         
-        
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()){
                 if("Windows".equals(info.getName())){

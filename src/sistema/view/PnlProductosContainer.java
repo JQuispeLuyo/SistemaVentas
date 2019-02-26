@@ -5,6 +5,7 @@
  */
 package sistema.view;
 
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -22,22 +23,19 @@ import utilidad.Hover;
  */
 public class PnlProductosContainer extends javax.swing.JPanel {
 
-    
     private int tipoFiltro = 0;
     private String datoFiltro = "";
-    
+
     int nPnl, pnlActualClick;
 
     ProductoC productoC = new ProductoC();
-    ProductoD productoD = new ProductoD();
     Hover hover;
 
     DefaultTableModel modeloTablaProducto;
 
-    public PnlProductosContainer(){
-        
-    
-    //Apariencia Componentes    
+    public PnlProductosContainer() {
+
+        //Apariencia Componentes    
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -54,11 +52,11 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         nPnl = pnlOptionProductos.getComponentCount();
         hover = new Hover(nPnl, pnlOptionProductos);
         hover.menu(-1);
-   
+
         //Controlador de producto
         productoC.mostrarUnidad(jcUnidadMedida);
         productoC.mostrarCategoria(jcCategoria, jcCategoriaFiltro);
-        
+
         try {
             tipoFiltro = 0;
             datoFiltro = "";
@@ -66,12 +64,11 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         } catch (Exception ex) {
             Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     private void cargarTabla() throws Exception {
         String columna[] = new String[]{"Código", "Producto", "Unidad", "Precio", "Categoria"};
-
         modeloTablaProducto = new DefaultTableModel(null, columna) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -79,7 +76,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
             }
 
         };
-//        productoD.listarProductoTabla(modeloTablaProducto, tipoFiltro, datoFiltro);
+
         productoC.listarProductoTabla(modeloTablaProducto, tipoFiltro, datoFiltro);
         jtProducto.setModel(modeloTablaProducto);
     }
@@ -97,7 +94,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         PnlFiltro = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        txtCodigoProducto1 = new javax.swing.JTextField();
+        txtProductoFiltro = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jcCategoriaFiltro = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -162,10 +159,15 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jPanel7.setOpaque(false);
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtCodigoProducto1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtCodigoProducto1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 102, 204)));
-        txtCodigoProducto1.setOpaque(false);
-        jPanel7.add(txtCodigoProducto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
+        txtProductoFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        txtProductoFiltro.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 102, 204)));
+        txtProductoFiltro.setOpaque(false);
+        txtProductoFiltro.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtProductoFiltroCaretUpdate(evt);
+            }
+        });
+        jPanel7.add(txtProductoFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel4.setText("BUSCAR");
@@ -194,7 +196,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
                 jcCategoriaFiltroVetoableChange(evt);
             }
         });
-        PnlFiltro.add(jcCategoriaFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 190, 30));
+        PnlFiltro.add(jcCategoriaFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 190, 30));
 
         pnlContainerFiltro.add(PnlFiltro, java.awt.BorderLayout.PAGE_START);
 
@@ -255,7 +257,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (2).png"))); // NOI18N
         item0.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionProductos.add(item0, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 120, 50));
+        pnlOptionProductos.add(item0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, 50));
 
         item1.setBackground(new java.awt.Color(204, 204, 204));
         item1.setEnabled(false);
@@ -278,7 +280,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag7.png"))); // NOI18N
         item1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionProductos.add(item1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 120, 50));
+        pnlOptionProductos.add(item1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, 50));
 
         item2.setBackground(new java.awt.Color(204, 204, 204));
         item2.setEnabled(false);
@@ -301,7 +303,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (4).png"))); // NOI18N
         item2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 50));
 
-        pnlOptionProductos.add(item2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, 50));
+        pnlOptionProductos.add(item2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 50));
 
         item3.setBackground(new java.awt.Color(204, 204, 204));
         item3.setEnabled(false);
@@ -324,7 +326,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (1).png"))); // NOI18N
         item3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 0, 30, 50));
 
-        pnlOptionProductos.add(item3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 120, 50));
+        pnlOptionProductos.add(item3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 120, 50));
 
         item4.setBackground(new java.awt.Color(204, 204, 204));
         item4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -346,7 +348,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (6).png"))); // NOI18N
         item4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionProductos.add(item4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 120, 50));
+        pnlOptionProductos.add(item4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 120, 50));
 
         add(pnlOptionProductos, java.awt.BorderLayout.LINE_END);
 
@@ -364,6 +366,19 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         txtCodigoProducto.setForeground(new java.awt.Color(102, 102, 102));
         txtCodigoProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
         txtCodigoProducto.setOpaque(false);
+        txtCodigoProducto.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtCodigoProductoCaretUpdate(evt);
+            }
+        });
+        txtCodigoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCodigoProductoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoProductoKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 80, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
@@ -418,6 +433,11 @@ public class PnlProductosContainer extends javax.swing.JPanel {
         txtPrecioProducto.setForeground(new java.awt.Color(102, 102, 102));
         txtPrecioProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
         txtPrecioProducto.setOpaque(false);
+        txtPrecioProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioProductoKeyTyped(evt);
+            }
+        });
         jPanel5.add(txtPrecioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 120, 30));
 
         PnlProductosForm.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 240, 60));
@@ -477,23 +497,38 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     private void item0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseClicked
 
         if (item0.isEnabled()) {
-        try {
-            if (productoC.validar()) {
-                productoC.CargarVariables();
-                productoC.guardarProducto();
-                cargarTabla();
-                productoC.limpiarVariables();
+            try {
+                if (productoC.validar()) {
+                    productoC.CargarVariables();
+                    productoC.guardarProducto();
+                    cargarTabla();
+                    productoC.limpiarVariables();
+
+                }
                 hover.menu(-1);
+            } catch (Exception ex) {
+                Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
-        }
         }
 
     }//GEN-LAST:event_item0MouseClicked
 
     private void item2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseClicked
-        
+        if (item2.isEnabled()) {
+            try {
+                if (productoC.validar()) {
+                    productoC.CargarVariables();
+                    productoC.eliminarProducto();
+                    cargarTabla();
+                    productoC.limpiarVariables();
+                    desactivarBotones(1);
+
+                }
+                hover.menu(-1);
+            } catch (Exception ex) {
+                Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_item2MouseClicked
 
     //Boton Actualizar
@@ -505,7 +540,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
                     productoC.editarProducto();
                     cargarTabla();
                     productoC.limpiarVariables();
-                    desactivarBotones(1);                
+                    desactivarBotones(1);
                 }
                 hover.menu(-1);
             } catch (Exception ex) {
@@ -523,7 +558,8 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item3MouseClicked
 
     private void item4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item4MouseClicked
-        // TODO add your handling code here:
+        System.out.println("ss");
+        
     }//GEN-LAST:event_item4MouseClicked
 
     private void item0MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseDragged
@@ -561,7 +597,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_pnlOptionProductosMouseMoved
 
     private void jcCategoriaFiltroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroPropertyChange
-        
+
     }//GEN-LAST:event_jcCategoriaFiltroPropertyChange
 
     private void jcCategoriaFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroItemStateChanged
@@ -574,15 +610,14 @@ public class PnlProductosContainer extends javax.swing.JPanel {
 
     private void jcCategoriaFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroActionPerformed
         try {
-            if(jcCategoriaFiltro.getSelectedIndex() == 0){
+            if (jcCategoriaFiltro.getSelectedIndex() == 0) {
                 tipoFiltro = 0;
                 datoFiltro = "";
-            }else{
+            } else {
                 tipoFiltro = 1;
                 datoFiltro = PnlProductosContainer.jcCategoriaFiltro.getItemAt(jcCategoriaFiltro.getSelectedIndex()).getDESCAT();
             }
             cargarTabla();
-            
         } catch (Exception ex) {
             Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -591,6 +626,45 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     private void txtProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProductoActionPerformed
+
+    private void txtPrecioProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioProductoKeyTyped
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9'))
+                && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.' || txtPrecioProducto.getText().contains("."))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioProductoKeyTyped
+
+    private void txtCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProductoKeyTyped
+        char caracter = evt.getKeyChar();
+        if (txtCodigoProducto.getText().length() >= 4) {
+            evt.consume();
+        }
+        if (!Character.isLetterOrDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCodigoProductoKeyTyped
+
+    private void txtCodigoProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProductoKeyReleased
+        String codigo = txtCodigoProducto.getText();
+        txtCodigoProducto.setText(codigo.substring(0, codigo.length()).toUpperCase());
+    }//GEN-LAST:event_txtCodigoProductoKeyReleased
+
+    private void txtCodigoProductoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCodigoProductoCaretUpdate
+
+    }//GEN-LAST:event_txtCodigoProductoCaretUpdate
+
+    private void txtProductoFiltroCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtProductoFiltroCaretUpdate
+        jcCategoriaFiltro.setSelectedIndex(0);
+        try {
+                tipoFiltro = 2;
+                datoFiltro = txtProductoFiltro.getText();
+            cargarTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtProductoFiltroCaretUpdate
 
     private void desactivarBotones(int tipo) {
 
@@ -667,8 +741,8 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     private javax.swing.JPanel pnlContainerFiltro;
     private javax.swing.JPanel pnlOptionProductos;
     public static javax.swing.JTextField txtCodigoProducto;
-    public static javax.swing.JTextField txtCodigoProducto1;
     public static javax.swing.JTextField txtPrecioProducto;
     public static javax.swing.JTextField txtProducto;
+    public static javax.swing.JTextField txtProductoFiltro;
     // End of variables declaration//GEN-END:variables
 }

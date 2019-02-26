@@ -14,13 +14,15 @@ public class PanelControl extends javax.swing.JFrame {
     Object pnls;
     PnlInicioContainer pnlInicioContainer = new PnlInicioContainer();
     PnlEntradaContainer pnlEntradaContainer = new PnlEntradaContainer();
-    PnlUsuariosContainer pnlUsuariosContainer = new PnlUsuariosContainer();
+    PnlClienteContainer pnlClienteContainer = new PnlClienteContainer();
     PnlEmpresaContainer pnlEmpresaContainer = new PnlEmpresaContainer();
+    PnlUsuariosContainer pnlUsuariosContainer = new PnlUsuariosContainer();
     PnlProductosContainer pnlProductosContainer = new PnlProductosContainer();
+    
+    
 
     @SuppressWarnings("empty-statement")
     public PanelControl() {
-
         loginM = LoginM.getInstance();
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -29,6 +31,7 @@ public class PanelControl extends javax.swing.JFrame {
                     break;
                 }
             }
+            
         } catch (Exception e) {
         }
 
@@ -47,8 +50,9 @@ public class PanelControl extends javax.swing.JFrame {
         //logica de paneles contenedores
         pnlPrincipal.add(pnlInicioContainer);
         pnlPrincipal.add(pnlEntradaContainer);
-        pnlPrincipal.add(pnlUsuariosContainer);
+        pnlPrincipal.add(pnlClienteContainer);
         pnlPrincipal.add(pnlEmpresaContainer);
+        pnlPrincipal.add(pnlUsuariosContainer);      
         pnlPrincipal.add(pnlProductosContainer);
         pnlPrincipal.add(pnlPrincipal.getComponent(0), 0);
         pnlPrincipal.validate();
@@ -364,7 +368,7 @@ public class PanelControl extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Usuarios");
+        jLabel4.setText("Clientes");
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/team.png"))); // NOI18N
 
@@ -442,9 +446,9 @@ public class PanelControl extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Productos");
+        jLabel6.setText("Usuarios");
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/provider.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlItem5Layout = new javax.swing.GroupLayout(pnlItem5);
         pnlItem5.setLayout(pnlItem5Layout);
@@ -481,9 +485,9 @@ public class PanelControl extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Configuracion");
+        jLabel8.setText("Productos");
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/setting.png"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlItem6Layout = new javax.swing.GroupLayout(pnlItem6);
         pnlItem6.setLayout(pnlItem6Layout);
@@ -494,7 +498,7 @@ public class PanelControl extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         pnlItem6Layout.setVerticalGroup(
             pnlItem6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

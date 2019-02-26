@@ -43,6 +43,10 @@ public class ProductoC {
     public void editarProducto() throws Exception {
         productoD.editarProducto(productoM);
     }
+    
+    public void eliminarProducto() throws Exception {
+        productoD.eliminarProducto(productoM);
+    }
 
     public void listarProductoTabla(DefaultTableModel modeloTablaProducto, int tipo, String dato) throws Exception {
         productoD.listarProductoTabla(modeloTablaProducto, tipo, dato);
@@ -58,7 +62,6 @@ public class ProductoC {
 
     public boolean validar() {
         if ("".equals(txtCodigoProducto.getText().trim())) {
-            System.out.println("nombre entro");
             JOptionPane.showMessageDialog(null, "Ingrese Codigo");
             return false;
         }
