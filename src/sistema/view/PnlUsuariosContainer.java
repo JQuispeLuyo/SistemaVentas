@@ -14,7 +14,6 @@ import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import sistema.controlador.UsuarioC;
-import static sistema.view.PnlProductosContainer.txtPrecioProducto;
 import utilidad.Hover;
 
 /**
@@ -49,7 +48,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
             datoFiltro = "";
             this.cargarTabla();
         } catch (Exception ex) {
-            Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -124,9 +123,9 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         pnlContainerFiltro = new javax.swing.JPanel();
         PnlFiltro = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        txtCodigoProducto1 = new javax.swing.JTextField();
+        txtTextoFiltroUsuario = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jcCategoriaFiltro = new javax.swing.JComboBox();
+        jcUsuarioFiltro = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtUsuario = new javax.swing.JTable();
 
@@ -542,10 +541,15 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         jPanel7.setOpaque(false);
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtCodigoProducto1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtCodigoProducto1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 102, 204)));
-        txtCodigoProducto1.setOpaque(false);
-        jPanel7.add(txtCodigoProducto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
+        txtTextoFiltroUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        txtTextoFiltroUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 102, 204)));
+        txtTextoFiltroUsuario.setOpaque(false);
+        txtTextoFiltroUsuario.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTextoFiltroUsuarioCaretUpdate(evt);
+            }
+        });
+        jPanel7.add(txtTextoFiltroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel16.setText("BUSCAR");
@@ -553,28 +557,29 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
 
         PnlFiltro.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 180, 60));
 
-        jcCategoriaFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jcCategoriaFiltro.addItemListener(new java.awt.event.ItemListener() {
+        jcUsuarioFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jcUsuarioFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona Filtro", "Nombre", "apellido", "Dni", "Codigo", "Inactivo" }));
+        jcUsuarioFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcCategoriaFiltroItemStateChanged(evt);
+                jcUsuarioFiltroItemStateChanged(evt);
             }
         });
-        jcCategoriaFiltro.addActionListener(new java.awt.event.ActionListener() {
+        jcUsuarioFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcCategoriaFiltroActionPerformed(evt);
+                jcUsuarioFiltroActionPerformed(evt);
             }
         });
-        jcCategoriaFiltro.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        jcUsuarioFiltro.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jcCategoriaFiltroPropertyChange(evt);
+                jcUsuarioFiltroPropertyChange(evt);
             }
         });
-        jcCategoriaFiltro.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+        jcUsuarioFiltro.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
             public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                jcCategoriaFiltroVetoableChange(evt);
+                jcUsuarioFiltroVetoableChange(evt);
             }
         });
-        PnlFiltro.add(jcCategoriaFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 190, 30));
+        PnlFiltro.add(jcUsuarioFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 190, 30));
 
         pnlContainerFiltro.add(PnlFiltro, java.awt.BorderLayout.PAGE_START);
 
@@ -626,21 +631,46 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioUsuarioActionPerformed
 
-    private void jcCategoriaFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroItemStateChanged
+    private void jcUsuarioFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcUsuarioFiltroItemStateChanged
 
-    }//GEN-LAST:event_jcCategoriaFiltroItemStateChanged
+    }//GEN-LAST:event_jcUsuarioFiltroItemStateChanged
 
-    private void jcCategoriaFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroActionPerformed
+    private void jcUsuarioFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcUsuarioFiltroActionPerformed
+        
+        try {
+            if (jcUsuarioFiltro.getSelectedIndex() == 0) {
+                tipoFiltro = 0;
+                datoFiltro = "";
+            } else {
+                tipoFiltro = jcUsuarioFiltro.getSelectedIndex(); 
+            }
+            filtrar();
+        } catch (Exception ex) {
+            Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_jcUsuarioFiltroActionPerformed
 
-    }//GEN-LAST:event_jcCategoriaFiltroActionPerformed
+    private void filtrar(){
+        datoFiltro = txtTextoFiltroUsuario.getText();
+        txtTextoFiltroUsuario.requestFocus();
+        txtTextoFiltroUsuario.setText("");
+        try {
+            cargarTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    private void jcUsuarioFiltroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcUsuarioFiltroPropertyChange
 
-    private void jcCategoriaFiltroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroPropertyChange
+    }//GEN-LAST:event_jcUsuarioFiltroPropertyChange
 
-    }//GEN-LAST:event_jcCategoriaFiltroPropertyChange
+    private void jcUsuarioFiltroVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jcUsuarioFiltroVetoableChange
 
-    private void jcCategoriaFiltroVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jcCategoriaFiltroVetoableChange
-
-    }//GEN-LAST:event_jcCategoriaFiltroVetoableChange
+    }//GEN-LAST:event_jcUsuarioFiltroVetoableChange
 
     private void cargarTabla() throws Exception {
         String columna[] = new String[]{"Código", "Nombre", "Apellido", "DNI", "Nacimiento", "Ubigeo", "Dirección", "Telefono", "Genero", "Usuario"};
@@ -735,7 +765,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                     hover.menu(-1);
                 }
             } catch (Exception ex) {
-                Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_item0MouseClicked
@@ -756,7 +786,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                 }
                 hover.menu(-1);
             } catch (Exception ex) {
-                Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_item1MouseClicked
@@ -777,7 +807,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                 }
                 hover.menu(-1);
             } catch (Exception ex) {
-                Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_item2MouseClicked
@@ -851,12 +881,19 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         }
         
         if (((caracter < '0') || (caracter > '9'))
-                && (caracter != KeyEvent.VK_BACK_SPACE)
-                && (caracter != '.' || txtPrecioProducto.getText().contains("."))) {
+                && (caracter != KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
         }
         
     }//GEN-LAST:event_txtDniUsuarioKeyTyped
+
+    private void txtTextoFiltroUsuarioCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTextoFiltroUsuarioCaretUpdate
+        try {
+            datoFiltro = txtTextoFiltroUsuario.getText();
+            cargarTabla();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txtTextoFiltroUsuarioCaretUpdate
 
     private void desactivarBotones(int tipo) {
 
@@ -933,7 +970,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JComboBox jcCategoriaFiltro;
+    public static javax.swing.JComboBox jcUsuarioFiltro;
     public static com.toedter.calendar.JDateChooser jcaNacimientoUsuario;
     private javax.swing.JTable jtUsuario;
     private javax.swing.JPanel pnlApellido;
@@ -955,13 +992,13 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     public static javax.swing.ButtonGroup rdGrupoGenero;
     public static javax.swing.JRadioButton rdMasculinoUsuario;
     public static javax.swing.JTextField txtApellidoUsuario;
-    public static javax.swing.JTextField txtCodigoProducto1;
     public static javax.swing.JTextField txtCodigoUsuario;
     public static javax.swing.JPasswordField txtContraseñaUsuario;
     public static javax.swing.JTextField txtDireccionUsuario;
     public static javax.swing.JTextField txtDniUsuario;
     public static javax.swing.JTextField txtNombreUsuario;
     public static javax.swing.JTextField txtTelefonoUsuario;
+    public static javax.swing.JTextField txtTextoFiltroUsuario;
     public static javax.swing.JTextField txtUsuarioUsuario;
     // End of variables declaration//GEN-END:variables
 }

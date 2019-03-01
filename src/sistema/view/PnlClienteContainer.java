@@ -5,8 +5,14 @@
  */
 package sistema.view;
 
+import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
-import sistema.controlador.UsuarioC;
+import javax.swing.table.DefaultTableModel;
+import sistema.controlador.ClienteC;
+import static sistema.view.PnlUsuariosContainer.rdGrupoGenero;
 import utilidad.Hover;
 /**
  *
@@ -19,7 +25,9 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     
     int nPnl, pnlActualClick;
     
-    UsuarioC usuarioC = new UsuarioC();
+    DefaultTableModel modeloTablaCliente;
+    
+    ClienteC clienteC = new ClienteC();
     Hover hover;
     
     public PnlClienteContainer() {
@@ -30,10 +38,30 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         nPnl = pnlOptionPersona.getComponentCount();
         hover = new Hover(nPnl, pnlOptionPersona);
         hover.menu(-1);
-        
+        try {
+            cargarTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(PnlClienteContainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setBorder(new EmptyBorder(20, 40, 40, 40));
     }
 
+    private void cargarTabla() throws Exception {
+        String columna[] = new String[]{"Código", "Nombre", "Apellido", "DNI", "Genero"};
+
+        modeloTablaCliente = new DefaultTableModel(null, columna) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+        };
+//        productoD.listarProductoTabla(modeloTablaProducto, tipoFiltro, datoFiltro);
+        clienteC.listarClienteTabla(modeloTablaCliente, tipoFiltro, datoFiltro);
+        jtCliente.setModel(modeloTablaCliente);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +72,6 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     private void initComponents() {
 
         rdGrupoGenero = new javax.swing.ButtonGroup();
-        rdGRupoTipo = new javax.swing.ButtonGroup();
         pnlUsuariosForm = new javax.swing.JPanel();
         pnlCodigo = new javax.swing.JPanel();
         txtCodigoCliente = new javax.swing.JTextField();
@@ -59,18 +86,10 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txtDniCliente = new javax.swing.JTextField();
         btnBuscarPersona = new javax.swing.JButton();
-        pnlUbicacion = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
         pnlGenero = new javax.swing.JPanel();
         rdGeneroMasculino = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
-        pnlApellido1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        txtDirecionCliente = new javax.swing.JTextField();
         pnlOptionPersona = new javax.swing.JPanel();
         item0 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -93,9 +112,9 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         txtCodigoProducto1 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jcCategoriaFiltro = new javax.swing.JComboBox();
+        jcClienteFiltro = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtPersona = new javax.swing.JTable();
+        jtCliente = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -196,37 +215,6 @@ public class PnlClienteContainer extends javax.swing.JPanel {
 
         pnlUsuariosForm.add(pnlDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 140, -1));
 
-        pnlUbicacion.setOpaque(false);
-        pnlUbicacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jComboBox1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        pnlUbicacion.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 30));
-
-        jComboBox2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-        pnlUbicacion.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 150, 30));
-
-        jComboBox3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pnlUbicacion.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 130, 30));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel7.setText("Ubicación");
-        pnlUbicacion.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
-
-        pnlUsuariosForm.add(pnlUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 490, 70));
-
         pnlGenero.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
         pnlGenero.setOpaque(false);
         pnlGenero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -254,26 +242,7 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         jLabel10.setText("Genero");
         pnlGenero.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 70));
 
-        pnlUsuariosForm.add(pnlGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 180, 70));
-
-        pnlApellido1.setOpaque(false);
-        pnlApellido1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel5.setText("Dirección");
-        pnlApellido1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
-
-        txtDirecionCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDirecionCliente.setForeground(new java.awt.Color(102, 102, 102));
-        txtDirecionCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtDirecionCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDirecionClienteActionPerformed(evt);
-            }
-        });
-        pnlApellido1.add(txtDirecionCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 300, 30));
-
-        pnlUsuariosForm.add(pnlApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 300, 60));
+        pnlUsuariosForm.add(pnlGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 180, 70));
 
         add(pnlUsuariosForm, java.awt.BorderLayout.CENTER);
 
@@ -435,33 +404,33 @@ public class PnlClienteContainer extends javax.swing.JPanel {
 
         PnlFiltro.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 180, 60));
 
-        jcCategoriaFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jcCategoriaFiltro.addItemListener(new java.awt.event.ItemListener() {
+        jcClienteFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jcClienteFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcCategoriaFiltroItemStateChanged(evt);
+                jcClienteFiltroItemStateChanged(evt);
             }
         });
-        jcCategoriaFiltro.addActionListener(new java.awt.event.ActionListener() {
+        jcClienteFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcCategoriaFiltroActionPerformed(evt);
+                jcClienteFiltroActionPerformed(evt);
             }
         });
-        jcCategoriaFiltro.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        jcClienteFiltro.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jcCategoriaFiltroPropertyChange(evt);
+                jcClienteFiltroPropertyChange(evt);
             }
         });
-        jcCategoriaFiltro.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+        jcClienteFiltro.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
             public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                jcCategoriaFiltroVetoableChange(evt);
+                jcClienteFiltroVetoableChange(evt);
             }
         });
-        PnlFiltro.add(jcCategoriaFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 190, 30));
+        PnlFiltro.add(jcClienteFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 190, 30));
 
         pnlContainerFiltro.add(PnlFiltro, java.awt.BorderLayout.PAGE_START);
 
-        jtPersona.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
-        jtPersona.setModel(new javax.swing.table.DefaultTableModel(
+        jtCliente.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jtCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -469,15 +438,15 @@ public class PnlClienteContainer extends javax.swing.JPanel {
 
             }
         ));
-        jtPersona.setGridColor(new java.awt.Color(255, 255, 255));
-        jtPersona.setRowHeight(25);
-        jtPersona.setSelectionBackground(new java.awt.Color(20, 110, 214));
-        jtPersona.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtCliente.setGridColor(new java.awt.Color(255, 255, 255));
+        jtCliente.setRowHeight(25);
+        jtCliente.setSelectionBackground(new java.awt.Color(20, 110, 214));
+        jtCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtPersonaMouseClicked(evt);
+                jtClienteMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtPersona);
+        jScrollPane1.setViewportView(jtCliente);
 
         pnlContainerFiltro.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -496,29 +465,25 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDniClienteActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void jcClienteFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcClienteFiltroItemStateChanged
 
-    private void jcCategoriaFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroItemStateChanged
+    }//GEN-LAST:event_jcClienteFiltroItemStateChanged
 
-    }//GEN-LAST:event_jcCategoriaFiltroItemStateChanged
+    private void jcClienteFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcClienteFiltroActionPerformed
 
-    private void jcCategoriaFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroActionPerformed
+    }//GEN-LAST:event_jcClienteFiltroActionPerformed
 
-    }//GEN-LAST:event_jcCategoriaFiltroActionPerformed
+    private void jcClienteFiltroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcClienteFiltroPropertyChange
 
-    private void jcCategoriaFiltroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroPropertyChange
+    }//GEN-LAST:event_jcClienteFiltroPropertyChange
 
-    }//GEN-LAST:event_jcCategoriaFiltroPropertyChange
+    private void jcClienteFiltroVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jcClienteFiltroVetoableChange
 
-    private void jcCategoriaFiltroVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jcCategoriaFiltroVetoableChange
+    }//GEN-LAST:event_jcClienteFiltroVetoableChange
 
-    }//GEN-LAST:event_jcCategoriaFiltroVetoableChange
-
-    private void jtPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonaMouseClicked
+    private void jtClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtClienteMouseClicked
         
-        int fila = jtPersona.getSelectedRow(); // el nro de fila seleccionada
+        int fila = jtCliente.getSelectedRow(); // el nro de fila seleccionada
 
         if (fila >= 0) {
 
@@ -527,32 +492,23 @@ public class PnlClienteContainer extends javax.swing.JPanel {
             hover.menu(-1);
 
             //Campos de formularios
-            txtCodigoCliente.setText(jtPersona.getValueAt(fila, 0).toString());
-            txtNombreCliente.setText(jtPersona.getValueAt(fila, 1).toString());
-            txtApellidoCliente.setText(jtPersona.getValueAt(fila, 1).toString());
-            
-//            String unidad = jtPersona.getValueAt(fila, 2).toString();
-//            for (int index = 0; index < jcUnidadMedida.getItemCount(); index++) {
-//                if (jcUnidadMedida.getItemAt(index).getDESUNI().equals(unidad)) {
-//                    jcUnidadMedida.setSelectedIndex(index);
-//                    break;
-//                };
-//            }
-//
-//            txtPrecioProducto.setText(jtPersona.getValueAt(fila, 3).toString());
-//
-//            String categoria = jtPersona.getValueAt(fila, 4).toString();
-//            for (int index = 0; index < jtPersona.getItemCount(); index++) {
-//                if (jcCategoria.getItemAt(index).getDESCAT().equals(categoria)) {
-//                    jcCategoria.setSelectedIndex(index);
-//                    break;
-//                };
-//            }
+            txtCodigoCliente.setText(jtCliente.getValueAt(fila, 0).toString());
+            txtNombreCliente.setText(jtCliente.getValueAt(fila, 1).toString());
+            txtApellidoCliente.setText(jtCliente.getValueAt(fila, 2).toString());
+            txtDniCliente.setText(jtCliente.getValueAt(fila, 3).toString());
 
+            for (Enumeration e = rdGrupoGenero.getElements(); e.hasMoreElements();) {
+                JRadioButton b = (JRadioButton) e.nextElement();
+                if (b.getActionCommand().equals(jtCliente.getValueAt(fila, 4).toString())) {
+                    b.setSelected(true);
+                }
+
+            }
+            
         }
         
         
-    }//GEN-LAST:event_jtPersonaMouseClicked
+    }//GEN-LAST:event_jtClienteMouseClicked
 
     private void item0MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseDragged
 
@@ -563,7 +519,19 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item0MouseMoved
 
     private void item0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseClicked
-       
+        if (item0.isEnabled()) {
+            try {
+                if (clienteC.validar()) {
+                    clienteC.cargarVariables();
+                    clienteC.guardarCliente();
+                    cargarTabla();
+                    clienteC.limpiarVariables();
+                    hover.menu(-1);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(PnlClienteContainer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_item0MouseClicked
 
     private void item1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item1MouseMoved
@@ -602,10 +570,6 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         hover.menu(-1);
     }//GEN-LAST:event_pnlOptionPersonaMouseMoved
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
     
 
     private void rdGeneroMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdGeneroMasculinoActionPerformed
@@ -613,12 +577,8 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_rdGeneroMasculinoActionPerformed
 
     private void btnBuscarPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPersonaMouseClicked
-        usuarioC.resPersona(txtDniCliente.getText());
+        clienteC.resPersona(txtDniCliente.getText());
     }//GEN-LAST:event_btnBuscarPersonaMouseClicked
-
-    private void txtDirecionClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirecionClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDirecionClienteActionPerformed
 
     
     
@@ -666,9 +626,6 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     private javax.swing.JPanel item2;
     private javax.swing.JPanel item3;
     private javax.swing.JPanel item4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -684,32 +641,26 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
     public static javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JComboBox jcCategoriaFiltro;
-    private javax.swing.JTable jtPersona;
+    public static javax.swing.JComboBox jcClienteFiltro;
+    private javax.swing.JTable jtCliente;
     private javax.swing.JPanel pnlApellido;
-    private javax.swing.JPanel pnlApellido1;
     private javax.swing.JPanel pnlCodigo;
     private javax.swing.JPanel pnlContainerFiltro;
     private javax.swing.JPanel pnlDni;
     private javax.swing.JPanel pnlGenero;
     private javax.swing.JPanel pnlNombre;
     private javax.swing.JPanel pnlOptionPersona;
-    private javax.swing.JPanel pnlUbicacion;
     private javax.swing.JPanel pnlUsuariosForm;
-    private javax.swing.ButtonGroup rdGRupoTipo;
     public static javax.swing.JRadioButton rdGeneroMasculino;
-    private javax.swing.ButtonGroup rdGrupoGenero;
+    public static javax.swing.ButtonGroup rdGrupoGenero;
     public static javax.swing.JTextField txtApellidoCliente;
     public static javax.swing.JTextField txtCodigoCliente;
     public static javax.swing.JTextField txtCodigoProducto1;
-    public static javax.swing.JTextField txtDirecionCliente;
     public static javax.swing.JTextField txtDniCliente;
     public static javax.swing.JTextField txtNombreCliente;
     // End of variables declaration//GEN-END:variables

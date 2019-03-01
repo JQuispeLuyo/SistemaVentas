@@ -17,8 +17,6 @@ public class ClienteM {
     private String NOMPER;
     private String APEPER;
     private String RUCDNIPER;
-    private String UBIPER;
-    private String DIRPER;
     private String GENPER;
     private String TIPPER;
     private String ESTAPER;
@@ -55,22 +53,6 @@ public class ClienteM {
         this.RUCDNIPER = RUCDNIPER;
     }
 
-    public String getUBIPER() {
-        return UBIPER;
-    }
-
-    public void setUBIPER(String UBIPER) {
-        this.UBIPER = UBIPER;
-    }
-
-    public String getDIRPER() {
-        return DIRPER;
-    }
-
-    public void setDIRPER(String DIRPER) {
-        this.DIRPER = DIRPER;
-    }
-
     public String getGENPER() {
         return GENPER;
     }
@@ -94,7 +76,6 @@ public class ClienteM {
     public void setESTAPER(String ESTAPER) {
         this.ESTAPER = ESTAPER;
     }
-    
     
      
 }

@@ -1,6 +1,12 @@
-DROP DATABASE sistema_venta;
-CREATE DATABASE sistema_venta;
-USE sistema_venta;
+-- Created by Vertabelo (http://vertabelo.com)
+-- Last modification date: 2019-03-01 01:46:26.758
+
+-- tables
+-- Table: CATEGORIA
+
+drop database sistema_venta;
+create database sistema_venta;
+use sistema_venta;
 
 CREATE TABLE CATEGORIA (
     CODCAT char(4) NOT NULL COMMENT 'Contiene el identificador de las categorias de los productos',
@@ -11,21 +17,17 @@ CREATE TABLE CATEGORIA (
 -- Table: PERSONA
 CREATE TABLE PERSONA (
     CODPER int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador de las personas',
-    NOMPER varchar(80) NOT NULL COMMENT 'Contiene el nombre de la persona',
-    APEPER varchar(80) NULL COMMENT 'Contiene el apellido de la persona',
+    NOMPER varchar(80) NOT NULL COMMENT 'Contiene el nombre de la persona, o la razón social de la empresa',
+    APEPER varchar(80) NULL COMMENT 'Contiene el apellido de la persona o nombre de la empresa',
     RUCDNIPER varchar(11) NULL COMMENT 'Contiene el DNI o RUC  (Persona o Empresa)',
-    RAZSOCPER varchar(150) NULL COMMENT 'Contiene la razon social',
     FECNAC date NULL COMMENT 'Contiene la fecha de nacimiento de la persona',
-    UBIPER char(6) NOT NULL COMMENT 'Contiene el ubigeo (Persona, Empresa)',
+    UBIPER char(6) NULL COMMENT 'Contiene el ubigeo (Persona, Empresa)',
     DIRPER varchar(30) NULL COMMENT 'Contiene las calles donde vive la persona',
-    WEBPER varchar(100) NULL COMMENT 'Contiene la pagina web del proveedor (empresa)',
-    TEL1PER char(9) NULL COMMENT 'Contiene el numero de teléfono de empleados y proveedores',
-    TEL2PER char(9) NULL COMMENT 'Contiene el numero de teléfono de empleados y proveedores',
-    CORPER varchar(120) NULL COMMENT 'Contiene el correo del proveedor',
-    GENPER char(1) NULL COMMENT 'Contiene el genero cliente y empleado',
-    USEPER varchar(30) NULL COMMENT 'Contiene el usuario de persona',
-    CONPER varchar(100) NULL COMMENT 'Contiene la contraseña de persona',
-    TIPPER char(1) NOT NULL COMMENT 'Contiene el tipo de persona (cliente, empleado y proveedor)',
+    TELPER char(9) NULL COMMENT 'Contiene el numero de teléfono de los Usuarios',
+    GENPER char(1) NULL COMMENT 'Contiene el genero cliente y usuario',
+    USEPER varchar(30) NULL COMMENT 'Contiene el nombre de usuario del Usuario',
+    CONPER varchar(100) NULL COMMENT 'Contiene la contraseña del Usuario',
+    TIPPER char(1) NOT NULL COMMENT 'Contiene el tipo de persona (cliente o usuario)',
     ESTAPER char(1) NOT NULL COMMENT 'Contiene el estado de la persona
 A = Activo
 B = Inactivo',

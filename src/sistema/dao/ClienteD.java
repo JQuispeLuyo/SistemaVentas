@@ -17,13 +17,13 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.json.JSONObject;
-import sistema.modelo.UsuarioM;
+import sistema.modelo.ClienteM;
 
 /**
  *
  * @author Jose Luis
  */
-public class UsuarioD extends Conexion {
+public class ClienteD extends Conexion {
 
     private ArrayList<String> DatosPersona = new ArrayList<String>();
     private ArrayList<String> CredencialUsuario = new ArrayList<String>();
@@ -69,7 +69,7 @@ public class UsuarioD extends Conexion {
         return null;
     }
 
-    public void guardarUsuario(UsuarioM usuarioM) throws Exception {
+    public void guardarCliente(ClienteM clienteM) throws Exception {
 
         try {
 //            String sql = "Insert Into PRODUCTO "
@@ -77,22 +77,16 @@ public class UsuarioD extends Conexion {
 //                    + "values"
 //                    + "(?,?,?,?,?)";
 
-            String sql = "CALL INSERTAR_USUARIO(?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "CALL INSERTAR_CLIENTE(?,?,?,?,?,?)";
 
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
-            ps.setString(1, usuarioM.getNOMPER());
-            ps.setString(2, usuarioM.getAPEPER());
-            ps.setString(3, usuarioM.getRUCDNIPER());
-            ps.setDate(4, usuarioM.getFECNAC());
-            ps.setString(5, usuarioM.getUBIPER());
-            ps.setString(6, usuarioM.getDIRPER());
-            ps.setString(7, usuarioM.getTEL1PER());
-            ps.setString(8, usuarioM.getGENPER());
-            ps.setString(9, usuarioM.getUSEPER());
-            ps.setString(10, usuarioM.getCONPER());
-            ps.setString(11, usuarioM.getTIPPER());
-            ps.setString(12, usuarioM.getESTAPER());
+            ps.setString(1, clienteM.getNOMPER());
+            ps.setString(2, clienteM.getAPEPER());
+            ps.setString(3, clienteM.getRUCDNIPER());;
+            ps.setString(4, clienteM.getGENPER());;
+            ps.setString(5, clienteM.getTIPPER());
+            ps.setString(6, clienteM.getESTAPER());
 
             ps.executeUpdate();
             ps.close();
@@ -106,26 +100,22 @@ public class UsuarioD extends Conexion {
 
     }
 
-    public void editarUsuarioDatos(UsuarioM usuarioM) throws Exception {
+    public void editarCliente(ClienteM clienteM) throws Exception {
 
         try {
-            String sql = "CALL EDITAR_USUARIO_DATOS(?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "CALL EDITAR_CLIENTE(?,?,?,?,?,?,?)";
 
 //                        CALL EDITAR_USUARIO_DATOS(12,'Jose Luis1', 'Quispe Luyo', '12345678900','2000/11/19','140409',
 //							'Mz. 10 Lt 10','123456789','M','E','A');
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
-            ps.setInt(1, usuarioM.getCODPER());
-            ps.setString(2, usuarioM.getNOMPER());
-            ps.setString(3, usuarioM.getAPEPER());
-            ps.setString(4, usuarioM.getRUCDNIPER());
-            ps.setDate(5, usuarioM.getFECNAC());
-            ps.setString(6, usuarioM.getUBIPER());
-            ps.setString(7, usuarioM.getDIRPER());
-            ps.setString(8, usuarioM.getTEL1PER());
-            ps.setString(9, usuarioM.getGENPER());
-            ps.setString(10, usuarioM.getTIPPER());
-            ps.setString(11, usuarioM.getESTAPER());
+            ps.setInt(1, clienteM.getCODPER());
+            ps.setString(2, clienteM.getNOMPER());
+            ps.setString(3, clienteM.getAPEPER());
+            ps.setString(4, clienteM.getRUCDNIPER());
+            ps.setString(5, clienteM.getGENPER());
+            ps.setString(6, clienteM.getTIPPER());
+            ps.setString(7, clienteM.getESTAPER());
             ps.executeUpdate();
             ps.close();
 
@@ -138,34 +128,14 @@ public class UsuarioD extends Conexion {
 
     }
 
-    public void editarUsuarioLogin(UsuarioM usuarioM) throws Exception {
-
-        try {
-            String sql = "CALL EDITAR_USUARIO_LOGIN(?,?,sha1(md5(?)))";
-
-            PreparedStatement ps = this.conectar().prepareStatement(sql);
-
-            ps.setInt(1, usuarioM.getCODPER());
-            ps.setString(2, usuarioM.getUSEPER());
-            ps.setString(3, usuarioM.getCONPER());
-            ps.executeUpdate();
-            ps.close();
-
-        } catch (Exception e) {
-
-            System.out.println("Error al actualizar USUARIO LOGIN en el Dao");
-
-        }
-    }
-
-    public void eliminarUsuario(UsuarioM usuarioM) throws Exception {
+    public void eliminarCliente(ClienteM clienteM) throws Exception {
 
         try {
             String sql = "CALL ELIMINAR_USUARIO(?,?)";
 
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
-            ps.setInt(1, usuarioM.getCODPER());
+            ps.setInt(1, clienteM.getCODPER());
             ps.setString(2, "B");
             ps.executeUpdate();
             ps.close();
@@ -177,29 +147,29 @@ public class UsuarioD extends Conexion {
         }
     }
 
-    public void listarUsuarioTabla(DefaultTableModel modeloTabla, Integer tipo, String dato) throws SQLException, Exception {
+    public void listarClienteTabla(DefaultTableModel modeloTabla, Integer tipo, String dato) throws SQLException, Exception {
         try {
 
             String sql = "";
 
             switch (tipo) {
                 case 0:
-                    sql = "CALL MOSTRAR_USUARIO()";
+                    sql = "CALL MOSTRAR_CLIENTE()";
                     break;
                 case 1:
-                    sql = "CALL FILTRAR_USUARIO('1', '%" + dato + "%')"; // Nombre
+                    sql = "CALL FILTRAR_CLIENTE('1', '%" + dato + "%')"; // Nombre
                     break;
                 case 2:
-                    sql = "CALL FILTRAR_USUARIO('2', '%" + dato + "%')"; // Apellido
+                    sql = "CALL FILTRAR_CLIENTE('2', '%" + dato + "%')"; // Apellido
                     break;
                 case 3:
-                    sql = "CALL FILTRAR_USUARIO('3', '%" + dato + "%')"; // DNI
+                    sql = "CALL FILTRAR_CLIENTE('3', '%" + dato + "%')"; // DNI
                     break;
                 case 4:
-                    sql = "CALL FILTRAR_USUARIO('4', '%" + dato + "%')"; // Codigo
+                    sql = "CALL FILTRAR_CLIENTE('4', '%" + dato + "%')"; // Codigo
                     break;
                 case 5:
-                    sql = "CALL FILTRAR_USUARIO('5', '%" + dato + "%')"; // Inactivos
+                    sql = "CALL FILTRAR_CLIENTE('5', '%" + dato + "%')"; // Inactivos
                     break;
             }
             PreparedStatement preparedstatement = this.conectar().prepareStatement(sql);
@@ -219,27 +189,8 @@ public class UsuarioD extends Conexion {
         }
 
     }
-    
-    
-    public boolean validarExistenciaUsuarioLogin(String usuario) throws Exception {
 
-        System.out.println("Dao " + usuario);
-        String sql = "CALL VERIFICAR_EXISTENCIA_USUARIO_LOGIN(?);";
-
-        PreparedStatement ps = this.conectar().prepareStatement(sql);
-        ps.setString(1, usuario);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            System.out.println("rs : " + rs.getObject(1));
-            if (rs.getObject(1).equals(usuario)) {
-                return true;
-            }
-        }
-        
-        return false;
-    }
-
-    public boolean validarExistenciaUsuario(String DNI) throws Exception {
+    public boolean validarExistenciaCliente(String DNI) throws Exception {
 
         System.out.println("Dao " + DNI);
         String sql = "CALL VERIFICAR_EXISTENCIA_USUARIO(?);";
