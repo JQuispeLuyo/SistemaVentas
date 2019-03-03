@@ -5,33 +5,37 @@
  */
 package sistema.view;
 
+import java.awt.event.KeyEvent;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import sistema.controlador.ClienteC;
 import static sistema.view.PnlUsuariosContainer.rdGrupoGenero;
+import static sistema.view.PnlUsuariosContainer.txtDniUsuario;
 import utilidad.Hover;
+
 /**
  *
  * @author Jose Luis
  */
 public class PnlClienteContainer extends javax.swing.JPanel {
-    
+
     private int tipoFiltro = 0;
     private String datoFiltro = "";
-    
+
     int nPnl, pnlActualClick;
-    
+
     DefaultTableModel modeloTablaCliente;
-    
+
     ClienteC clienteC = new ClienteC();
     Hover hover;
-    
+
     public PnlClienteContainer() {
-        
+
         initComponents();
         txtCodigoCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         //Añanidor hover al menu
@@ -47,7 +51,7 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     }
 
     private void cargarTabla() throws Exception {
-        String columna[] = new String[]{"Código", "Nombre", "Apellido", "DNI", "Genero"};
+        String columna[] = new String[]{"Código", "Nombre", "Apellido", "DNI", "Genero", "Activo"};
 
         modeloTablaCliente = new DefaultTableModel(null, columna) {
             @Override
@@ -60,8 +64,7 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         clienteC.listarClienteTabla(modeloTablaCliente, tipoFiltro, datoFiltro);
         jtCliente.setModel(modeloTablaCliente);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,6 +93,7 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         rdGeneroMasculino = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
+        jckActivoCliente = new javax.swing.JCheckBox();
         pnlOptionPersona = new javax.swing.JPanel();
         item0 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -110,7 +114,7 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         pnlContainerFiltro = new javax.swing.JPanel();
         PnlFiltro = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        txtCodigoProducto1 = new javax.swing.JTextField();
+        txtClienteFiltro = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jcClienteFiltro = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -199,13 +203,17 @@ public class PnlClienteContainer extends javax.swing.JPanel {
                 txtDniClienteActionPerformed(evt);
             }
         });
+        txtDniCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDniClienteKeyTyped(evt);
+            }
+        });
         pnlDni.add(txtDniCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 30));
 
         btnBuscarPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
         btnBuscarPersona.setBorder(null);
         btnBuscarPersona.setBorderPainted(false);
         btnBuscarPersona.setContentAreaFilled(false);
-        btnBuscarPersona.setFocusPainted(false);
         btnBuscarPersona.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBuscarPersonaMouseClicked(evt);
@@ -243,6 +251,11 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         pnlGenero.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 70));
 
         pnlUsuariosForm.add(pnlGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 180, 70));
+
+        jckActivoCliente.setSelected(true);
+        jckActivoCliente.setText("Activo");
+        jckActivoCliente.setOpaque(false);
+        pnlUsuariosForm.add(jckActivoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 203, 120, 60));
 
         add(pnlUsuariosForm, java.awt.BorderLayout.CENTER);
 
@@ -393,10 +406,15 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         jPanel7.setOpaque(false);
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtCodigoProducto1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtCodigoProducto1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 102, 204)));
-        txtCodigoProducto1.setOpaque(false);
-        jPanel7.add(txtCodigoProducto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
+        txtClienteFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        txtClienteFiltro.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 102, 204)));
+        txtClienteFiltro.setOpaque(false);
+        txtClienteFiltro.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtClienteFiltroCaretUpdate(evt);
+            }
+        });
+        jPanel7.add(txtClienteFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel16.setText("BUSCAR");
@@ -405,6 +423,7 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         PnlFiltro.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 180, 60));
 
         jcClienteFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jcClienteFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione filtro", "Nombre", "Apellido", "Dni", "Inactivos" }));
         jcClienteFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcClienteFiltroItemStateChanged(evt);
@@ -470,8 +489,30 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_jcClienteFiltroItemStateChanged
 
     private void jcClienteFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcClienteFiltroActionPerformed
-
+        try {
+            if (jcClienteFiltro.getSelectedIndex() == 0) {
+                tipoFiltro = 0;
+                datoFiltro = "";
+            } else {
+                tipoFiltro = jcClienteFiltro.getSelectedIndex();
+            }
+            filtrar();
+        } catch (Exception ex) {
+            Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jcClienteFiltroActionPerformed
+
+    private void filtrar() {
+        try {
+            datoFiltro = txtClienteFiltro.getText();
+            txtClienteFiltro.requestFocus();
+            txtClienteFiltro.setText("");
+
+            cargarTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     private void jcClienteFiltroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcClienteFiltroPropertyChange
 
@@ -482,7 +523,7 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_jcClienteFiltroVetoableChange
 
     private void jtClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtClienteMouseClicked
-        
+
         int fila = jtCliente.getSelectedRow(); // el nro de fila seleccionada
 
         if (fila >= 0) {
@@ -502,12 +543,16 @@ public class PnlClienteContainer extends javax.swing.JPanel {
                 if (b.getActionCommand().equals(jtCliente.getValueAt(fila, 4).toString())) {
                     b.setSelected(true);
                 }
-
             }
-            
+            if ("A".equals(jtCliente.getValueAt(fila, 5).toString())) {
+                jckActivoCliente.setSelected(true);
+            } else {
+                jckActivoCliente.setSelected(false);
+            }
+
         }
-        
-        
+
+
     }//GEN-LAST:event_jtClienteMouseClicked
 
     private void item0MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseDragged
@@ -515,19 +560,21 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item0MouseDragged
 
     private void item0MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseMoved
-         hover.menu(0);
+        hover.menu(0);
     }//GEN-LAST:event_item0MouseMoved
 
     private void item0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseClicked
         if (item0.isEnabled()) {
             try {
-                if (clienteC.validar()) {
-                    clienteC.cargarVariables();
-                    clienteC.guardarCliente();
-                    cargarTabla();
-                    clienteC.limpiarVariables();
-                    hover.menu(-1);
+                if (!clienteC.validarExistenciaCliente(txtDniCliente.getText())) {
+                    if (clienteC.validar()) {
+                        clienteC.cargarVariables();
+                        clienteC.guardarCliente();
+                        cargarTabla();
+                        clienteC.limpiarVariables();
+                    }
                 }
+                hover.menu(-1);
             } catch (Exception ex) {
                 Logger.getLogger(PnlClienteContainer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -539,7 +586,23 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item1MouseMoved
 
     private void item1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item1MouseClicked
-        
+        if (item1.isEnabled()) {
+            try {
+
+                if (clienteC.validar()) {
+                    clienteC.cargarVariables();
+                    clienteC.editarCliente();
+                    cargarTabla();
+                    clienteC.limpiarVariables();
+                    desactivarBotones(1);
+                    hover.menu(-1);
+
+                }
+
+            } catch (Exception ex) {
+                Logger.getLogger(PnlClienteContainer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_item1MouseClicked
 
     private void item2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseMoved
@@ -547,7 +610,26 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item2MouseMoved
 
     private void item2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseClicked
-        // TODO add your handling code here:
+        if (item2.isEnabled()) {
+            int opcion = JOptionPane.showConfirmDialog(null, "Seguro de eliminar",
+                    "Eliminación del registro",
+                    JOptionPane.OK_CANCEL_OPTION);
+
+            if (opcion == JOptionPane.OK_OPTION) {
+                try {
+                    if (clienteC.validar()) {
+                        clienteC.cargarVariables();
+                        clienteC.eliminarCliente();
+                        cargarTabla();
+                        clienteC.limpiarVariables();
+                        desactivarBotones(1);
+                        hover.menu(-1);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(PnlClienteContainer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }//GEN-LAST:event_item2MouseClicked
 
     private void item3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item3MouseMoved
@@ -555,7 +637,11 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item3MouseMoved
 
     private void item3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item3MouseClicked
-
+        if (item3.isEnabled()) {
+            clienteC.limpiarVariables();
+            desactivarBotones(1);
+            hover.menu(-1);
+        }
     }//GEN-LAST:event_item3MouseClicked
 
     private void item4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item4MouseMoved
@@ -570,19 +656,41 @@ public class PnlClienteContainer extends javax.swing.JPanel {
         hover.menu(-1);
     }//GEN-LAST:event_pnlOptionPersonaMouseMoved
 
-    
 
     private void rdGeneroMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdGeneroMasculinoActionPerformed
 
     }//GEN-LAST:event_rdGeneroMasculinoActionPerformed
 
     private void btnBuscarPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPersonaMouseClicked
-        clienteC.resPersona(txtDniCliente.getText());
+        if (txtDniCliente.getText().length() >= 8) {
+            clienteC.resPersona(txtDniCliente.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese DNI (8 digitos)");
+        }
     }//GEN-LAST:event_btnBuscarPersonaMouseClicked
 
-    
-    
-    
+    private void txtClienteFiltroCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtClienteFiltroCaretUpdate
+
+        try {
+            datoFiltro = txtClienteFiltro.getText();
+            cargarTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(PnlClienteContainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtClienteFiltroCaretUpdate
+
+    private void txtDniClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniClienteKeyTyped
+        char caracter = evt.getKeyChar();
+        if (txtDniCliente.getText().length() >= 8) {
+            evt.consume();
+        }
+
+        if (((caracter < '0') || (caracter > '9'))
+                && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDniClienteKeyTyped
+
     private void desactivarBotones(int tipo) {
 
         switch (tipo) {
@@ -647,6 +755,7 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     public static javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JComboBox jcClienteFiltro;
+    public static javax.swing.JCheckBox jckActivoCliente;
     private javax.swing.JTable jtCliente;
     private javax.swing.JPanel pnlApellido;
     private javax.swing.JPanel pnlCodigo;
@@ -659,8 +768,8 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     public static javax.swing.JRadioButton rdGeneroMasculino;
     public static javax.swing.ButtonGroup rdGrupoGenero;
     public static javax.swing.JTextField txtApellidoCliente;
+    public static javax.swing.JTextField txtClienteFiltro;
     public static javax.swing.JTextField txtCodigoCliente;
-    public static javax.swing.JTextField txtCodigoProducto1;
     public static javax.swing.JTextField txtDniCliente;
     public static javax.swing.JTextField txtNombreCliente;
     // End of variables declaration//GEN-END:variables

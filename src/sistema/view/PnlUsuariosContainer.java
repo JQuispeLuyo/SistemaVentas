@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -636,23 +637,23 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_jcUsuarioFiltroItemStateChanged
 
     private void jcUsuarioFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcUsuarioFiltroActionPerformed
-        
+
         try {
             if (jcUsuarioFiltro.getSelectedIndex() == 0) {
                 tipoFiltro = 0;
                 datoFiltro = "";
             } else {
-                tipoFiltro = jcUsuarioFiltro.getSelectedIndex(); 
+                tipoFiltro = jcUsuarioFiltro.getSelectedIndex();
             }
             filtrar();
         } catch (Exception ex) {
             Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_jcUsuarioFiltroActionPerformed
 
-    private void filtrar(){
+    private void filtrar() {
         datoFiltro = txtTextoFiltroUsuario.getText();
         txtTextoFiltroUsuario.requestFocus();
         txtTextoFiltroUsuario.setText("");
@@ -662,8 +663,8 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
             Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
+
     private void jcUsuarioFiltroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcUsuarioFiltroPropertyChange
 
     }//GEN-LAST:event_jcUsuarioFiltroPropertyChange
@@ -703,13 +704,13 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
             txtNombreUsuario.setText(jtUsuario.getValueAt(fila, 1).toString());
             txtApellidoUsuario.setText(jtUsuario.getValueAt(fila, 2).toString());
             txtDniUsuario.setText(jtUsuario.getValueAt(fila, 3).toString());
-            
+
             try {
                 jcaNacimientoUsuario.setDate(Date.valueOf(jtUsuario.getValueAt(fila, 4).toString()));
             } catch (Exception e) {
                 jcaNacimientoUsuario.setDate(null);
             }
-            
+
 //            txtTelefonoUsuario.setText(jtUsuario.getValueAt(fila, 5).toString());
             txtDireccionUsuario.setText(jtUsuario.getValueAt(fila, 6).toString());
             txtTelefonoUsuario.setText(jtUsuario.getValueAt(fila, 7).toString());
@@ -796,19 +797,25 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item2MouseMoved
 
     private void item2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseClicked
-       if (item2.isEnabled()) {
-            try {
-                if (usuarioC.validarEditarUsuario()) {
-                    usuarioC.cargarVariables();
-                    usuarioC.eliminarUsuario();
-                    cargarTabla();
-                    usuarioC.limpiarVariables();
-                    desactivarBotones(1);
+        if (item2.isEnabled()) {
+            int opcion = JOptionPane.showConfirmDialog(null,"Seguro de eleminar?", 
+                                                            "Eliminación del registro", 
+                                                            JOptionPane.OK_CANCEL_OPTION);
+            if (opcion == JOptionPane.OK_OPTION) {
+                try {
+                    if (usuarioC.validarEditarUsuario()) {
+                        usuarioC.cargarVariables();
+                        usuarioC.eliminarUsuario();
+                        cargarTabla();
+                        usuarioC.limpiarVariables();
+                        desactivarBotones(1);
+                    }
+                    hover.menu(-1);
+                } catch (Exception ex) {
+                    Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                hover.menu(-1);
-            } catch (Exception ex) {
-                Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
     }//GEN-LAST:event_item2MouseClicked
 
@@ -879,12 +886,12 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         if (txtDniUsuario.getText().length() >= 8) {
             evt.consume();
         }
-        
+
         if (((caracter < '0') || (caracter > '9'))
                 && (caracter != KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_txtDniUsuarioKeyTyped
 
     private void txtTextoFiltroUsuarioCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTextoFiltroUsuarioCaretUpdate

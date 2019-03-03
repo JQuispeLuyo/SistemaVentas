@@ -5,9 +5,17 @@
  */
 package sistema.view;
 
+import java.awt.event.KeyEvent;
+import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
-import sistema.controlador.UsuarioC;
+import javax.swing.table.DefaultTableModel;
+import sistema.controlador.EmpresaC;
 import utilidad.Hover;
+
 /**
  *
  * @author Jose Luis
@@ -16,21 +24,43 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
 
     private int tipoFiltro = 0;
     private String datoFiltro = "";
-    
+
     int nPnl, pnlActualClick;
-    
-    UsuarioC usuarioC = new UsuarioC();
+
+    DefaultTableModel modeloTablaEmpresa;
+
+    EmpresaC empresaC = new EmpresaC();
     Hover hover;
-    
+
     public PnlEmpresaContainer() {
+
         initComponents();
-        txtCodigoPersona.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtCodigoEmpresa.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         //Añanidor hover al menu
-        nPnl = pnlOptionPersona.getComponentCount();
-        hover = new Hover(nPnl, pnlOptionPersona);
+        nPnl = pnlOptionEmpresa.getComponentCount();
+        hover = new Hover(nPnl, pnlOptionEmpresa);
         hover.menu(-1);
-        
+        try {
+            cargarTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(PnlEmpresaContainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setBorder(new EmptyBorder(20, 40, 40, 40));
+    }
+
+    private void cargarTabla() throws Exception {
+        String columna[] = new String[]{"Código", "Nombre", "Razon Social", "RUC", "Activo"};
+
+        modeloTablaEmpresa=  new DefaultTableModel(null, columna) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+        };
+//        productoD.listarProductoTabla(modeloTablaProducto, tipoFiltro, datoFiltro);
+        empresaC.listarEmpresaTabla(modeloTablaEmpresa, tipoFiltro, datoFiltro);
+        jtEmpresa.setModel(modeloTablaEmpresa);
     }
 
     /**
@@ -43,42 +73,22 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
     private void initComponents() {
 
         rdGrupoGenero = new javax.swing.ButtonGroup();
-        rdGRupoTipo = new javax.swing.ButtonGroup();
         pnlUsuariosForm = new javax.swing.JPanel();
         pnlCodigo = new javax.swing.JPanel();
-        txtCodigoPersona = new javax.swing.JTextField();
+        txtCodigoEmpresa = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         pnlNombre = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtNombrePersona = new javax.swing.JTextField();
+        txtNombreEmpresa = new javax.swing.JTextField();
         pnlApellido = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtApellidoPersona = new javax.swing.JTextField();
+        txtRazonSocialEmpresa = new javax.swing.JTextField();
         pnlDni = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        txtDniPersona = new javax.swing.JTextField();
+        txtRucEmpresa = new javax.swing.JTextField();
         btnBuscarPersona = new javax.swing.JButton();
-        pnlUbicacion = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        pnlTelefono = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        txtTelefonoPersona = new javax.swing.JTextField();
-        pnlApellido1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        txtDirecionPersona = new javax.swing.JTextField();
-        pnlTelefono1 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        txtTelefonoPersona1 = new javax.swing.JTextField();
-        pnlApellido2 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        txtDirecionPersona1 = new javax.swing.JTextField();
-        pnlApellido3 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        txtDirecionPersona2 = new javax.swing.JTextField();
-        pnlOptionPersona = new javax.swing.JPanel();
+        jckEstadoEmpresa = new javax.swing.JCheckBox();
+        pnlOptionEmpresa = new javax.swing.JPanel();
         item0 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -98,11 +108,11 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         pnlContainerFiltro = new javax.swing.JPanel();
         PnlFiltro = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        txtCodigoProducto1 = new javax.swing.JTextField();
+        txtEmpresaFiltro = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jcCategoriaFiltro = new javax.swing.JComboBox();
+        jcEmpresaFiltro = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtPersona = new javax.swing.JTable();
+        jtEmpresa = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -120,12 +130,12 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         pnlCodigo.setOpaque(false);
         pnlCodigo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtCodigoPersona.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtCodigoPersona.setForeground(new java.awt.Color(102, 102, 102));
-        txtCodigoPersona.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtCodigoPersona.setEnabled(false);
-        txtCodigoPersona.setOpaque(false);
-        pnlCodigo.add(txtCodigoPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 80, 30));
+        txtCodigoEmpresa.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        txtCodigoEmpresa.setForeground(new java.awt.Color(102, 102, 102));
+        txtCodigoEmpresa.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtCodigoEmpresa.setEnabled(false);
+        txtCodigoEmpresa.setOpaque(false);
+        pnlCodigo.add(txtCodigoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 80, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel4.setText("Codigo");
@@ -140,17 +150,17 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         jLabel2.setText("Nombre");
         pnlNombre.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
 
-        txtNombrePersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtNombrePersona.setForeground(new java.awt.Color(102, 102, 102));
-        txtNombrePersona.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtNombrePersona.addActionListener(new java.awt.event.ActionListener() {
+        txtNombreEmpresa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNombreEmpresa.setForeground(new java.awt.Color(102, 102, 102));
+        txtNombreEmpresa.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtNombreEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombrePersonaActionPerformed(evt);
+                txtNombreEmpresaActionPerformed(evt);
             }
         });
-        pnlNombre.add(txtNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 270, 30));
+        pnlNombre.add(txtNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 310, 30));
 
-        pnlUsuariosForm.add(pnlNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 270, -1));
+        pnlUsuariosForm.add(pnlNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 310, -1));
 
         pnlApellido.setOpaque(false);
         pnlApellido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -159,17 +169,17 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         jLabel3.setText("Razon Social");
         pnlApellido.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
 
-        txtApellidoPersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtApellidoPersona.setForeground(new java.awt.Color(102, 102, 102));
-        txtApellidoPersona.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtApellidoPersona.addActionListener(new java.awt.event.ActionListener() {
+        txtRazonSocialEmpresa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtRazonSocialEmpresa.setForeground(new java.awt.Color(102, 102, 102));
+        txtRazonSocialEmpresa.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtRazonSocialEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoPersonaActionPerformed(evt);
+                txtRazonSocialEmpresaActionPerformed(evt);
             }
         });
-        pnlApellido.add(txtApellidoPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 270, 30));
+        pnlApellido.add(txtRazonSocialEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 310, 30));
 
-        pnlUsuariosForm.add(pnlApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 270, -1));
+        pnlUsuariosForm.add(pnlApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 310, -1));
 
         pnlDni.setOpaque(false);
         pnlDni.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -178,22 +188,26 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         jLabel6.setText("RUC");
         pnlDni.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
 
-        txtDniPersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDniPersona.setForeground(new java.awt.Color(102, 102, 102));
-        txtDniPersona.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDniPersona.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtDniPersona.addActionListener(new java.awt.event.ActionListener() {
+        txtRucEmpresa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtRucEmpresa.setForeground(new java.awt.Color(102, 102, 102));
+        txtRucEmpresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtRucEmpresa.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtRucEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDniPersonaActionPerformed(evt);
+                txtRucEmpresaActionPerformed(evt);
             }
         });
-        pnlDni.add(txtDniPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 30));
+        txtRucEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRucEmpresaKeyTyped(evt);
+            }
+        });
+        pnlDni.add(txtRucEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 30));
 
         btnBuscarPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
         btnBuscarPersona.setBorder(null);
         btnBuscarPersona.setBorderPainted(false);
         btnBuscarPersona.setContentAreaFilled(false);
-        btnBuscarPersona.setFocusPainted(false);
         btnBuscarPersona.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBuscarPersonaMouseClicked(evt);
@@ -201,145 +215,24 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         });
         pnlDni.add(btnBuscarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 40, 40));
 
-        pnlUsuariosForm.add(pnlDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 140, -1));
+        pnlUsuariosForm.add(pnlDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 140, -1));
 
-        pnlUbicacion.setOpaque(false);
-        pnlUbicacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jComboBox1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        pnlUbicacion.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 30));
-
-        jComboBox2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-        pnlUbicacion.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 140, 30));
-
-        jComboBox3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pnlUbicacion.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 140, 30));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel7.setText("Ubicación");
-        pnlUbicacion.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
-
-        pnlUsuariosForm.add(pnlUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 460, 70));
-
-        pnlTelefono.setOpaque(false);
-        pnlTelefono.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel8.setText("Telefono 1");
-        pnlTelefono.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
-
-        txtTelefonoPersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTelefonoPersona.setForeground(new java.awt.Color(102, 102, 102));
-        txtTelefonoPersona.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtTelefonoPersona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoPersonaActionPerformed(evt);
-            }
-        });
-        pnlTelefono.add(txtTelefonoPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 30));
-
-        pnlUsuariosForm.add(pnlTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 100, -1));
-
-        pnlApellido1.setOpaque(false);
-        pnlApellido1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel5.setText("Dirección");
-        pnlApellido1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
-
-        txtDirecionPersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDirecionPersona.setForeground(new java.awt.Color(102, 102, 102));
-        txtDirecionPersona.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtDirecionPersona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDirecionPersonaActionPerformed(evt);
-            }
-        });
-        pnlApellido1.add(txtDirecionPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 270, 30));
-
-        pnlUsuariosForm.add(pnlApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 270, 60));
-
-        pnlTelefono1.setOpaque(false);
-        pnlTelefono1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel9.setText("Telefono 2");
-        pnlTelefono1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
-
-        txtTelefonoPersona1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTelefonoPersona1.setForeground(new java.awt.Color(102, 102, 102));
-        txtTelefonoPersona1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtTelefonoPersona1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoPersona1ActionPerformed(evt);
-            }
-        });
-        pnlTelefono1.add(txtTelefonoPersona1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 30));
-
-        pnlUsuariosForm.add(pnlTelefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 100, -1));
-
-        pnlApellido2.setOpaque(false);
-        pnlApellido2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel10.setText("Correo");
-        pnlApellido2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
-
-        txtDirecionPersona1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDirecionPersona1.setForeground(new java.awt.Color(102, 102, 102));
-        txtDirecionPersona1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtDirecionPersona1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDirecionPersona1ActionPerformed(evt);
-            }
-        });
-        pnlApellido2.add(txtDirecionPersona1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 270, 30));
-
-        pnlUsuariosForm.add(pnlApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 270, 60));
-
-        pnlApellido3.setOpaque(false);
-        pnlApellido3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel11.setText("Web");
-        pnlApellido3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
-
-        txtDirecionPersona2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDirecionPersona2.setForeground(new java.awt.Color(102, 102, 102));
-        txtDirecionPersona2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
-        txtDirecionPersona2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDirecionPersona2ActionPerformed(evt);
-            }
-        });
-        pnlApellido3.add(txtDirecionPersona2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 270, 30));
-
-        pnlUsuariosForm.add(pnlApellido3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 270, 60));
+        jckEstadoEmpresa.setSelected(true);
+        jckEstadoEmpresa.setText("Activo");
+        jckEstadoEmpresa.setOpaque(false);
+        pnlUsuariosForm.add(jckEstadoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 120, 60));
 
         add(pnlUsuariosForm, java.awt.BorderLayout.CENTER);
 
-        pnlOptionPersona.setBackground(new java.awt.Color(204, 102, 255));
-        pnlOptionPersona.setMaximumSize(new java.awt.Dimension(150, 300));
-        pnlOptionPersona.setOpaque(false);
-        pnlOptionPersona.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        pnlOptionEmpresa.setBackground(new java.awt.Color(204, 102, 255));
+        pnlOptionEmpresa.setMaximumSize(new java.awt.Dimension(150, 300));
+        pnlOptionEmpresa.setOpaque(false);
+        pnlOptionEmpresa.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                pnlOptionPersonaMouseMoved(evt);
+                pnlOptionEmpresaMouseMoved(evt);
             }
         });
-        pnlOptionPersona.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlOptionEmpresa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         item0.setBackground(new java.awt.Color(204, 204, 204));
         item0.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -364,7 +257,7 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (2).png"))); // NOI18N
         item0.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionPersona.add(item0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, 50));
+        pnlOptionEmpresa.add(item0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, 50));
 
         item1.setBackground(new java.awt.Color(204, 204, 204));
         item1.setEnabled(false);
@@ -387,7 +280,7 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag7.png"))); // NOI18N
         item1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionPersona.add(item1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, 50));
+        pnlOptionEmpresa.add(item1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, 50));
 
         item2.setBackground(new java.awt.Color(204, 204, 204));
         item2.setEnabled(false);
@@ -410,7 +303,7 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (4).png"))); // NOI18N
         item2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 50));
 
-        pnlOptionPersona.add(item2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 50));
+        pnlOptionEmpresa.add(item2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 50));
 
         item3.setBackground(new java.awt.Color(204, 204, 204));
         item3.setEnabled(false);
@@ -433,7 +326,7 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (1).png"))); // NOI18N
         item3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 0, 30, 50));
 
-        pnlOptionPersona.add(item3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 120, 50));
+        pnlOptionEmpresa.add(item3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 120, 50));
 
         item4.setBackground(new java.awt.Color(204, 204, 204));
         item4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -455,12 +348,12 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (6).png"))); // NOI18N
         item4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionPersona.add(item4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 120, 50));
+        pnlOptionEmpresa.add(item4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 120, 50));
 
         jPanel1.setOpaque(false);
-        pnlOptionPersona.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 120, 30));
+        pnlOptionEmpresa.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 120, 30));
 
-        add(pnlOptionPersona, java.awt.BorderLayout.LINE_END);
+        add(pnlOptionEmpresa, java.awt.BorderLayout.LINE_END);
 
         pnlContainerFiltro.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         pnlContainerFiltro.setMinimumSize(new java.awt.Dimension(800, 250));
@@ -478,10 +371,15 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         jPanel7.setOpaque(false);
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtCodigoProducto1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtCodigoProducto1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 102, 204)));
-        txtCodigoProducto1.setOpaque(false);
-        jPanel7.add(txtCodigoProducto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
+        txtEmpresaFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        txtEmpresaFiltro.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 102, 204)));
+        txtEmpresaFiltro.setOpaque(false);
+        txtEmpresaFiltro.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtEmpresaFiltroCaretUpdate(evt);
+            }
+        });
+        jPanel7.add(txtEmpresaFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 180, 30));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel16.setText("BUSCAR");
@@ -489,33 +387,34 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
 
         PnlFiltro.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 180, 60));
 
-        jcCategoriaFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jcCategoriaFiltro.addItemListener(new java.awt.event.ItemListener() {
+        jcEmpresaFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jcEmpresaFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione filtro", "Nombre", "Apellido", "Dni", "Inactivos" }));
+        jcEmpresaFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcCategoriaFiltroItemStateChanged(evt);
+                jcEmpresaFiltroItemStateChanged(evt);
             }
         });
-        jcCategoriaFiltro.addActionListener(new java.awt.event.ActionListener() {
+        jcEmpresaFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcCategoriaFiltroActionPerformed(evt);
+                jcEmpresaFiltroActionPerformed(evt);
             }
         });
-        jcCategoriaFiltro.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        jcEmpresaFiltro.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jcCategoriaFiltroPropertyChange(evt);
+                jcEmpresaFiltroPropertyChange(evt);
             }
         });
-        jcCategoriaFiltro.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+        jcEmpresaFiltro.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
             public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                jcCategoriaFiltroVetoableChange(evt);
+                jcEmpresaFiltroVetoableChange(evt);
             }
         });
-        PnlFiltro.add(jcCategoriaFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 190, 30));
+        PnlFiltro.add(jcEmpresaFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 190, 30));
 
         pnlContainerFiltro.add(PnlFiltro, java.awt.BorderLayout.PAGE_START);
 
-        jtPersona.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
-        jtPersona.setModel(new javax.swing.table.DefaultTableModel(
+        jtEmpresa.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jtEmpresa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -523,60 +422,74 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
 
             }
         ));
-        jtPersona.setGridColor(new java.awt.Color(255, 255, 255));
-        jtPersona.setRowHeight(25);
-        jtPersona.setSelectionBackground(new java.awt.Color(20, 110, 214));
-        jtPersona.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtEmpresa.setGridColor(new java.awt.Color(255, 255, 255));
+        jtEmpresa.setRowHeight(25);
+        jtEmpresa.setSelectionBackground(new java.awt.Color(20, 110, 214));
+        jtEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtPersonaMouseClicked(evt);
+                jtEmpresaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtPersona);
+        jScrollPane1.setViewportView(jtEmpresa);
 
         pnlContainerFiltro.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         add(pnlContainerFiltro, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombrePersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombrePersonaActionPerformed
+    private void txtNombreEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreEmpresaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombrePersonaActionPerformed
+    }//GEN-LAST:event_txtNombreEmpresaActionPerformed
 
-    private void txtApellidoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoPersonaActionPerformed
+    private void txtRazonSocialEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRazonSocialEmpresaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoPersonaActionPerformed
+    }//GEN-LAST:event_txtRazonSocialEmpresaActionPerformed
 
-    private void txtDniPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniPersonaActionPerformed
+    private void txtRucEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRucEmpresaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDniPersonaActionPerformed
+    }//GEN-LAST:event_txtRucEmpresaActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void jcEmpresaFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcEmpresaFiltroItemStateChanged
 
-    private void txtTelefonoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoPersonaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoPersonaActionPerformed
+    }//GEN-LAST:event_jcEmpresaFiltroItemStateChanged
 
-    private void jcCategoriaFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroItemStateChanged
+    private void jcEmpresaFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcEmpresaFiltroActionPerformed
+        try {
+            if (jcEmpresaFiltro.getSelectedIndex() == 0) {
+                tipoFiltro = 0;
+                datoFiltro = "";
+            } else {
+                tipoFiltro = jcEmpresaFiltro.getSelectedIndex();
+            }
+            filtrar();
+        } catch (Exception ex) {
+            Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jcEmpresaFiltroActionPerformed
 
-    }//GEN-LAST:event_jcCategoriaFiltroItemStateChanged
+    private void filtrar() {
+        try {
+            datoFiltro = txtEmpresaFiltro.getText();
+            txtEmpresaFiltro.requestFocus();
+            txtEmpresaFiltro.setText("");
 
-    private void jcCategoriaFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroActionPerformed
+            cargarTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
-    }//GEN-LAST:event_jcCategoriaFiltroActionPerformed
+    private void jcEmpresaFiltroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcEmpresaFiltroPropertyChange
 
-    private void jcCategoriaFiltroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcCategoriaFiltroPropertyChange
+    }//GEN-LAST:event_jcEmpresaFiltroPropertyChange
 
-    }//GEN-LAST:event_jcCategoriaFiltroPropertyChange
+    private void jcEmpresaFiltroVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jcEmpresaFiltroVetoableChange
 
-    private void jcCategoriaFiltroVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jcCategoriaFiltroVetoableChange
+    }//GEN-LAST:event_jcEmpresaFiltroVetoableChange
 
-    }//GEN-LAST:event_jcCategoriaFiltroVetoableChange
+    private void jtEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEmpresaMouseClicked
 
-    private void jtPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtPersonaMouseClicked
-        
-        int fila = jtPersona.getSelectedRow(); // el nro de fila seleccionada
+        int fila = jtEmpresa.getSelectedRow(); // el nro de fila seleccionada
 
         if (fila >= 0) {
 
@@ -585,44 +498,47 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
             hover.menu(-1);
 
             //Campos de formularios
-            txtCodigoPersona.setText(jtPersona.getValueAt(fila, 0).toString());
-            txtNombrePersona.setText(jtPersona.getValueAt(fila, 1).toString());
-            txtApellidoPersona.setText(jtPersona.getValueAt(fila, 1).toString());
-            txtTelefonoPersona.setText(jtPersona.getValueAt(fila, 1).toString());
-            
-//            String unidad = jtPersona.getValueAt(fila, 2).toString();
-//            for (int index = 0; index < jcUnidadMedida.getItemCount(); index++) {
-//                if (jcUnidadMedida.getItemAt(index).getDESUNI().equals(unidad)) {
-//                    jcUnidadMedida.setSelectedIndex(index);
-//                    break;
-//                };
-//            }
-//
-//            txtPrecioProducto.setText(jtPersona.getValueAt(fila, 3).toString());
-//
-//            String categoria = jtPersona.getValueAt(fila, 4).toString();
-//            for (int index = 0; index < jtPersona.getItemCount(); index++) {
-//                if (jcCategoria.getItemAt(index).getDESCAT().equals(categoria)) {
-//                    jcCategoria.setSelectedIndex(index);
-//                    break;
-//                };
-//            }
+            txtCodigoEmpresa.setText(jtEmpresa.getValueAt(fila, 0).toString());
+            txtNombreEmpresa.setText(jtEmpresa.getValueAt(fila, 1).toString());
+            txtRazonSocialEmpresa.setText(jtEmpresa.getValueAt(fila, 2).toString());
+            txtRucEmpresa.setText(jtEmpresa.getValueAt(fila, 3).toString());
 
+            if("A".equals(jtEmpresa.getValueAt(fila, 4).toString())){
+               jckEstadoEmpresa.setSelected(true); 
+            }else{
+                jckEstadoEmpresa.setSelected(false); 
+            }
+            
+            
         }
-        
-        
-    }//GEN-LAST:event_jtPersonaMouseClicked
+
+
+    }//GEN-LAST:event_jtEmpresaMouseClicked
 
     private void item0MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseDragged
 
     }//GEN-LAST:event_item0MouseDragged
 
     private void item0MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseMoved
-         hover.menu(0);
+        hover.menu(0);
     }//GEN-LAST:event_item0MouseMoved
 
     private void item0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseClicked
-       
+        if (item0.isEnabled()) {
+            try {
+                if (!empresaC.validarExistenciaEmpresa(txtRucEmpresa.getText())) {
+                    if (empresaC.validar()) {
+                        empresaC.cargarVariables();
+                        empresaC.guardarEmpresa();
+                        cargarTabla();
+                        empresaC.limpiarVariables();
+                    }
+                }
+                hover.menu(-1);
+            } catch (Exception ex) {
+                Logger.getLogger(PnlEmpresaContainer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_item0MouseClicked
 
     private void item1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item1MouseMoved
@@ -630,7 +546,22 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item1MouseMoved
 
     private void item1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item1MouseClicked
-        
+        if (item1.isEnabled()) {
+            try {
+
+                if (empresaC.validar()) {
+                    empresaC.cargarVariables();
+                    empresaC.editarEmpresa();
+                    cargarTabla();
+                    empresaC.limpiarVariables();
+                    desactivarBotones(1);
+                    hover.menu(-1);
+
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(PnlEmpresaContainer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_item1MouseClicked
 
     private void item2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseMoved
@@ -638,7 +569,26 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item2MouseMoved
 
     private void item2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseClicked
-        // TODO add your handling code here:
+        if (item2.isEnabled()) {
+            int opcion = JOptionPane.showConfirmDialog(null, "Seguro de eliminar",
+                    "Eliminación del registro",
+                    JOptionPane.OK_CANCEL_OPTION);
+
+            if (opcion == JOptionPane.OK_OPTION) {
+                try {
+                    if (empresaC.validar()) {
+                        empresaC.cargarVariables();
+                        empresaC.eliminarEmpresa();
+                        cargarTabla();
+                        empresaC.limpiarVariables();
+                        desactivarBotones(1);
+                        hover.menu(-1);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(PnlEmpresaContainer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }//GEN-LAST:event_item2MouseClicked
 
     private void item3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item3MouseMoved
@@ -646,7 +596,11 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item3MouseMoved
 
     private void item3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item3MouseClicked
-
+        if (item3.isEnabled()) {
+            empresaC.limpiarVariables();
+            desactivarBotones(1);
+            hover.menu(-1);
+        }
     }//GEN-LAST:event_item3MouseClicked
 
     private void item4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item4MouseMoved
@@ -657,39 +611,41 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_item4MouseClicked
 
-    private void pnlOptionPersonaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOptionPersonaMouseMoved
+    private void pnlOptionEmpresaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOptionEmpresaMouseMoved
         hover.menu(-1);
-    }//GEN-LAST:event_pnlOptionPersonaMouseMoved
+    }//GEN-LAST:event_pnlOptionEmpresaMouseMoved
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
-    
 
     private void btnBuscarPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPersonaMouseClicked
-        usuarioC.resPersona(txtDniPersona.getText());
+        if (txtRucEmpresa.getText().length() >=11) {
+            empresaC.resEmpresa(txtRucEmpresa.getText());
+        }else{
+            JOptionPane.showMessageDialog(null, "Ingrese RUC (11 digitos)");
+        }
     }//GEN-LAST:event_btnBuscarPersonaMouseClicked
 
-    private void txtDirecionPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirecionPersonaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDirecionPersonaActionPerformed
+    private void txtEmpresaFiltroCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtEmpresaFiltroCaretUpdate
 
-    private void txtTelefonoPersona1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoPersona1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoPersona1ActionPerformed
+        try {
+            datoFiltro = txtEmpresaFiltro.getText();
+            cargarTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(PnlEmpresaContainer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtEmpresaFiltroCaretUpdate
 
-    private void txtDirecionPersona1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirecionPersona1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDirecionPersona1ActionPerformed
+    private void txtRucEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucEmpresaKeyTyped
+        char caracter = evt.getKeyChar();
+        if (txtRucEmpresa.getText().length() >= 11) {
+            evt.consume();
+        }
 
-    private void txtDirecionPersona2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirecionPersona2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDirecionPersona2ActionPerformed
+        if (((caracter < '0') || (caracter > '9'))
+                && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRucEmpresaKeyTyped
 
-    
-    
-    
     private void desactivarBotones(int tipo) {
 
         switch (tipo) {
@@ -699,7 +655,7 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
                 item2.setEnabled(false);
                 item3.setEnabled(false);
                 item4.setEnabled(true);
-                txtCodigoPersona.setEnabled(true);
+                txtCodigoEmpresa.setEnabled(true);
 
                 break;
 
@@ -709,7 +665,7 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
                 item2.setEnabled(true);
                 item3.setEnabled(true);
                 item4.setEnabled(false);
-                txtCodigoPersona.setEnabled(false);
+                txtCodigoEmpresa.setEnabled(false);
 
                 break;
 
@@ -719,7 +675,7 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
                 item2.setEnabled(false);
                 item3.setEnabled(false);
                 item4.setEnabled(false);
-                txtCodigoPersona.setEnabled(false);
+                txtCodigoEmpresa.setEnabled(false);
                 break;
         }
 
@@ -733,11 +689,6 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
     private javax.swing.JPanel item2;
     private javax.swing.JPanel item3;
     private javax.swing.JPanel item4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -752,40 +703,25 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JComboBox jcCategoriaFiltro;
-    private javax.swing.JTable jtPersona;
+    public static javax.swing.JComboBox jcEmpresaFiltro;
+    public static javax.swing.JCheckBox jckEstadoEmpresa;
+    private javax.swing.JTable jtEmpresa;
     private javax.swing.JPanel pnlApellido;
-    private javax.swing.JPanel pnlApellido1;
-    private javax.swing.JPanel pnlApellido2;
-    private javax.swing.JPanel pnlApellido3;
     private javax.swing.JPanel pnlCodigo;
     private javax.swing.JPanel pnlContainerFiltro;
     private javax.swing.JPanel pnlDni;
     private javax.swing.JPanel pnlNombre;
-    private javax.swing.JPanel pnlOptionPersona;
-    private javax.swing.JPanel pnlTelefono;
-    private javax.swing.JPanel pnlTelefono1;
-    private javax.swing.JPanel pnlUbicacion;
+    private javax.swing.JPanel pnlOptionEmpresa;
     private javax.swing.JPanel pnlUsuariosForm;
-    private javax.swing.ButtonGroup rdGRupoTipo;
-    private javax.swing.ButtonGroup rdGrupoGenero;
-    public static javax.swing.JTextField txtApellidoPersona;
-    public static javax.swing.JTextField txtCodigoPersona;
-    public static javax.swing.JTextField txtCodigoProducto1;
-    public static javax.swing.JTextField txtDirecionPersona;
-    public static javax.swing.JTextField txtDirecionPersona1;
-    public static javax.swing.JTextField txtDirecionPersona2;
-    public static javax.swing.JTextField txtDniPersona;
-    public static javax.swing.JTextField txtNombrePersona;
-    public static javax.swing.JTextField txtTelefonoPersona;
-    public static javax.swing.JTextField txtTelefonoPersona1;
+    public static javax.swing.ButtonGroup rdGrupoGenero;
+    public static javax.swing.JTextField txtCodigoEmpresa;
+    public static javax.swing.JTextField txtEmpresaFiltro;
+    public static javax.swing.JTextField txtNombreEmpresa;
+    public static javax.swing.JTextField txtRazonSocialEmpresa;
+    public static javax.swing.JTextField txtRucEmpresa;
     // End of variables declaration//GEN-END:variables
 }

@@ -53,6 +53,14 @@ public class ClienteD extends Conexion {
                     DatosPersona.add(parts[0]);
                     DatosPersona.add(parts[1]);
                     DatosPersona.add(parts[2]);
+                    try {
+                        if (!parts[3].isEmpty()) {
+                            JOptionPane.showMessageDialog(null,"Dni no encontrado","Mensaje", 2);
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Hiciste lo correcto bob .jpg", "Mensaje", 1);
+                        
+                    }
                 }
 
 //                JSONObject obj = new JSONObject(resul);
@@ -64,7 +72,7 @@ public class ClienteD extends Conexion {
 
             }
         } catch (IOException e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Problema con el api");
         }
         return null;
     }
@@ -77,21 +85,24 @@ public class ClienteD extends Conexion {
 //                    + "values"
 //                    + "(?,?,?,?,?)";
 
-            String sql = "CALL INSERTAR_CLIENTE(?,?,?,?,?,?)";
+            String sql = "INSERT INTO PERSONA"
+                    + "(NOMPER,APEPER,RUCDNIPER,GENPER,TIPPER,ESTAPER)"
+                    + "VALUES"
+                    + "(?,?,?,?,?,?);";
 
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
             ps.setString(1, clienteM.getNOMPER());
             ps.setString(2, clienteM.getAPEPER());
-            ps.setString(3, clienteM.getRUCDNIPER());;
-            ps.setString(4, clienteM.getGENPER());;
+            ps.setString(3, clienteM.getRUCDNIPER());
+            ps.setString(4, clienteM.getGENPER());
             ps.setString(5, clienteM.getTIPPER());
             ps.setString(6, clienteM.getESTAPER());
 
             ps.executeUpdate();
             ps.close();
 
-            JOptionPane.showMessageDialog(null, "Registrado correctamente");
+            JOptionPane.showMessageDialog(null, "Registro ingresado correctamente");
         } catch (Exception e) {
 
             System.out.println("Error al guardar USUARIO en el Dao");
@@ -103,23 +114,27 @@ public class ClienteD extends Conexion {
     public void editarCliente(ClienteM clienteM) throws Exception {
 
         try {
-            String sql = "CALL EDITAR_CLIENTE(?,?,?,?,?,?,?)";
+            String sql = "Update"
+                    + "	PERSONA"
+                    + "	set NOMPER=?,APEPER=?,RUCDNIPER=?,GENPER=?,TIPPER=?,ESTAPER=?"
+                    + "where CODPER=?;";
 
 //                        CALL EDITAR_USUARIO_DATOS(12,'Jose Luis1', 'Quispe Luyo', '12345678900','2000/11/19','140409',
 //							'Mz. 10 Lt 10','123456789','M','E','A');
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
-            ps.setInt(1, clienteM.getCODPER());
-            ps.setString(2, clienteM.getNOMPER());
-            ps.setString(3, clienteM.getAPEPER());
-            ps.setString(4, clienteM.getRUCDNIPER());
-            ps.setString(5, clienteM.getGENPER());
-            ps.setString(6, clienteM.getTIPPER());
-            ps.setString(7, clienteM.getESTAPER());
+            ps.setString(1, clienteM.getNOMPER());
+            ps.setString(2, clienteM.getAPEPER());
+            ps.setString(3, clienteM.getRUCDNIPER());
+            ps.setString(4, clienteM.getGENPER());
+            ps.setString(5, clienteM.getTIPPER());
+            ps.setString(6, clienteM.getESTAPER());
+            ps.setInt(7, clienteM.getCODPER());
+
             ps.executeUpdate();
             ps.close();
 
-            JOptionPane.showMessageDialog(null, "Actualización correcta");
+            JOptionPane.showMessageDialog(null, "Registro actualizado");
         } catch (Exception e) {
 
             System.out.println("Error al actualizar USUARIO DATOS en el Dao");
@@ -128,21 +143,42 @@ public class ClienteD extends Conexion {
 
     }
 
-    public void eliminarCliente(ClienteM clienteM) throws Exception {
+    public void eliminarCliente(int CODPER) throws Exception {
 
         try {
-            String sql = "CALL ELIMINAR_USUARIO(?,?)";
+            String sql = "delete from PERSONA where CODPER=?";
 
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
-            ps.setInt(1, clienteM.getCODPER());
-            ps.setString(2, "B");
+            ps.setInt(1, CODPER);
             ps.executeUpdate();
             ps.close();
 
+            JOptionPane.showMessageDialog(null, "Resgistro eliminado");
+
         } catch (Exception e) {
 
-            System.out.println("Error al actualizar USUARIO LOGIN en el Dao");
+            System.out.println("Error al eliminar CLIENTE en el Dao");
+
+        }
+    }
+
+    public void habilitarCliente(String DNI) throws Exception {
+
+        try {
+            String sql = "CALL HABILITAR_CLIENTE(?,?)";
+
+            PreparedStatement ps = this.conectar().prepareStatement(sql);
+
+            ps.setString(1, DNI);
+            ps.setString(2, "A");
+            ps.executeUpdate();
+            ps.close();
+
+            JOptionPane.showMessageDialog(null, "Resgistro habilidato");
+        } catch (Exception e) {
+
+            System.out.println("Error al eliminar CLIENTE en el Dao");
 
         }
     }
@@ -166,10 +202,7 @@ public class ClienteD extends Conexion {
                     sql = "CALL FILTRAR_CLIENTE('3', '%" + dato + "%')"; // DNI
                     break;
                 case 4:
-                    sql = "CALL FILTRAR_CLIENTE('4', '%" + dato + "%')"; // Codigo
-                    break;
-                case 5:
-                    sql = "CALL FILTRAR_CLIENTE('5', '%" + dato + "%')"; // Inactivos
+                    sql = "CALL FILTRAR_CLIENTE('4', '%" + dato + "%')"; // DNI
                     break;
             }
             PreparedStatement preparedstatement = this.conectar().prepareStatement(sql);
@@ -185,7 +218,7 @@ public class ClienteD extends Conexion {
             }
             rs.close();
         } catch (Exception e) {
-            System.out.println("Error en Dao USUARIO Listar");
+            System.out.println("Error en Dao Cliente Listar");
         }
 
     }
@@ -193,7 +226,7 @@ public class ClienteD extends Conexion {
     public boolean validarExistenciaCliente(String DNI) throws Exception {
 
         System.out.println("Dao " + DNI);
-        String sql = "CALL VERIFICAR_EXISTENCIA_USUARIO(?);";
+        String sql = "CALL VERIFICAR_EXISTENCIA_CLIENTE(?);";
 
         PreparedStatement ps = this.conectar().prepareStatement(sql);
         ps.setString(1, DNI);
@@ -202,11 +235,11 @@ public class ClienteD extends Conexion {
             System.out.println("rs : " + rs.getObject(1));
             if (rs.getObject(1).equals(DNI)) {
                 return true;
-            }         
+            }
         }
-        
+
         return false;
-        
+
     }
 
 }
