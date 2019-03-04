@@ -5,6 +5,7 @@
  */
 package sistema.view;
 
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.util.Enumeration;
@@ -15,6 +16,8 @@ import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import sistema.controlador.UsuarioC;
+import sistema.dao.UbigeoD;
+import sistema.modelo.UbigeoM;
 import utilidad.Hover;
 
 /**
@@ -29,6 +32,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     int nPnl, pnlActualClick;
 
     UsuarioC usuarioC = new UsuarioC();
+    UbigeoD ubigeoD = new UbigeoD();
     Hover hover;
 
     DefaultTableModel modeloTablaUsuario;
@@ -41,6 +45,15 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         nPnl = pnlOptionPersona.getComponentCount();
         hover = new Hover(nPnl, pnlOptionPersona);
         hover.menu(-1);
+
+        txtUbigeoUsuario.setVisible(false);
+
+        try {
+            //combo departamento
+            ubigeoD.listarDepartamentoUbigeo(jcDepartamentoUsuario);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los departementos", "Error", 1);
+        }
 
         this.setBorder(new EmptyBorder(20, 40, 40, 40));
 
@@ -79,9 +92,9 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         txtDniUsuario = new javax.swing.JTextField();
         btnBuscarPersona = new javax.swing.JButton();
         pnlUbicacion = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jcDepartamentoUsuario = new javax.swing.JComboBox<>();
+        jcDistritoUsuario = new javax.swing.JComboBox<>();
+        jcProvinciaUsuario = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         pnlGenero = new javax.swing.JPanel();
         rdMasculinoUsuario = new javax.swing.JRadioButton();
@@ -104,6 +117,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jcaNacimientoUsuario = new com.toedter.calendar.JDateChooser();
         btnCredencialLogin = new javax.swing.JButton();
+        txtUbigeoUsuario = new javax.swing.JLabel();
         pnlOptionPersona = new javax.swing.JPanel();
         item0 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -222,7 +236,6 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
 
         btnBuscarPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
         btnBuscarPersona.setBorder(null);
-        btnBuscarPersona.setBorderPainted(false);
         btnBuscarPersona.setContentAreaFilled(false);
         btnBuscarPersona.setFocusPainted(false);
         btnBuscarPersona.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -242,27 +255,47 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         pnlUbicacion.setOpaque(false);
         pnlUbicacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+        jcDepartamentoUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jcDepartamentoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcDepartamentoUsuario.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcDepartamentoUsuarioItemStateChanged(evt);
             }
         });
-        pnlUbicacion.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 30));
-
-        jComboBox2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+        jcDepartamentoUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcDepartamentoUsuarioMouseClicked(evt);
             }
         });
-        pnlUbicacion.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 140, 30));
+        jcDepartamentoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcDepartamentoUsuarioActionPerformed(evt);
+            }
+        });
+        pnlUbicacion.add(jcDepartamentoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 140, 30));
 
-        jComboBox3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pnlUbicacion.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 140, 30));
+        jcDistritoUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jcDistritoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcDistritoUsuario.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcDistritoUsuarioItemStateChanged(evt);
+            }
+        });
+        jcDistritoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcDistritoUsuarioActionPerformed(evt);
+            }
+        });
+        pnlUbicacion.add(jcDistritoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 140, 30));
+
+        jcProvinciaUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jcProvinciaUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcProvinciaUsuario.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcProvinciaUsuarioItemStateChanged(evt);
+            }
+        });
+        pnlUbicacion.add(jcProvinciaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 140, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel7.setText("Ubicación");
@@ -312,6 +345,11 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         txtTelefonoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoUsuarioActionPerformed(evt);
+            }
+        });
+        txtTelefonoUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoUsuarioKeyTyped(evt);
             }
         });
         pnlTelefono.add(txtTelefonoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, 30));
@@ -392,6 +430,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
             }
         });
         pnlUsuariosForm.add(btnCredencialLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 343, -1, 50));
+        pnlUsuariosForm.add(txtUbigeoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 70, 20));
 
         add(pnlUsuariosForm, java.awt.BorderLayout.CENTER);
 
@@ -620,9 +659,9 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDniUsuarioActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void jcDepartamentoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcDepartamentoUsuarioActionPerformed
+
+    }//GEN-LAST:event_jcDepartamentoUsuarioActionPerformed
 
     private void txtTelefonoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoUsuarioActionPerformed
         // TODO add your handling code here:
@@ -711,7 +750,12 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                 jcaNacimientoUsuario.setDate(null);
             }
 
-//            txtTelefonoUsuario.setText(jtUsuario.getValueAt(fila, 5).toString());
+            ubigeoD.listarUbigeo(jcDepartamentoUsuario,
+                    jcProvinciaUsuario,
+                    jcDistritoUsuario,
+                    jtUsuario.getValueAt(fila, 5).toString());
+            txtUbigeoUsuario.setText(jtUsuario.getValueAt(fila, 5).toString());
+
             txtDireccionUsuario.setText(jtUsuario.getValueAt(fila, 6).toString());
             txtTelefonoUsuario.setText(jtUsuario.getValueAt(fila, 7).toString());
 
@@ -798,9 +842,9 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
 
     private void item2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseClicked
         if (item2.isEnabled()) {
-            int opcion = JOptionPane.showConfirmDialog(null,"Seguro de eleminar?", 
-                                                            "Eliminación del registro", 
-                                                            JOptionPane.OK_CANCEL_OPTION);
+            int opcion = JOptionPane.showConfirmDialog(null, "Seguro de eleminar?",
+                    "Eliminación del registro",
+                    JOptionPane.OK_CANCEL_OPTION);
             if (opcion == JOptionPane.OK_OPTION) {
                 try {
                     if (usuarioC.validarEditarUsuario()) {
@@ -815,7 +859,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                     Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
+            hover.menu(-1);
         }
     }//GEN-LAST:event_item2MouseClicked
 
@@ -843,9 +887,9 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         hover.menu(-1);
     }//GEN-LAST:event_pnlOptionPersonaMouseMoved
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void jcDistritoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcDistritoUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_jcDistritoUsuarioActionPerformed
 
 
     private void rdMasculinoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdMasculinoUsuarioActionPerformed
@@ -853,9 +897,13 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_rdMasculinoUsuarioActionPerformed
 
     private void btnBuscarPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPersonaMouseClicked
-        usuarioC.resPersona(txtDniUsuario.getText());
-        txtUsuarioUsuario.setText(txtDniUsuario.getText());
-        txtContraseñaUsuario.setText(txtDniUsuario.getText());
+        if (txtDniUsuario.getText().length() == 8) {
+            usuarioC.resPersona(txtDniUsuario.getText());
+            txtUsuarioUsuario.setText(txtDniUsuario.getText());
+            txtContraseñaUsuario.setText(txtDniUsuario.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese DNI (8 digitos)");
+        }
     }//GEN-LAST:event_btnBuscarPersonaMouseClicked
 
     private void txtDireccionUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionUsuarioActionPerformed
@@ -868,14 +916,16 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
 
     private void btnCredencialLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCredencialLoginMouseClicked
         try {
-
-            if (usuarioC.validarCredencialLogin()) {
+            if (!(txtContraseñaUsuario.getText().trim() == "") && txtContraseñaUsuario.getText().length()>=4) {
                 usuarioC.cargarVariablesLogin();
                 usuarioC.editarUsuarioLogin();
                 cargarTabla();
                 usuarioC.limpiarVariables();
                 desactivarBotones(1);
+            }else{
+                JOptionPane.showMessageDialog(null, "Ingrese contraseña (mayor a 4 digitos)");
             }
+            hover.menu(-1);
         } catch (Exception ex) {
             Logger.getLogger(PnlUsuariosContainer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -902,6 +952,63 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtTextoFiltroUsuarioCaretUpdate
 
+    private void jcDepartamentoUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcDepartamentoUsuarioMouseClicked
+
+    }//GEN-LAST:event_jcDepartamentoUsuarioMouseClicked
+
+    private void jcDepartamentoUsuarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcDepartamentoUsuarioItemStateChanged
+        try {
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                ubigeoD.listarProvinciaUbigeo(jcProvinciaUsuario, jcDepartamentoUsuario.getSelectedItem().toString());
+                String CODUBI;
+                UbigeoM ubigeo = (UbigeoM) jcDistritoUsuario.getSelectedItem();
+                CODUBI = ubigeo.getIdUbi();
+                txtUbigeoUsuario.setText(String.valueOf(CODUBI));
+            }
+        } catch (Exception ex) {
+            System.out.println("Error en cboDptoItemState " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jcDepartamentoUsuarioItemStateChanged
+
+    private void jcProvinciaUsuarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcProvinciaUsuarioItemStateChanged
+        try {
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                ubigeoD.listarDistritoUbigeo(jcDistritoUsuario, jcProvinciaUsuario.getSelectedItem().toString());
+                String CODUBI;
+                UbigeoM ubigeo = (UbigeoM) jcDistritoUsuario.getSelectedItem();
+                CODUBI = ubigeo.getIdUbi();
+                txtUbigeoUsuario.setText(String.valueOf(CODUBI));
+            }
+        } catch (Exception ex) {
+            System.out.println("error en cargar el distrito en el cboProv " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jcProvinciaUsuarioItemStateChanged
+
+    private void jcDistritoUsuarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcDistritoUsuarioItemStateChanged
+        try {
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                String CODUBI;
+                UbigeoM ubigeo = (UbigeoM) jcDistritoUsuario.getSelectedItem();
+                CODUBI = ubigeo.getIdUbi();
+                txtUbigeoUsuario.setText(String.valueOf(CODUBI));
+            }
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+    }//GEN-LAST:event_jcDistritoUsuarioItemStateChanged
+
+    private void txtTelefonoUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoUsuarioKeyTyped
+        char caracter = evt.getKeyChar();
+        if (txtTelefonoUsuario.getText().length() >= 9) {
+            evt.consume();
+        }
+
+        if (((caracter < '0') || (caracter > '9'))
+                && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoUsuarioKeyTyped
+
     private void desactivarBotones(int tipo) {
 
         switch (tipo) {
@@ -913,6 +1020,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                 item4.setEnabled(true);
                 btnCredencialLogin.setEnabled(false);
                 txtCodigoUsuario.setEnabled(true);
+                txtUsuarioUsuario.setEnabled(true);
 
                 break;
 
@@ -924,6 +1032,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
                 item4.setEnabled(false);
                 btnCredencialLogin.setEnabled(true);
                 txtCodigoUsuario.setEnabled(false);
+                txtUsuarioUsuario.setEnabled(false);
 
                 break;
 
@@ -949,9 +1058,6 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     private javax.swing.JPanel item2;
     private javax.swing.JPanel item3;
     private javax.swing.JPanel item4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -977,6 +1083,9 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JComboBox<String> jcDepartamentoUsuario;
+    public static javax.swing.JComboBox<String> jcDistritoUsuario;
+    public static javax.swing.JComboBox<String> jcProvinciaUsuario;
     public static javax.swing.JComboBox jcUsuarioFiltro;
     public static com.toedter.calendar.JDateChooser jcaNacimientoUsuario;
     private javax.swing.JTable jtUsuario;
@@ -1006,6 +1115,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     public static javax.swing.JTextField txtNombreUsuario;
     public static javax.swing.JTextField txtTelefonoUsuario;
     public static javax.swing.JTextField txtTextoFiltroUsuario;
+    public static javax.swing.JLabel txtUbigeoUsuario;
     public static javax.swing.JTextField txtUsuarioUsuario;
     // End of variables declaration//GEN-END:variables
 }

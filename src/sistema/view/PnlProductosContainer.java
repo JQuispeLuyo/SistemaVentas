@@ -68,7 +68,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     }
 
     private void cargarTabla() throws Exception {
-        String columna[] = new String[]{"Código", "Producto", "Unidad", "Precio", "Categoria"};
+        String columna[] = new String[]{"Código","Categoria","Producto", "Precio","Unidad"};
         modeloTablaProducto = new DefaultTableModel(null, columna) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -79,6 +79,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
 
         productoC.listarProductoTabla(modeloTablaProducto, tipoFiltro, datoFiltro);
         jtProducto.setModel(modeloTablaProducto);
+        PnlAgregarProductoContainer.jcCategoriaFiltro.setSelectedIndex(0);
     }
 
     /**
@@ -364,7 +365,8 @@ public class PnlProductosContainer extends javax.swing.JPanel {
 
         txtCodigoProducto.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         txtCodigoProducto.setForeground(new java.awt.Color(102, 102, 102));
-        txtCodigoProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        txtCodigoProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(153, 153, 153)));
+        txtCodigoProducto.setEnabled(false);
         txtCodigoProducto.setOpaque(false);
         txtCodigoProducto.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -469,22 +471,25 @@ public class PnlProductosContainer extends javax.swing.JPanel {
 
             //Campos de formularios
             txtCodigoProducto.setText(jtProducto.getValueAt(fila, 0).toString());
-            txtProducto.setText(jtProducto.getValueAt(fila, 1).toString());
-
-            String unidad = jtProducto.getValueAt(fila, 2).toString();
-            for (int index = 0; index < jcUnidadMedida.getItemCount(); index++) {
-                if (jcUnidadMedida.getItemAt(index).getDESUNI().equals(unidad)) {
-                    jcUnidadMedida.setSelectedIndex(index);
-                    break;
-                };
-            }
-
-            txtPrecioProducto.setText(jtProducto.getValueAt(fila, 3).toString());
-
-            String categoria = jtProducto.getValueAt(fila, 4).toString();
+            
+            String categoria = jtProducto.getValueAt(fila, 1).toString();
             for (int index = 0; index < jcCategoria.getItemCount(); index++) {
                 if (jcCategoria.getItemAt(index).getDESCAT().equals(categoria)) {
                     jcCategoria.setSelectedIndex(index);
+                    break;
+                };
+            }
+            
+            txtProducto.setText(jtProducto.getValueAt(fila, 2).toString());
+
+            
+
+            txtPrecioProducto.setText(jtProducto.getValueAt(fila, 3).toString());
+
+            String unidad = jtProducto.getValueAt(fila, 4).toString();
+            for (int index = 0; index < jcUnidadMedida.getItemCount(); index++) {
+                if (jcUnidadMedida.getItemAt(index).getDESUNI().equals(unidad)) {
+                    jcUnidadMedida.setSelectedIndex(index);
                     break;
                 };
             }
@@ -503,7 +508,6 @@ public class PnlProductosContainer extends javax.swing.JPanel {
                     productoC.guardarProducto();
                     cargarTabla();
                     productoC.limpiarVariables();
-
                 }
                 hover.menu(-1);
             } catch (Exception ex) {
@@ -637,18 +641,18 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_txtPrecioProductoKeyTyped
 
     private void txtCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProductoKeyTyped
-        char caracter = evt.getKeyChar();
-        if (txtCodigoProducto.getText().length() >= 4) {
-            evt.consume();
-        }
-        if (!Character.isLetterOrDigit(evt.getKeyChar())) {
-            evt.consume();
-        }
+//        char caracter = evt.getKeyChar();
+//        if (txtCodigoProducto.getText().length() >= 4) {
+//            evt.consume();
+//        }
+//        if (!Character.isLetterOrDigit(evt.getKeyChar())) {
+//            evt.consume();
+//        }
     }//GEN-LAST:event_txtCodigoProductoKeyTyped
 
     private void txtCodigoProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProductoKeyReleased
-        String codigo = txtCodigoProducto.getText();
-        txtCodigoProducto.setText(codigo.substring(0, codigo.length()).toUpperCase());
+//        String codigo = txtCodigoProducto.getText();
+//        txtCodigoProducto.setText(codigo.substring(0, codigo.length()).toUpperCase());
     }//GEN-LAST:event_txtCodigoProductoKeyReleased
 
     private void txtCodigoProductoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCodigoProductoCaretUpdate
@@ -675,7 +679,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
                 item2.setEnabled(false);
                 item3.setEnabled(false);
                 item4.setEnabled(true);
-                txtCodigoProducto.setEnabled(true);
+                txtCodigoProducto.setEnabled(false);
 
                 break;
 

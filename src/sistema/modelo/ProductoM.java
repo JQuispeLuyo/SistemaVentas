@@ -1,22 +1,23 @@
-
 package sistema.modelo;
 
 public class ProductoM {
-    
-    String CODPRO;
+
+    int CODPRO;
     String DESPRO;
     int CODUNI;
     double PREPRO;
-    String CODCAT;
+    int CODCAT;
+
+    
 
     public ProductoM() {
     }
 
-    public String getCODPRO() {
+    public int getCODPRO() {
         return CODPRO;
     }
 
-    public void setCODPRO(String CODPRO) {
+    public void setCODPRO(int CODPRO) {
         this.CODPRO = CODPRO;
     }
 
@@ -44,12 +45,12 @@ public class ProductoM {
         this.PREPRO = PREPRO;
     }
     
-    public String getCODCAT() {
+    public int getCODCAT() {
         return CODCAT;
     }
 
-    public void setCODCAT(String CODCAT) {
+    public void setCODCAT(int CODCAT) {
         this.CODCAT = CODCAT;
     }
-    
+
 }

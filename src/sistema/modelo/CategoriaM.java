@@ -1,24 +1,23 @@
-
 package sistema.modelo;
 
 public class CategoriaM {
-    
-    String CODCAT;
+
+    int CODCAT;
     String DESCAT;
 
     public CategoriaM() {
     }
 
-    public CategoriaM(String CODCAT, String NOMCAT) {
+    public CategoriaM(int CODCAT, String DESCAT) {
         this.CODCAT = CODCAT;
-        this.DESCAT = NOMCAT;
+        this.DESCAT = DESCAT;
     }
-
-    public String getCODCAT() {
+    
+    public int getCODCAT() {
         return CODCAT;
     }
 
-    public void setCODCAT(String CODCAT) {
+    public void setCODCAT(int CODCAT) {
         this.CODCAT = CODCAT;
     }
 
@@ -34,5 +33,5 @@ public class CategoriaM {
     public String toString() {
         return DESCAT;
     }
-    
+
 }

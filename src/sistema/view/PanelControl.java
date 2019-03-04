@@ -45,8 +45,8 @@ public class PanelControl extends javax.swing.JFrame {
             pnlMenuOptions.getComponent(i).setBackground(pnlMenu.getBackground());
         }
         lblUsername.setText(loginM.getUser());
-//        hoverMenu(0);
-
+        hoverMenu(0);
+        
         //logica de paneles contenedores
         pnlPrincipal.add(pnlInicioContainer);
         pnlPrincipal.add(pnlEntradaContainer);

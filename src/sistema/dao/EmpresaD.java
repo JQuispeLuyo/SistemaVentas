@@ -71,7 +71,6 @@ public class EmpresaD extends Conexion {
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "RUC no encontrado", "Mensaje", 2);
-
                 }
 
             }

@@ -7,34 +7,41 @@ package sistema.view;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import sistema.controlador.ClienteC;
 import sistema.controlador.UsuarioC;
 import sistema.controlador.VentaProductoC;
+import static sistema.view.PnlEntradaContainer.pnlVentaProducto;
 import utilidad.Hover;
+
 /**
  *
  * @author Jose Luis
  */
 public class PnlVentaProductoContainer extends javax.swing.JPanel {
-    
+
     private int tipoFiltro = 0;
     private String datoFiltro = "";
-    
+
     VentaProductoC ventaProductoC = new VentaProductoC();
-    
+    ClienteC clienteC = new ClienteC();
+
     int nPnl, pnlActualClick;
     DefaultTableModel modeloTablaVentaProducto;
-    
+
     UsuarioC usuarioC = new UsuarioC();
     Hover hover;
-    
+
     public PnlVentaProductoContainer() {
-        
+
         initComponents();
         //Añanidor hover al menu
         nPnl = pnlOptionPersona.getComponentCount();
         hover = new Hover(nPnl, pnlOptionPersona);
+        desactivarBotones(1);
         hover.menu(-1);
         try {
             this.cargarTabla();
@@ -60,10 +67,10 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         jpVistaCliente = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        txtDniRucClienteVenta = new javax.swing.JTextField();
         jpVistaCuerpoVenta = new javax.swing.JPanel();
         jpVistaAgregarProducto = new javax.swing.JPanel();
         pnlOptionPersona = new javax.swing.JPanel();
@@ -82,6 +89,11 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         item4 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jsCantidadVenta = new javax.swing.JSpinner();
+        jLabel3 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
         jpVistaTablaProductoVenta = new javax.swing.JPanel();
         Scroll = new javax.swing.JScrollPane();
         jtVentaProducto = new javax.swing.JTable();
@@ -89,13 +101,14 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         jpVistaPrecio = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jlSubTotalProducto = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        jlIgbProducto = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jlTotalProducto = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -111,6 +124,11 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jButton1.setText("Buscar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jpVistaCliente.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 100, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
@@ -118,19 +136,12 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         jLabel7.setText("Cliente");
         jpVistaCliente.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, -1, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("73828877");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jpVistaCliente.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 110, 30));
-
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Jose Luis Quispe Luyo");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jpVistaCliente.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 350, 30));
+        jpVistaCliente.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 350, 30));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boleta", "Factura" }));
         jpVistaCliente.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 120, 30));
@@ -139,8 +150,9 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Tipo de Venta");
         jpVistaCliente.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 30));
+        jpVistaCliente.add(txtDniRucClienteVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 120, 30));
 
-        jpVistaCabeceraVenta.add(jpVistaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 90));
+        jpVistaCabeceraVenta.add(jpVistaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 750, 80));
 
         add(jpVistaCabeceraVenta, java.awt.BorderLayout.PAGE_START);
 
@@ -279,7 +291,26 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
 
         pnlOptionPersona.add(item4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 170, 50));
 
-        jpVistaAgregarProducto.add(pnlOptionPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 80));
+        jpVistaAgregarProducto.add(pnlOptionPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 820, 70));
+
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jsCantidadVenta.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jPanel1.add(jsCantidadVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 80, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setText("Cantidad");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 30));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 140, 30));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setText("Cantidad");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 70, 30));
+
+        jpVistaAgregarProducto.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 740, 70));
 
         jpVistaCuerpoVenta.add(jpVistaAgregarProducto, java.awt.BorderLayout.PAGE_START);
 
@@ -302,6 +333,17 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
             }
         ));
         jtVentaProducto.setGridColor(new java.awt.Color(255, 255, 255));
+        jtVentaProducto.setRowHeight(25);
+        jtVentaProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtVentaProductoMouseClicked(evt);
+            }
+        });
+        jtVentaProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtVentaProductoKeyPressed(evt);
+            }
+        });
         Scroll.setViewportView(jtVentaProducto);
 
         jpVistaTablaProductoVenta.add(Scroll, java.awt.BorderLayout.CENTER);
@@ -317,51 +359,69 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
 
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setBackground(new java.awt.Color(255, 153, 153));
+        jLabel10.setBackground(new java.awt.Color(204, 255, 153));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Sub total");
         jLabel10.setOpaque(true);
         jPanel9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
 
-        jLabel11.setBackground(new java.awt.Color(255, 204, 204));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("11.00");
-        jLabel11.setOpaque(true);
-        jPanel9.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 90, 40));
+        jlSubTotalProducto.setBackground(new java.awt.Color(204, 255, 153));
+        jlSubTotalProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlSubTotalProducto.setText("0.00");
+        jlSubTotalProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(255, 255, 255)));
+        jlSubTotalProducto.setOpaque(true);
+        jPanel9.add(jlSubTotalProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 90, 40));
 
         jpVistaPrecio.add(jPanel9);
 
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel12.setBackground(new java.awt.Color(255, 153, 153));
+        jLabel12.setBackground(new java.awt.Color(153, 255, 153));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("IGV");
         jLabel12.setOpaque(true);
         jPanel10.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
 
-        jLabel13.setBackground(new java.awt.Color(255, 204, 204));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("18%");
-        jLabel13.setOpaque(true);
-        jPanel10.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 90, 40));
+        jlIgbProducto.setBackground(new java.awt.Color(153, 255, 153));
+        jlIgbProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlIgbProducto.setText("18%");
+        jlIgbProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(255, 255, 255)));
+        jlIgbProducto.setOpaque(true);
+        jPanel10.add(jlIgbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 90, 40));
 
         jpVistaPrecio.add(jPanel10);
 
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel14.setBackground(new java.awt.Color(255, 153, 153));
+        jLabel14.setBackground(new java.awt.Color(102, 255, 102));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Total");
         jLabel14.setOpaque(true);
         jPanel11.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
 
-        jLabel15.setBackground(new java.awt.Color(255, 204, 204));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("11.00");
-        jLabel15.setOpaque(true);
-        jPanel11.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 90, 40));
+        jlTotalProducto.setBackground(new java.awt.Color(102, 255, 102));
+        jlTotalProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlTotalProducto.setText("0.00");
+        jlTotalProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(255, 255, 255)));
+        jlTotalProducto.setOpaque(true);
+        jPanel11.add(jlTotalProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 90, 40));
 
         jpVistaPrecio.add(jPanel11);
+
+        jButton2.setBackground(new java.awt.Color(102, 153, 255));
+        jButton2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jButton2.setText("Calcular :D");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setMaximumSize(new java.awt.Dimension(100, 40));
+        jButton2.setMinimumSize(new java.awt.Dimension(100, 40));
+        jButton2.setOpaque(false);
+        jButton2.setPreferredSize(new java.awt.Dimension(100, 40));
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jpVistaPrecio.add(jButton2);
 
         jpVistaPrecioVenta.add(jpVistaPrecio, java.awt.BorderLayout.CENTER);
 
@@ -370,7 +430,6 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         add(jpVistaCuerpoVenta, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    
     private void cargarTabla() throws Exception {
         String columna[] = new String[]{"Código", "Producto", "Unidad", "Precio", "Cantidad", "P. Venta"};
         modeloTablaVentaProducto = new DefaultTableModel(null, columna) {
@@ -383,18 +442,21 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         ventaProductoC.listarVentaProductoTabla(modeloTablaVentaProducto, tipoFiltro, datoFiltro);
         jtVentaProducto.setModel(modeloTablaVentaProducto);
     }
-    
-    
+
     private void item0MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseDragged
 
     }//GEN-LAST:event_item0MouseDragged
 
     private void item0MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseMoved
-         hover.menu(0);
+        hover.menu(0);
     }//GEN-LAST:event_item0MouseMoved
 
     private void item0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseClicked
-       
+        PnlEntradaContainer.pnlVentaProducto.getComponent(1).setVisible(true);
+        PnlEntradaContainer.pnlVentaProducto.getComponent(0).setVisible(false);
+        PnlEntradaContainer.pnlVentaProducto.add(PnlEntradaContainer.pnlVentaProducto.getComponent(1), 1);
+        PnlEntradaContainer.pnlVentaProducto.validate();
+        hover.menu(-1);
     }//GEN-LAST:event_item0MouseClicked
 
     private void item1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item1MouseMoved
@@ -402,7 +464,9 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item1MouseMoved
 
     private void item1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item1MouseClicked
-        
+        editSelectedRows(jtVentaProducto);
+        desactivarBotones(1);
+        hover.menu(-1);
     }//GEN-LAST:event_item1MouseClicked
 
     private void item2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseMoved
@@ -410,8 +474,55 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item2MouseMoved
 
     private void item2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item2MouseClicked
-        // TODO add your handling code here:
+        removeSelectedRows(jtVentaProducto);
     }//GEN-LAST:event_item2MouseClicked
+
+    private void removeSelectedRows(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int[] rows = table.getSelectedRows();
+        for (int i = 0; i < rows.length; i++) {
+            model.removeRow(rows[i] - i);
+        }
+    }
+
+    private void editSelectedRows(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int[] rows = table.getSelectedRows();
+        int fila = jtVentaProducto.getSelectedRow();
+
+        model.setValueAt(String.valueOf(jsCantidadVenta.getValue()), fila, 4);
+        double precioProducto = Double.parseDouble(model.getValueAt(fila, 3).toString());
+
+        
+        int cantidadProducto = Integer.parseInt(model.getValueAt(fila, 4).toString());
+
+        
+        double precioTotal = cantidadProducto * precioProducto;
+        
+        model.setValueAt(String.valueOf(jsCantidadVenta.getValue()), fila, 4);
+        System.out.println(precioTotal);
+        model.setValueAt(String.format( "%.2f", precioTotal), fila, 5);
+        
+        JOptionPane.showMessageDialog(null, "Cantidad actualizada");
+
+    }
+
+    
+    private void calcularPrecioVentaRows(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        
+        double precio = 0.0;
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            precio += Double.parseDouble(model.getValueAt(i, 5).toString());
+            jlSubTotalProducto.setText(String.format( "%.2f", precio));
+        }
+
+//        for (int i = 0; i < rows.length; i++) {
+//            model.removeRow(rows[i] - i);
+//        }
+    }
+
 
     private void item3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item3MouseMoved
         hover.menu(3);
@@ -433,11 +544,46 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         hover.menu(-1);
     }//GEN-LAST:event_pnlOptionPersonaMouseMoved
 
-    
+    private void jtVentaProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtVentaProductoKeyPressed
 
-    
-    
-    
+    }//GEN-LAST:event_jtVentaProductoKeyPressed
+
+    private void jtVentaProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtVentaProductoMouseClicked
+        int fila = jtVentaProducto.getSelectedRow(); // el nro de fila seleccionada
+        if (fila >= 0) {
+            //Botones
+            desactivarBotones(2);
+            hover.menu(-1);
+            jsCantidadVenta.setValue(Integer.parseInt(jtVentaProducto.getValueAt(fila, 4).toString()));
+        }
+    }//GEN-LAST:event_jtVentaProductoMouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        calcularPrecioVentaRows(jtVentaProducto);
+        double SubTotal = Double.parseDouble(jlSubTotalProducto.getText());
+        double precioTotalProducto = (SubTotal + (SubTotal * 0.18));
+        if(precioTotalProducto >0){
+            desactivarBotones(3);
+        }else{
+            desactivarBotones(1);
+        }
+        hover.menu(-1);
+        jlTotalProducto.setText(String.format( "%.2f", precioTotalProducto));
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        if (item0.isEnabled()) {
+            try {
+                if (!clienteC.validarExistenciaCliente(txtDniRucClienteVenta.getText())) {
+                    
+                }
+                hover.menu(-1);
+            } catch (Exception ex) {
+                Logger.getLogger(PnlClienteContainer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
     private void desactivarBotones(int tipo) {
 
         switch (tipo) {
@@ -454,17 +600,17 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
                 item0.setEnabled(true);
                 item1.setEnabled(true);
                 item2.setEnabled(true);
-                item3.setEnabled(true);
-                item4.setEnabled(true);
+                item3.setEnabled(false);
+                item4.setEnabled(false);
 
                 break;
 
             case 3:
-                item0.setEnabled(false);
+                item0.setEnabled(true);
                 item1.setEnabled(false);
                 item2.setEnabled(false);
-                item3.setEnabled(false);
-                item4.setEnabled(false);
+                item3.setEnabled(true);
+                item4.setEnabled(true);
                 break;
         }
 
@@ -478,14 +624,12 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
     private javax.swing.JPanel item3;
     private javax.swing.JPanel item4;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -497,11 +641,17 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel jlIgbProducto;
+    private javax.swing.JLabel jlSubTotalProducto;
+    private javax.swing.JLabel jlTotalProducto;
     private javax.swing.JPanel jpVistaAgregarProducto;
     private javax.swing.JPanel jpVistaCabeceraVenta;
     private javax.swing.JPanel jpVistaCliente;
@@ -509,9 +659,11 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
     private javax.swing.JPanel jpVistaPrecio;
     private javax.swing.JPanel jpVistaPrecioVenta;
     private javax.swing.JPanel jpVistaTablaProductoVenta;
-    private javax.swing.JTable jtVentaProducto;
+    private javax.swing.JSpinner jsCantidadVenta;
+    public static javax.swing.JTable jtVentaProducto;
     private javax.swing.JPanel pnlOptionPersona;
     private javax.swing.ButtonGroup rdGRupoTipo;
     private javax.swing.ButtonGroup rdGrupoGenero;
+    public static javax.swing.JTextField txtDniRucClienteVenta;
     // End of variables declaration//GEN-END:variables
 }

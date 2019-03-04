@@ -5,6 +5,8 @@
  */
 package sistema.view;
 
+import java.awt.BorderLayout;
+
 /**
  *
  * @author Jose Luis
@@ -14,8 +16,22 @@ public class PnlEntradaContainer extends javax.swing.JPanel {
     /**
      * Creates new form PnlEntradaContainer
      */
+    
+    PnlVentaProductoContainer pnlVentaProductoContainer = new PnlVentaProductoContainer();
+    PnlVentasContainer pnlVentaContainer = new PnlVentasContainer();
+    PnlAgregarProductoContainer pnlAgregarProductoContainer = new PnlAgregarProductoContainer();
+    
     public PnlEntradaContainer() {
         initComponents();
+        pnlVentaProducto.add(pnlVentaProductoContainer);
+        pnlVentaProducto.add(pnlAgregarProductoContainer);
+        pnlVentaProducto.add(pnlVentaProducto.getComponent(0), 0);
+        pnlVentaProducto.validate();
+        
+        
+        pnlVentas.add(pnlVentaContainer, BorderLayout.CENTER);
+        pnlVentas.validate();
+        
     }
 
     /**
@@ -27,36 +43,32 @@ public class PnlEntradaContainer extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jtmVentas = new javax.swing.JTabbedPane();
+        pnlVentas = new javax.swing.JPanel();
+        pnlVentaProducto = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
+        setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("Entrada");
+        jtmVentas.setToolTipText("");
+        jtmVentas.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(363, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(314, 314, 314))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(277, 277, 277)
-                .addComponent(jLabel1)
-                .addContainerGap(279, Short.MAX_VALUE))
-        );
+        pnlVentas.setLayout(new java.awt.BorderLayout());
+        jtmVentas.addTab("Ventas", pnlVentas);
+
+        pnlVentaProducto.setLayout(new java.awt.BorderLayout());
+        jtmVentas.addTab("Ventas Producto", pnlVentaProducto);
+
+        add(jtmVentas, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    public static javax.swing.JTabbedPane jtmVentas;
+    public static javax.swing.JPanel pnlVentaProducto;
+    public static javax.swing.JPanel pnlVentas;
     // End of variables declaration//GEN-END:variables
 }

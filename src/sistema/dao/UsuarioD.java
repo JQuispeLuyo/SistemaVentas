@@ -53,6 +53,16 @@ public class UsuarioD extends Conexion {
                     DatosPersona.add(parts[0]);
                     DatosPersona.add(parts[1]);
                     DatosPersona.add(parts[2]);
+
+                    try {
+                        if (!parts[3].isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Dni no encontrado", "Mensaje", 2);
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Hiciste lo correcto bob .jpg", "Mensaje", 1);
+
+                    }
+
                 }
 
 //                JSONObject obj = new JSONObject(resul);
@@ -77,7 +87,10 @@ public class UsuarioD extends Conexion {
 //                    + "values"
 //                    + "(?,?,?,?,?)";
 
-            String sql = "CALL INSERTAR_USUARIO(?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO PERSONA"
+                    + " (NOMPER,APEPER,RUCDNIPER,FECNAC,UBIPER,DIRPER,TELPER,GENPER,USEPER,CONPER,TIPPER,ESTAPER)"
+                    + " VALUES"
+                    + " (?,?,?,?,?,?,?,?,?,?,?,?);";
 
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
@@ -100,7 +113,7 @@ public class UsuarioD extends Conexion {
             JOptionPane.showMessageDialog(null, "Registrado correctamente");
         } catch (Exception e) {
 
-            System.out.println("Error al guardar USUARIO en el Dao");
+            JOptionPane.showMessageDialog(null, "Error al guardar registro", "Error", 0);
 
         }
 
@@ -109,71 +122,84 @@ public class UsuarioD extends Conexion {
     public void editarUsuarioDatos(UsuarioM usuarioM) throws Exception {
 
         try {
-            String sql = "CALL EDITAR_USUARIO_DATOS(?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "Update"
+                    + " PERSONA "
+                    + " set NOMPER=?,"
+                    + " APEPER=?,"
+                    + " RUCDNIPER=?,"
+                    + " FECNAC=?,"
+                    + " UBIPER=?,"
+                    + " DIRPER=?,"
+                    + " TELPER=?,"
+                    + " GENPER=?,"
+                    + " TIPPER=?,"
+                    + " ESTAPER=?"
+                    + " where CODPER=?;";
 
 //                        CALL EDITAR_USUARIO_DATOS(12,'Jose Luis1', 'Quispe Luyo', '12345678900','2000/11/19','140409',
 //							'Mz. 10 Lt 10','123456789','M','E','A');
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
-            ps.setInt(1, usuarioM.getCODPER());
-            ps.setString(2, usuarioM.getNOMPER());
-            ps.setString(3, usuarioM.getAPEPER());
-            ps.setString(4, usuarioM.getRUCDNIPER());
-            ps.setDate(5, usuarioM.getFECNAC());
-            ps.setString(6, usuarioM.getUBIPER());
-            ps.setString(7, usuarioM.getDIRPER());
-            ps.setString(8, usuarioM.getTEL1PER());
-            ps.setString(9, usuarioM.getGENPER());
-            ps.setString(10, usuarioM.getTIPPER());
-            ps.setString(11, usuarioM.getESTAPER());
+            ps.setString(1, usuarioM.getNOMPER());
+            ps.setString(2, usuarioM.getAPEPER());
+            ps.setString(3, usuarioM.getRUCDNIPER());
+            ps.setDate(4, usuarioM.getFECNAC());
+            ps.setString(5, usuarioM.getUBIPER());
+            ps.setString(6, usuarioM.getDIRPER());
+            ps.setString(7, usuarioM.getTEL1PER());
+            ps.setString(8, usuarioM.getGENPER());
+            ps.setString(9, usuarioM.getTIPPER());
+            ps.setString(10, usuarioM.getESTAPER());
+            ps.setInt(11, usuarioM.getCODPER());
             ps.executeUpdate();
             ps.close();
 
             JOptionPane.showMessageDialog(null, "Actualización correcta");
         } catch (Exception e) {
 
-            System.out.println("Error al actualizar USUARIO DATOS en el Dao");
+            JOptionPane.showMessageDialog(null, "Error al actualizar registro", "Error", 0);
 
         }
 
     }
 
-    public void editarUsuarioLogin(UsuarioM usuarioM) throws Exception {
+    public void editarUsuarioContraseña(UsuarioM usuarioM) throws Exception {
 
         try {
-            String sql = "CALL EDITAR_USUARIO_LOGIN(?,?,sha1(md5(?)))";
-
+            String sql = "Update PERSONA"
+                    + " set CONPER = sha1(md5(?))"
+                    + " where CODPER=?;";
+            
+            System.out.println("usuear " + usuarioM.getCONPER());
+            System.out.println("codci " + usuarioM.getCODPER());
+            
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
-            ps.setInt(1, usuarioM.getCODPER());
-            ps.setString(2, usuarioM.getUSEPER());
-            ps.setString(3, usuarioM.getCONPER());
+            ps.setString(1, usuarioM.getCONPER());
+            ps.setInt(2, usuarioM.getCODPER());
             ps.executeUpdate();
             ps.close();
-
+            JOptionPane.showMessageDialog(null, "Contraseña cambiada", "Mensaje", 1);
         } catch (Exception e) {
 
-            System.out.println("Error al actualizar USUARIO LOGIN en el Dao");
+            JOptionPane.showMessageDialog(null, "Error al cambiar contraseña", "Error", 0);
 
         }
     }
 
-    public void eliminarUsuario(UsuarioM usuarioM) throws Exception {
+    public void eliminarUsuario(int CODPER) throws Exception {
 
         try {
-            String sql = "CALL ELIMINAR_USUARIO(?,?)";
+            String sql = "delete from persona where CODPER = ?";
 
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
-            ps.setInt(1, usuarioM.getCODPER());
-            ps.setString(2, "B");
+            ps.setInt(1, CODPER);
             ps.executeUpdate();
             ps.close();
-
+            JOptionPane.showMessageDialog(null, "Registro borrado", "Mensaje", 1);
         } catch (Exception e) {
-
-            System.out.println("Error al actualizar USUARIO LOGIN en el Dao");
-
+            JOptionPane.showMessageDialog(null, "Error al borrar registro", "Error", 0);
         }
     }
 
@@ -219,8 +245,7 @@ public class UsuarioD extends Conexion {
         }
 
     }
-    
-    
+
     public boolean validarExistenciaUsuarioLogin(String usuario) throws Exception {
 
         System.out.println("Dao " + usuario);
@@ -235,7 +260,7 @@ public class UsuarioD extends Conexion {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -251,11 +276,11 @@ public class UsuarioD extends Conexion {
             System.out.println("rs : " + rs.getObject(1));
             if (rs.getObject(1).equals(DNI)) {
                 return true;
-            }         
+            }
         }
-        
+
         return false;
-        
+
     }
 
 }

@@ -12,6 +12,7 @@ import sistema.dao.ProductoD;
 import sistema.modelo.CategoriaM;
 import sistema.modelo.ProductoM;
 import sistema.modelo.UnidadM;
+import sistema.view.PnlAgregarProductoContainer;
 import sistema.view.PnlProductosContainer;
 import static sistema.view.PnlProductosContainer.jcCategoria;
 import static sistema.view.PnlProductosContainer.jcUnidadMedida;
@@ -36,6 +37,10 @@ public class ProductoC {
         productoD.mostrarCategoria(jcCategoria, jcCategoriaFiltro);
     }
     
+    public void mostrarCategoriaFiltroAgregar(JComboBox<CategoriaM> jcCategoriaFiltro) {
+        productoD.mostrarCategoriaFiltroAgregar(jcCategoriaFiltro);
+    }
+    
     public void guardarProducto() throws Exception {
         productoD.guardarProducto(productoM);
     }
@@ -45,7 +50,7 @@ public class ProductoC {
     }
     
     public void eliminarProducto() throws Exception {
-        productoD.eliminarProducto(productoM);
+        productoD.eliminarProducto(productoM.getCODPRO());
     }
 
     public void listarProductoTabla(DefaultTableModel modeloTablaProducto, int tipo, String dato) throws Exception {
@@ -53,18 +58,18 @@ public class ProductoC {
     }
 
     public void CargarVariables() {
-        productoM.setCODPRO(txtCodigoProducto.getText());
+        if (!"".equals(PnlProductosContainer.txtCodigoProducto.getText().trim())) {
+            productoM.setCODPRO(Integer.parseInt((PnlProductosContainer.txtCodigoProducto.getText())));
+        }
+  
         productoM.setDESPRO(txtProducto.getText().trim());
-        productoM.setCODUNI(Integer.parseInt(PnlProductosContainer.jcUnidadMedida.getItemAt(jcUnidadMedida.getSelectedIndex()).getCODUNI()));
+        productoM.setCODUNI(PnlProductosContainer.jcUnidadMedida.getItemAt(jcUnidadMedida.getSelectedIndex()).getCODUNI());
         productoM.setPREPRO(Double.parseDouble(txtPrecioProducto.getText()));
         productoM.setCODCAT(PnlProductosContainer.jcCategoria.getItemAt(jcCategoria.getSelectedIndex()).getCODCAT());
     }
 
     public boolean validar() {
-        if ("".equals(txtCodigoProducto.getText().trim())) {
-            JOptionPane.showMessageDialog(null, "Ingrese Codigo");
-            return false;
-        }
+
         if (jcCategoria.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Selecione una categoria");
             return false;
@@ -93,6 +98,16 @@ public class ProductoC {
         jcUnidadMedida.setSelectedIndex(0);
         txtPrecioProducto.setText("");
         jcCategoria.setSelectedIndex(0);
+    }
+    
+    public void limpiarVariablesAgregar() {
+        
+        PnlAgregarProductoContainer.txtCodigoProducto.setText("");
+        PnlAgregarProductoContainer.txtProducto.setText("");
+        PnlAgregarProductoContainer.txtUnidadProducto.setText("");
+        PnlAgregarProductoContainer.txtPrecioProductoTotal.setText("");
+        PnlAgregarProductoContainer.jsCantidadProductoAgregar.setValue(0);
+        PnlAgregarProductoContainer.jcCategoriaFiltro.setSelectedIndex(0);
     }
 
 }

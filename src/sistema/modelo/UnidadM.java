@@ -10,26 +10,24 @@ package sistema.modelo;
  * @author Jose Luis
  */
 public class UnidadM {
-    String CODUNI;
-    String ABRUNI;
+    int CODUNI;
     String DESUNI;
 
     public UnidadM() {
     }
 
-    public UnidadM(String CODUNI, String DESUNI) {
+    public UnidadM(int CODUNI, String DESUNI) {
         this.CODUNI = CODUNI;
         this.DESUNI = DESUNI;
     }
 
-    public String getCODUNI() {
+    public int getCODUNI() {
         return CODUNI;
     }
 
-    public void setCODUNI(String CODUNI) {
+    public void setCODUNI(int CODUNI) {
         this.CODUNI = CODUNI;
     }
-
 
     public String getDESUNI() {
         return DESUNI;

@@ -49,9 +49,9 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
     }
 
     private void cargarTabla() throws Exception {
-        String columna[] = new String[]{"Código", "Nombre", "Razon Social", "RUC", "Activo"};
+        String columna[] = new String[]{"Código","Razon Social" ,"Nombre", "RUC", "Activo"};
 
-        modeloTablaEmpresa=  new DefaultTableModel(null, columna) {
+        modeloTablaEmpresa = new DefaultTableModel(null, columna) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -499,17 +499,20 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
 
             //Campos de formularios
             txtCodigoEmpresa.setText(jtEmpresa.getValueAt(fila, 0).toString());
-            txtNombreEmpresa.setText(jtEmpresa.getValueAt(fila, 1).toString());
-            txtRazonSocialEmpresa.setText(jtEmpresa.getValueAt(fila, 2).toString());
+            txtRazonSocialEmpresa.setText(jtEmpresa.getValueAt(fila, 1).toString());
+            
+            if (!txtNombreEmpresa.getText().equals("")) {
+                txtNombreEmpresa.setText(jtEmpresa.getValueAt(fila, 2).toString());
+            }
+
             txtRucEmpresa.setText(jtEmpresa.getValueAt(fila, 3).toString());
 
-            if("A".equals(jtEmpresa.getValueAt(fila, 4).toString())){
-               jckEstadoEmpresa.setSelected(true); 
-            }else{
-                jckEstadoEmpresa.setSelected(false); 
+            if ("A".equals(jtEmpresa.getValueAt(fila, 4).toString())) {
+                jckEstadoEmpresa.setSelected(true);
+            } else {
+                jckEstadoEmpresa.setSelected(false);
             }
-            
-            
+
         }
 
 
@@ -617,9 +620,9 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
 
 
     private void btnBuscarPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPersonaMouseClicked
-        if (txtRucEmpresa.getText().length() >=11) {
+        if (txtRucEmpresa.getText().length() >= 11) {
             empresaC.resEmpresa(txtRucEmpresa.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Ingrese RUC (11 digitos)");
         }
     }//GEN-LAST:event_btnBuscarPersonaMouseClicked

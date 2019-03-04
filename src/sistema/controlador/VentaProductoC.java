@@ -21,4 +21,11 @@ public class VentaProductoC {
         ventaProductoD.listarProductoTabla(modeloTablaVentaProducto, tipoFiltro, datoFiltro);
     }
     
+    public void getClienteVentaProducto() {
+        
+    }
+    
+    public void cargarVariables(){
+        
+    }
 }
