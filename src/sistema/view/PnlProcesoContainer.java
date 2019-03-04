@@ -11,7 +11,7 @@ import java.awt.BorderLayout;
  *
  * @author Jose Luis
  */
-public class PnlEntradaContainer extends javax.swing.JPanel {
+public class PnlProcesoContainer extends javax.swing.JPanel {
 
     /**
      * Creates new form PnlEntradaContainer
@@ -21,16 +21,13 @@ public class PnlEntradaContainer extends javax.swing.JPanel {
     PnlVentaContainer pnlVentaContainer = new PnlVentaContainer();
     PnlAgregarProductoContainer pnlAgregarProductoContainer = new PnlAgregarProductoContainer();
     
-    public PnlEntradaContainer() {
+    public PnlProcesoContainer() {
         initComponents();
         pnlVentaProducto.add(pnlVentaProductoContainer);
         pnlVentaProducto.add(pnlAgregarProductoContainer);
         pnlVentaProducto.add(pnlVentaProducto.getComponent(0), 0);
         pnlVentaProducto.validate();
         
-        
-        pnlVentas.add(pnlVentaContainer, BorderLayout.CENTER);
-        pnlVentas.validate();
         
     }
 
@@ -45,7 +42,6 @@ public class PnlEntradaContainer extends javax.swing.JPanel {
 
         jtmVentas = new javax.swing.JTabbedPane();
         pnlVentaProducto = new javax.swing.JPanel();
-        pnlVentas = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(800, 600));
@@ -59,9 +55,6 @@ public class PnlEntradaContainer extends javax.swing.JPanel {
         pnlVentaProducto.setLayout(new java.awt.BorderLayout());
         jtmVentas.addTab("Ventas Producto", pnlVentaProducto);
 
-        pnlVentas.setLayout(new java.awt.BorderLayout());
-        jtmVentas.addTab("Ventas", pnlVentas);
-
         add(jtmVentas, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -69,6 +62,5 @@ public class PnlEntradaContainer extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JTabbedPane jtmVentas;
     public static javax.swing.JPanel pnlVentaProducto;
-    private javax.swing.JPanel pnlVentas;
     // End of variables declaration//GEN-END:variables
 }

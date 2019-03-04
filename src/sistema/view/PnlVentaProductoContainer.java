@@ -16,7 +16,7 @@ import sistema.controlador.ClienteC;
 import sistema.controlador.EmpresaC;
 import sistema.controlador.UsuarioC;
 import sistema.controlador.VentaProductoC;
-import static sistema.view.PnlEntradaContainer.pnlVentaProducto;
+
 import utilidad.Hover;
 
 /**
@@ -46,6 +46,8 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         hover = new Hover(nPnl, pnlOptionPersona);
         desactivarBotones(1);
         hover.menu(-1);
+
+        jlCodigoClienteVentaProducto.setVisible(false);
         try {
             this.cargarTabla();
         } catch (Exception ex) {
@@ -53,6 +55,7 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         }
         this.setBorder(new EmptyBorder(20, 40, 40, 40));
         jpVistaPrecioVenta.setBorder(new EmptyBorder(20, 0, 0, 0));
+
     }
 
     /**
@@ -99,7 +102,6 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jcaFechaVentaProducto = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         jpVistaTablaProductoVenta = new javax.swing.JPanel();
         Scroll = new javax.swing.JScrollPane();
         jtVentaProducto = new javax.swing.JTable();
@@ -145,7 +147,6 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         jlDatoClienteVentaProducto.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jlDatoClienteVentaProducto.setForeground(new java.awt.Color(102, 102, 102));
         jlDatoClienteVentaProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlDatoClienteVentaProducto.setText("Jose Luis Quispe Luyo");
         jlDatoClienteVentaProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jpVistaCliente.add(jlDatoClienteVentaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 350, 30));
 
@@ -330,19 +331,6 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Cantidad");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 70, 30));
-
-        jButton3.setText("jButton3");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
-            }
-        });
-        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton3KeyPressed(evt);
-            }
-        });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, -1, -1));
 
         jpVistaAgregarProducto.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 740, 70));
 
@@ -560,6 +548,10 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item3MouseMoved
 
     private void item3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item3MouseClicked
+        if (ventaProductoC.validar()) {
+            ventaProductoC.cargarVariables();
+            ventaProductoC.guardarVentaProducto();
+        }
 
     }//GEN-LAST:event_item3MouseClicked
 
@@ -603,39 +595,33 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void btnBuscarClienteVentaProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarClienteVentaProductoMouseClicked
+
         if (btnBuscarClienteVentaProducto.isEnabled()) {
             try {
                 if (jcTipoVentaProducto.getSelectedIndex() == 0) {
+
                     if (clienteC.validarExistenciaCliente(txtDniRucClienteVenta.getText())) {
                         ventaProductoC.cargarClienteVentaProducto(txtDniRucClienteVenta.getText());
-//                    ventaProductoC.cargarVariables();
                     } else {
                         JOptionPane.showMessageDialog(null, "Registre al cliente");
                     }
+
                 } else {
                     if (empresaC.validarExistenciaEmpresa(txtDniRucClienteVenta.getText())) {
                         ventaProductoC.cargarClienteVentaProducto(txtDniRucClienteVenta.getText());
 //                    ventaProductoC.cargarVariables();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Registre al cliente");
+                        JOptionPane.showMessageDialog(null, "Registre a la empresa");
                     }
                 }
                 hover.menu(-1);
             } catch (Exception ex) {
                 Logger.getLogger(PnlClienteContainer.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
+
     }//GEN-LAST:event_btnBuscarClienteVentaProductoMouseClicked
-
-    private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
-
-    }//GEN-LAST:event_jButton3KeyPressed
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        if (ventaProductoC.validar()) {
-            ventaProductoC.cargarVariables();
-        }
-    }//GEN-LAST:event_jButton3MouseClicked
 
     private void txtDniRucClienteVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniRucClienteVentaKeyTyped
         char caracter = evt.getKeyChar();
@@ -704,7 +690,6 @@ public class PnlVentaProductoContainer extends javax.swing.JPanel {
     private javax.swing.JPanel item3;
     private javax.swing.JPanel item4;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;

@@ -22,7 +22,7 @@ import utilidad.Hover;
  *
  * @author Jose Luis
  */
-public class PnlVentasContainer extends javax.swing.JPanel {
+public class PnlVentaContainer extends javax.swing.JPanel {
 
     private int tipoFiltro = 0;
     private String datoFiltro = "";
@@ -34,7 +34,7 @@ public class PnlVentasContainer extends javax.swing.JPanel {
     ClienteC clienteC = new ClienteC();
     Hover hover;
 
-    public PnlVentasContainer() {
+    public PnlVentaContainer() {
 
         initComponents();
         //Añanidor hover al menu
@@ -44,7 +44,7 @@ public class PnlVentasContainer extends javax.swing.JPanel {
         try {
             cargarTabla();
         } catch (Exception ex) {
-            Logger.getLogger(PnlVentasContainer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PnlVentaContainer.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.setBorder(new EmptyBorder(20, 40, 40, 40));
     }
@@ -326,7 +326,7 @@ public class PnlVentasContainer extends javax.swing.JPanel {
 
     private void item0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseClicked
         if (item0.isEnabled()) {
-            PnlEntradaContainer.jtmVentas.setSelectedIndex(1);
+//            PnlEntradaContainer.jtmVentas.setSelectedIndex(1);
             
 //            try {
 //                if (!clienteC.validarExistenciaCliente(txtDniCliente.getText())) {
@@ -363,7 +363,7 @@ public class PnlVentasContainer extends javax.swing.JPanel {
                 }
 
             } catch (Exception ex) {
-                Logger.getLogger(PnlVentasContainer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PnlVentaContainer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_item1MouseClicked
@@ -389,7 +389,7 @@ public class PnlVentasContainer extends javax.swing.JPanel {
                         hover.menu(-1);
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(PnlVentasContainer.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(PnlVentaContainer.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

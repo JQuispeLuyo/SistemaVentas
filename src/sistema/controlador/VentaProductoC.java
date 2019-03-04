@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistema.dao.VentaProductoD;
 import sistema.modelo.LoginM;
+import sistema.modelo.VentaDetalleProductoM;
 import sistema.modelo.VentaProductoM;
 import sistema.view.PnlVentaProductoContainer;
 
@@ -22,15 +23,44 @@ public class VentaProductoC {
 
     VentaProductoD ventaProductoD = new VentaProductoD();
     VentaProductoM ventaProductoM = new VentaProductoM();
+    VentaDetalleProductoM ventaDetalleProductoM = new VentaDetalleProductoM();
     LoginM loginM;
 
+    public void guardarVentaProducto() {
+        ventaProductoD.guardarVentaProducto(ventaProductoM);
+        guardarVentaProductoTabla();
+    }
+
+    public void guardarVentaProductoTabla() {
+
+        //        "Código", "Producto", "Unidad", "Precio", "Cantidad", "P. Venta"};
+        DefaultTableModel modelo = (DefaultTableModel) PnlVentaProductoContainer.jtVentaProducto.getModel();
+        loginM = LoginM.getInstance();
+
+        int CODVENT = getVentaProducto(loginM.getId());
+        ventaProductoM.setCODVENT(CODVENT);
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+
+            int cantidadProductoActual = Integer.parseInt(modelo.getValueAt(i, 4).toString());
+            int CODPRO = Integer.parseInt(modelo.getValueAt(i, 0).toString());
+
+            ventaDetalleProductoM.setCODVENT(ventaProductoM.getCODVENT());
+            ventaDetalleProductoM.setCANDETVENT(cantidadProductoActual);
+            ventaDetalleProductoM.setCODPRO(CODPRO);
+            
+            ventaProductoD.guardarVentaDetalle(ventaDetalleProductoM);
+        }
+
+        JOptionPane.showMessageDialog(null, "Venta ingresado correctamente");
+    }
 
     public void listarVentaProductoTabla(DefaultTableModel modeloTablaVentaProducto, int tipoFiltro, String datoFiltro) {
         ventaProductoD.listarProductoTabla(modeloTablaVentaProducto, tipoFiltro, datoFiltro);
     }
 
-    public void getClienteVentaProducto() {
-
+    public int getVentaProducto(int CODPER) {
+        return ventaProductoD.getVentaProducto(CODPER);
     }
 
     public void cargarVariables() {
@@ -58,8 +88,8 @@ public class VentaProductoC {
 
         System.out.println("id usuario " + loginM.getId());
         System.out.println("id cliente " + PnlVentaProductoContainer.jlCodigoClienteVentaProducto.getText());
-        ventaProductoM.setPERSONA_CODPER(Integer.parseInt(PnlVentaProductoContainer.jlCodigoClienteVentaProducto.getText()));
         ventaProductoM.setEMPLEADO_CODPER(loginM.getId());
+        ventaProductoM.setPERSONA_CODPER(Integer.parseInt(PnlVentaProductoContainer.jlCodigoClienteVentaProducto.getText()));
 
     }
 
@@ -75,7 +105,7 @@ public class VentaProductoC {
                 JOptionPane.showMessageDialog(null, "Ingrese DNI");
                 return false;
             }
-        }else{
+        } else {
             if (PnlVentaProductoContainer.txtDniRucClienteVenta.getText().trim().equals("")) {
                 JOptionPane.showMessageDialog(null, "Ingrese RUC");
                 return false;
@@ -97,9 +127,9 @@ public class VentaProductoC {
 
         return true;
     }
-    
-    public void limpiarVariable(){
-        
+
+    public void limpiarVariable() {
+
         PnlVentaProductoContainer.jlCodigoClienteVentaProducto.setText("");
         PnlVentaProductoContainer.jlCodigoVentaProducto.setText("");
         PnlVentaProductoContainer.txtDniRucClienteVenta.setText("");

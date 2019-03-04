@@ -524,7 +524,7 @@ public class PanelControl extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Cerrar sesión");
+        jLabel9.setText("Salir");
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/exit.png"))); // NOI18N
 
@@ -681,6 +681,7 @@ public class PanelControl extends javax.swing.JFrame {
 
     private void pnlItem7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlItem7MouseClicked
         hoverMenuClick(6);
+        System.exit(0);
     }//GEN-LAST:event_pnlItem7MouseClicked
 
     private void pnlItem2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlItem2MouseDragged
