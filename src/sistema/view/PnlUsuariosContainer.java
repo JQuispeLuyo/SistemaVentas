@@ -237,7 +237,6 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
         btnBuscarPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
         btnBuscarPersona.setBorder(null);
         btnBuscarPersona.setContentAreaFilled(false);
-        btnBuscarPersona.setFocusPainted(false);
         btnBuscarPersona.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBuscarPersonaMouseClicked(evt);
@@ -880,7 +879,7 @@ public class PnlUsuariosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item4MouseMoved
 
     private void item4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item4MouseClicked
-        // TODO add your handling code here:
+        usuarioC.reporteUsuario();
     }//GEN-LAST:event_item4MouseClicked
 
     private void pnlOptionPersonaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOptionPersonaMouseMoved

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3c73f714-9344-49b0-b5c3-e8e9e9b745b4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[CALL MOSTRAR_USUARIO();]]>
+	</queryString>
+	<field name="CODPER" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Contiene el identificador de las personas]]></fieldDescription>
+	</field>
+	<field name="NOMPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el nombre de la persona, o la razón social de la empresa]]></fieldDescription>
+	</field>
+	<field name="APEPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el apellido de la persona o nombre de la empresa]]></fieldDescription>
+	</field>
+	<field name="RUCDNIPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el DNI o RUC  (Persona o Empresa)]]></fieldDescription>
+	</field>
+	<field name="FECNAC" class="java.sql.Date">
+		<fieldDescription><![CDATA[Contiene la fecha de nacimiento de la persona]]></fieldDescription>
+	</field>
+	<field name="UBIPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el ubigeo (Persona, Empresa)]]></fieldDescription>
+	</field>
+	<field name="DIRPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene las calles donde vive la persona]]></fieldDescription>
+	</field>
+	<field name="TELPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el numero de teléfono de los Usuarios]]></fieldDescription>
+	</field>
+	<field name="GENPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el genero cliente y usuario]]></fieldDescription>
+	</field>
+	<field name="USEPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el nombre de usuario del Usuario]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="305" height="44" uuid="283739f4-cd91-44cf-81cc-5f5dcb07d7a9"/>
+				<textElement>
+					<font size="32"/>
+				</textElement>
+				<text><![CDATA[Reporte de Usuarios]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="68" height="20" uuid="208927b1-2760-412f-b7ac-976215a86f08"/>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="68" y="0" width="100" height="20" uuid="634f7466-8289-4937-81ae-bee73f0f494e"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="0" width="100" height="20" uuid="8700b2e2-25ac-47fe-b0dc-96743d89ffc4"/>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="0" width="78" height="20" uuid="06c85def-ef10-493d-aa30-437a5a15bb75"/>
+				<text><![CDATA[DNI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="0" width="71" height="20" uuid="97a9a1d5-1676-458f-a262-ec2bbc35d113"/>
+				<text><![CDATA[Telefono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="0" width="29" height="20" uuid="59cfd770-3d29-45a0-b2f5-c8713243ac27"/>
+				<text><![CDATA[Gen.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="459" y="0" width="96" height="20" uuid="3da82d9d-fd55-4220-915d-2fc2cac3c4f0"/>
+				<text><![CDATA[Usuario]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="68" height="20" uuid="6ab0066c-fa84-4828-a5b4-e80c9e5a415c"/>
+				<textFieldExpression><![CDATA[$F{CODPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="0" width="100" height="20" uuid="3edced64-f002-4a23-9bd6-904ff324746a"/>
+				<textFieldExpression><![CDATA[$F{NOMPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="0" width="100" height="20" uuid="843d78f5-10d4-4786-83af-88b9f7233933"/>
+				<textFieldExpression><![CDATA[$F{APEPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="0" width="78" height="20" uuid="4a283a69-05b0-4ef8-98ac-b8e9a4eae60b"/>
+				<textFieldExpression><![CDATA[$F{RUCDNIPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="346" y="0" width="71" height="20" uuid="19d4952f-121d-4fca-b9cb-869680ee850b"/>
+				<textFieldExpression><![CDATA[$F{TELPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="0" width="29" height="20" uuid="6d8967a9-0fcc-4082-821b-747f2373e66f"/>
+				<textFieldExpression><![CDATA[$F{GENPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="0" width="96" height="20" uuid="89524f4a-e455-4c88-9e60-e52f1be348a4"/>
+				<textFieldExpression><![CDATA[$F{USEPER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="80" height="20" uuid="0b5ec05b-8548-4191-ae09-141e5d20f914"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="94" y="0" width="40" height="20" uuid="5c7f90b8-59a4-422e-a928-bcce766aaa0e"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

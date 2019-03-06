@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6cdd1cd9-cf32-4013-8b05-a0c9c73e023e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[CALL MOSTRAR_CLIENTE;]]>
+	</queryString>
+	<field name="CODPER" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Contiene el identificador de las personas]]></fieldDescription>
+	</field>
+	<field name="NOMPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el nombre de la persona, o la razón social de la empresa]]></fieldDescription>
+	</field>
+	<field name="APEPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el apellido de la persona o nombre de la empresa]]></fieldDescription>
+	</field>
+	<field name="RUCDNIPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el DNI o RUC  (Persona o Empresa)]]></fieldDescription>
+	</field>
+	<field name="GENPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el genero cliente y usuario]]></fieldDescription>
+	</field>
+	<field name="ESTAPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el estado de la persona
+A = Activo
+B = Inactivo]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="300" height="51" uuid="a289ff01-1b4e-4639-a677-dac6093b4b58"/>
+				<textElement>
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[Reporte de cliente]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="63" height="20" uuid="1e126c6a-9856-4ee8-94e1-764ccc474393"/>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="2" width="177" height="20" uuid="faca5a99-6a3b-4260-9a64-02ecbbc149bf"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="2" width="173" height="20" uuid="f75de8b2-e624-426a-a34c-be8dfaf93912"/>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="2" width="99" height="20" uuid="d61ca4d3-b471-462a-b489-8fc62b5e8278"/>
+				<text><![CDATA[DNI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="513" y="2" width="42" height="20" uuid="f1e8a40a-da61-40c6-9551-d5c0da12998c"/>
+				<text><![CDATA[Gen.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="63" height="20" uuid="b77d7b8e-ba32-4cf5-8670-edb7bba72656"/>
+				<textFieldExpression><![CDATA[$F{CODPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="173" height="20" uuid="5bc14f9d-208c-49d4-994e-1cccc25a7817"/>
+				<textFieldExpression><![CDATA[$F{APEPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="0" width="177" height="20" uuid="5bb379ae-2caa-4173-9c66-55c3b9568ecc"/>
+				<textFieldExpression><![CDATA[$F{NOMPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="413" y="0" width="100" height="20" uuid="a259d8e9-7ca4-4252-a5e5-2f6c2e4edc2b"/>
+				<textFieldExpression><![CDATA[$F{RUCDNIPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="513" y="0" width="42" height="20" uuid="edb86d4a-8860-4ced-b847-95c9a19a74a9"/>
+				<textFieldExpression><![CDATA[$F{GENPER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="80" height="20" uuid="1ded4b58-978e-445f-b0c0-73bf4615c1e2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="80" y="0" width="40" height="20" uuid="39cbf3d6-b035-4768-a9a2-d5f0ebfd87c3"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

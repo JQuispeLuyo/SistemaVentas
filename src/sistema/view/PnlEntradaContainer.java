@@ -67,8 +67,8 @@ public class PnlEntradaContainer extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private static javax.swing.JTabbedPane jtmVentas;
+    public static javax.swing.JTabbedPane jtmVentas;
     public static javax.swing.JPanel pnlVentaProducto;
-    private javax.swing.JPanel pnlVentas;
+    public static javax.swing.JPanel pnlVentas;
     // End of variables declaration//GEN-END:variables
 }

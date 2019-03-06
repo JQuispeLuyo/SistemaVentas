@@ -10,12 +10,9 @@ import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import sistema.controlador.ClienteC;
-import static sistema.view.PnlUsuariosContainer.rdGrupoGenero;
-import static sistema.view.PnlUsuariosContainer.txtDniUsuario;
+import sistema.controlador.VentaC;
 import utilidad.Hover;
 
 /**
@@ -29,17 +26,17 @@ public class PnlVentaContainer extends javax.swing.JPanel {
 
     int nPnl, pnlActualClick;
 
-    DefaultTableModel modeloTablaCliente;
+    DefaultTableModel modeloTablaVenta;
 
-    ClienteC clienteC = new ClienteC();
+    VentaC ventaC = new VentaC();
     Hover hover;
 
     public PnlVentaContainer() {
 
         initComponents();
         //Añanidor hover al menu
-        nPnl = pnlOptionPersona.getComponentCount();
-        hover = new Hover(nPnl, pnlOptionPersona);
+        nPnl = pnlOptionVenta.getComponentCount();
+        hover = new Hover(nPnl, pnlOptionVenta);
         hover.menu(-1);
         try {
             cargarTabla();
@@ -50,9 +47,9 @@ public class PnlVentaContainer extends javax.swing.JPanel {
     }
 
     private void cargarTabla() throws Exception {
-        String columna[] = new String[]{"Código", "Nombre", "Apellido", "DNI", "Genero", "Activo"};
+        String columna[] = new String[]{"Código", "Vendedor", "Cliente", "Doc. cliente"};
 
-        modeloTablaCliente = new DefaultTableModel(null, columna) {
+        modeloTablaVenta = new DefaultTableModel(null, columna) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -60,8 +57,8 @@ public class PnlVentaContainer extends javax.swing.JPanel {
 
         };
 //        productoD.listarProductoTabla(modeloTablaProducto, tipoFiltro, datoFiltro);
-        clienteC.listarClienteTabla(modeloTablaCliente, tipoFiltro, datoFiltro);
-        jtVentas.setModel(modeloTablaCliente);
+        ventaC.listarVentaTabla(modeloTablaVenta, tipoFiltro, datoFiltro);
+        jtVenta.setModel(modeloTablaVenta);
     }
 
     /**
@@ -84,8 +81,8 @@ public class PnlVentaContainer extends javax.swing.JPanel {
         jcClienteFiltro = new javax.swing.JComboBox();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtVentas = new javax.swing.JTable();
-        pnlOptionPersona = new javax.swing.JPanel();
+        jtVenta = new javax.swing.JTable();
+        pnlOptionVenta = new javax.swing.JPanel();
         item0 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -143,7 +140,7 @@ public class PnlVentaContainer extends javax.swing.JPanel {
         PnlFiltro.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 180, 60));
 
         jcClienteFiltro.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jcClienteFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione filtro", "Nombre", "Apellido", "Dni", "Inactivos" }));
+        jcClienteFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione filtro", "Nombre", "DNI / RUC" }));
         jcClienteFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcClienteFiltroItemStateChanged(evt);
@@ -173,8 +170,8 @@ public class PnlVentaContainer extends javax.swing.JPanel {
         jPanel4.setOpaque(false);
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        jtVentas.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jtVentas.setModel(new javax.swing.table.DefaultTableModel(
+        jtVenta.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jtVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -185,9 +182,9 @@ public class PnlVentaContainer extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtVentas.setGridColor(new java.awt.Color(255, 255, 255));
-        jtVentas.setRowHeight(25);
-        jScrollPane1.setViewportView(jtVentas);
+        jtVenta.setGridColor(new java.awt.Color(255, 255, 255));
+        jtVenta.setRowHeight(25);
+        jScrollPane1.setViewportView(jtVenta);
 
         jPanel4.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -195,15 +192,15 @@ public class PnlVentaContainer extends javax.swing.JPanel {
 
         add(pnlUsuariosForm, java.awt.BorderLayout.CENTER);
 
-        pnlOptionPersona.setBackground(new java.awt.Color(204, 102, 255));
-        pnlOptionPersona.setMaximumSize(new java.awt.Dimension(150, 300));
-        pnlOptionPersona.setOpaque(false);
-        pnlOptionPersona.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        pnlOptionVenta.setBackground(new java.awt.Color(204, 102, 255));
+        pnlOptionVenta.setMaximumSize(new java.awt.Dimension(150, 300));
+        pnlOptionVenta.setOpaque(false);
+        pnlOptionVenta.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                pnlOptionPersonaMouseMoved(evt);
+                pnlOptionVentaMouseMoved(evt);
             }
         });
-        pnlOptionPersona.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlOptionVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         item0.setBackground(new java.awt.Color(204, 204, 204));
         item0.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -228,7 +225,7 @@ public class PnlVentaContainer extends javax.swing.JPanel {
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (1).png"))); // NOI18N
         item0.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionPersona.add(item0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, 50));
+        pnlOptionVenta.add(item0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, 50));
 
         item1.setBackground(new java.awt.Color(204, 204, 204));
         item1.setEnabled(false);
@@ -245,13 +242,13 @@ public class PnlVentaContainer extends javax.swing.JPanel {
         item1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel19.setText("Editar");
+        jLabel19.setText("Ver");
         item1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 50, 50));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag7.png"))); // NOI18N
         item1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionPersona.add(item1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, 50));
+        pnlOptionVenta.add(item1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, 50));
 
         item2.setBackground(new java.awt.Color(204, 204, 204));
         item2.setEnabled(false);
@@ -274,7 +271,7 @@ public class PnlVentaContainer extends javax.swing.JPanel {
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (4).png"))); // NOI18N
         item2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 50));
 
-        pnlOptionPersona.add(item2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 50));
+        pnlOptionVenta.add(item2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 50));
 
         item3.setBackground(new java.awt.Color(204, 204, 204));
         item3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -296,12 +293,12 @@ public class PnlVentaContainer extends javax.swing.JPanel {
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Producto/price-tag (6).png"))); // NOI18N
         item3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
-        pnlOptionPersona.add(item3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 120, 50));
+        pnlOptionVenta.add(item3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 120, 50));
 
         jPanel1.setOpaque(false);
-        pnlOptionPersona.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 120, 30));
+        pnlOptionVenta.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 120, 30));
 
-        add(pnlOptionPersona, java.awt.BorderLayout.LINE_END);
+        add(pnlOptionVenta, java.awt.BorderLayout.LINE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void filtrar() {
@@ -326,7 +323,7 @@ public class PnlVentaContainer extends javax.swing.JPanel {
 
     private void item0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseClicked
         if (item0.isEnabled()) {
-//            PnlEntradaContainer.jtmVentas.setSelectedIndex(1);
+            PnlEntradaContainer.jtmVentas.setSelectedIndex(0);
             
 //            try {
 //                if (!clienteC.validarExistenciaCliente(txtDniCliente.getText())) {
@@ -352,11 +349,11 @@ public class PnlVentaContainer extends javax.swing.JPanel {
         if (item1.isEnabled()) {
             try {
 
-                if (clienteC.validar()) {
-                    clienteC.cargarVariables();
-                    clienteC.editarCliente();
+                if (ventaC.validar()) {
+                    ventaC.cargarVariables();
+//                    ventaC.editarCliente();
                     cargarTabla();
-                    clienteC.limpiarVariables();
+                    ventaC.limpiarVariables();
                     desactivarBotones(1);
                     hover.menu(-1);
 
@@ -380,11 +377,11 @@ public class PnlVentaContainer extends javax.swing.JPanel {
 
             if (opcion == JOptionPane.OK_OPTION) {
                 try {
-                    if (clienteC.validar()) {
-                        clienteC.cargarVariables();
-                        clienteC.eliminarCliente();
+                    if (ventaC.validar()) {
+                        ventaC.cargarVariables();
+//                        ventaC.eliminarCliente();
                         cargarTabla();
-                        clienteC.limpiarVariables();
+                        ventaC.limpiarVariables();
                         desactivarBotones(1);
                         hover.menu(-1);
                     }
@@ -400,12 +397,12 @@ public class PnlVentaContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item3MouseMoved
 
     private void item3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item3MouseClicked
-        // TODO add your handling code here:
+        ventaC.reporteVenta();
     }//GEN-LAST:event_item3MouseClicked
 
-    private void pnlOptionPersonaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOptionPersonaMouseMoved
+    private void pnlOptionVentaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOptionVentaMouseMoved
         hover.menu(-1);
-    }//GEN-LAST:event_pnlOptionPersonaMouseMoved
+    }//GEN-LAST:event_pnlOptionVentaMouseMoved
 
     private void txtClienteFiltroCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtClienteFiltroCaretUpdate
 
@@ -496,8 +493,8 @@ public class PnlVentaContainer extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JComboBox jcClienteFiltro;
-    public static javax.swing.JTable jtVentas;
-    private javax.swing.JPanel pnlOptionPersona;
+    public static javax.swing.JTable jtVenta;
+    private javax.swing.JPanel pnlOptionVenta;
     private javax.swing.JPanel pnlUsuariosForm;
     public static javax.swing.ButtonGroup rdGrupoGenero;
     public static javax.swing.JTextField txtClienteFiltro;

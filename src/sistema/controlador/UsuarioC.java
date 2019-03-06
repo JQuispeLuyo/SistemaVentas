@@ -270,4 +270,8 @@ public class UsuarioC {
         PnlUsuariosContainer.txtUsuarioUsuario.setText("");
         PnlUsuariosContainer.txtContraseñaUsuario.setText("");
     }
+
+    public void reporteUsuario() {
+        usuarioD.reporteUsuario(); 
+    }
 }

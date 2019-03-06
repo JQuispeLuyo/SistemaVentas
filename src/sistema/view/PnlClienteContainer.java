@@ -649,7 +649,7 @@ public class PnlClienteContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item4MouseMoved
 
     private void item4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item4MouseClicked
-        // TODO add your handling code here:
+        clienteC.reporteCliente();
     }//GEN-LAST:event_item4MouseClicked
 
     private void pnlOptionPersonaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOptionPersonaMouseMoved

@@ -5,17 +5,36 @@
  */
 package sistema.dao;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import sistema.controlador.ProductoC;
 import sistema.modelo.CategoriaM;
 import sistema.modelo.ProductoM;
 import sistema.modelo.UnidadM;
+import sistema.view.PnlProductosContainer;
 
 public class ProductoD extends Conexion {
 
@@ -41,7 +60,7 @@ public class ProductoD extends Conexion {
             ps.setInt(5, productoM.getCODUNI());
             ps.executeUpdate();
             ps.close();
-            
+
             JOptionPane.showMessageDialog(null, "Registro ingresado");
         } catch (Exception e) {
 
@@ -61,7 +80,6 @@ public class ProductoD extends Conexion {
 
             PreparedStatement ps = this.conectar().prepareStatement(sql);
 
-            
             ps.setInt(1, productoM.getCODCAT());
             ps.setString(2, productoM.getDESPRO());
             ps.setDouble(3, productoM.getPREPRO());
@@ -152,7 +170,7 @@ public class ProductoD extends Conexion {
             JOptionPane.showMessageDialog(null, "ERROR AL MOSTRAR LAS CATEGORIAS");
         }
     }
-    
+
     public void mostrarCategoriaFiltroAgregar(JComboBox<CategoriaM> jcCategoriaFiltro) {
         try {
             String sql = "select * from CATEGORIA";
@@ -209,6 +227,48 @@ public class ProductoD extends Conexion {
             System.out.println("Error en Dao producto Listar");
         }
 
+    }
+
+//     public void generarReporte() throws net.sf.jasperreports.engine.JRException{
+//        InputStream inputStream = null;
+//        try {
+////            inputStream = new FileInputStream ("src/prueba1.jrxml");
+//            inputStream = new FileInputStream ("src/reportes/ProductoReporte.jrxml");
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(ProductoD.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Map parameters = new HashMap();
+//        JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
+//        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+//        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters);
+//        JasperExportManager.exportReportToPdfFile(jasperPrint, "src/prueba1.pdf");
+//         
+//    }
+    
+    public void reporteProducto() {
+        try {
+        String path = "src\\reportes\\ProductoReporte.jasper";
+
+//            Map parametro = new HashMap();
+//            parametro.put("id_estado", 36);
+            JasperReport reporte = null;
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, this.conectar());
+
+            JasperViewer view = new JasperViewer(jprint, false);
+
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+            view.setVisible(true);
+
+        } catch (JRException ex) {
+            Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductoD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
     }
 
 }

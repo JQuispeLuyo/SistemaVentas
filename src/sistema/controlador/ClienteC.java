@@ -131,4 +131,8 @@ public class ClienteC {
         PnlClienteContainer.rdGrupoGenero.clearSelection();
 
     }
+
+    public void reporteCliente() {
+        clienteD.reporteCliente();
+    }
 }

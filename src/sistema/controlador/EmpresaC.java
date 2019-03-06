@@ -118,4 +118,8 @@ public class EmpresaC {
         PnlEmpresaContainer.txtRucEmpresa.setText("");
 
     }
+
+    public void reporteEmpresa() {
+        empresaD.reporteEmpresa();
+    }
 }

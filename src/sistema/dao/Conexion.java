@@ -15,7 +15,7 @@ public class Conexion {
         String pwd = "root";
         try {
             Class.forName(driver);
-            cn = DriverManager.getConnection(url, user, pwd);
+            cn = (Connection) DriverManager.getConnection(url, user, pwd);
         } catch (Exception e) {
             System.out.println("Error en la conexion " + e.getMessage());
         }

@@ -5,13 +5,24 @@
  */
 package sistema.view;
 
+import com.mysql.jdbc.Connection;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import sistema.controlador.ProductoC;
+import sistema.dao.Conexion;
 import sistema.dao.ProductoD;
 import sistema.modelo.CategoriaM;
 import sistema.modelo.UnidadM;
@@ -68,7 +79,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     }
 
     private void cargarTabla() throws Exception {
-        String columna[] = new String[]{"Código","Categoria","Producto", "Precio","Unidad"};
+        String columna[] = new String[]{"Código", "Categoria", "Producto", "Precio", "Unidad"};
         modeloTablaProducto = new DefaultTableModel(null, columna) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -471,7 +482,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
 
             //Campos de formularios
             txtCodigoProducto.setText(jtProducto.getValueAt(fila, 0).toString());
-            
+
             String categoria = jtProducto.getValueAt(fila, 1).toString();
             for (int index = 0; index < jcCategoria.getItemCount(); index++) {
                 if (jcCategoria.getItemAt(index).getDESCAT().equals(categoria)) {
@@ -479,10 +490,8 @@ public class PnlProductosContainer extends javax.swing.JPanel {
                     break;
                 };
             }
-            
-            txtProducto.setText(jtProducto.getValueAt(fila, 2).toString());
 
-            
+            txtProducto.setText(jtProducto.getValueAt(fila, 2).toString());
 
             txtPrecioProducto.setText(jtProducto.getValueAt(fila, 3).toString());
 
@@ -562,8 +571,7 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item3MouseClicked
 
     private void item4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item4MouseClicked
-        System.out.println("ss");
-        
+        productoC.reporteProducto();
     }//GEN-LAST:event_item4MouseClicked
 
     private void item0MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item0MouseDragged
@@ -662,8 +670,8 @@ public class PnlProductosContainer extends javax.swing.JPanel {
     private void txtProductoFiltroCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtProductoFiltroCaretUpdate
         jcCategoriaFiltro.setSelectedIndex(0);
         try {
-                tipoFiltro = 2;
-                datoFiltro = txtProductoFiltro.getText();
+            tipoFiltro = 2;
+            datoFiltro = txtProductoFiltro.getText();
             cargarTabla();
         } catch (Exception ex) {
             Logger.getLogger(PnlProductosContainer.class.getName()).log(Level.SEVERE, null, ex);

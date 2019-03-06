@@ -611,7 +611,7 @@ public class PnlEmpresaContainer extends javax.swing.JPanel {
     }//GEN-LAST:event_item4MouseMoved
 
     private void item4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item4MouseClicked
-        // TODO add your handling code here:
+        empresaC.reporteEmpresa();
     }//GEN-LAST:event_item4MouseClicked
 
     private void pnlOptionEmpresaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOptionEmpresaMouseMoved

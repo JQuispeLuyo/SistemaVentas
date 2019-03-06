@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a70d36ee-2f11-485f-84fc-8bb5122f0425">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[CALL MOSTRAR_EMPRESA();]]>
+	</queryString>
+	<field name="CODPER" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Contiene el identificador de las personas]]></fieldDescription>
+	</field>
+	<field name="NOMPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el nombre de la persona, o la razón social de la empresa]]></fieldDescription>
+	</field>
+	<field name="APEPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el apellido de la persona o nombre de la empresa]]></fieldDescription>
+	</field>
+	<field name="RUCDNIPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el DNI o RUC  (Persona o Empresa)]]></fieldDescription>
+	</field>
+	<field name="ESTAPER" class="java.lang.String">
+		<fieldDescription><![CDATA[Contiene el estado de la persona
+A = Activo
+B = Inactivo]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="357" height="62" uuid="8bd3e340-69f4-4313-8020-164a0642727a"/>
+				<textElement>
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[Reporte de empresas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="fd1acdb6-0750-45dd-8f57-93a7863f1de7"/>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="2" width="312" height="20" uuid="583a34b7-76aa-44b9-aafc-ca4636483d06"/>
+				<text><![CDATA[Razon social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="412" y="0" width="100" height="20" uuid="cfd0bd6b-e0ec-498c-923b-544ed1a0b4cc"/>
+				<text><![CDATA[RUC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="512" y="0" width="43" height="20" uuid="68758ecd-0c70-4de0-8577-8fa42c2d3d6e"/>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="4e0d9b1b-a51d-47d8-8249-ab62d36c74c3"/>
+				<textFieldExpression><![CDATA[$F{CODPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="312" height="20" uuid="5d69b4f5-fefa-4f2d-b4a2-a100507b95f9"/>
+				<textFieldExpression><![CDATA[$F{NOMPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="412" y="0" width="100" height="20" uuid="67083955-3e67-46b2-b974-2c8966f5c3b2"/>
+				<textFieldExpression><![CDATA[$F{RUCDNIPER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="512" y="0" width="43" height="20" uuid="65a25f03-bd5b-4ae1-96cf-1f1a0b55a692"/>
+				<textFieldExpression><![CDATA[$F{ESTAPER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="80" height="20" uuid="15fb9592-8619-45b2-8bc8-ad03014fbe9a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="80" y="0" width="40" height="20" uuid="8e2749e8-543d-416c-ab56-73ea6fb3db50"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

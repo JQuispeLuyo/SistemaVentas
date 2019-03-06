@@ -5,9 +5,14 @@
  */
 package sistema.controlador;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 import sistema.dao.ProductoD;
 import sistema.modelo.CategoriaM;
 import sistema.modelo.ProductoM;
@@ -92,6 +97,10 @@ public class ProductoC {
         return true;
     }
 
+    public void reporteProducto(){ 
+        productoD.reporteProducto();
+    }
+    
     public void limpiarVariables() {
         txtCodigoProducto.setText("");
         txtProducto.setText("");
